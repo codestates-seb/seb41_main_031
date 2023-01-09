@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const LoginContainer = styled.div`
-    padding: 300px;
 `
 const LoginButtonColor = styled.button`
     background-color: blue;
