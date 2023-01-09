@@ -1,13 +1,13 @@
-package com.codestates.seb41_main_031.amuna;
+package com.codestates.seb41_main_031.amoona;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AmunaApplication {
+public class AmoonaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AmunaApplication.class, args);
+		SpringApplication.run(AmoonaApplication.class, args);
 	}
 
 }
