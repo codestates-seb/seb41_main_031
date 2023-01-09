@@ -1,0 +1,5 @@
+function QuestionUp(){
+
+}
+
+export default QuestionUp;

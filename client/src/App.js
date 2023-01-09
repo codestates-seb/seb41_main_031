@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
+import Mypage from "./Component/Mypage";
 import { createGlobalStyle } from "styled-components";
+
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -20,6 +22,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
+          <Route path="/mypage" element={<Mypage />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
