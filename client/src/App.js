@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import exo from "../src/Asset/fonts/exo.css";
 import MainPage from "./Pages/MainPage";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
@@ -9,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
+    /* font-family: 'exo'; */
   }
 `;
 
