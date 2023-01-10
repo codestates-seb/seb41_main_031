@@ -61,7 +61,7 @@ const Login = function LoginForm() {
       window.location.replace('/MainPage');
     } else {
       // Display an error message to the user
-      setErrorMessage('Invalid username or password');
+      setErrorMessage('아이디 혹은 비밀번호가 정확하지 않습니다');
     }
   }
  
