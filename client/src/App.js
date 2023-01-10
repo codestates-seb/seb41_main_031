@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import exo from "../src/Asset/fonts/exo.css";
 import MainPage from "./Pages/MainPage";
 import Mypage from "./Pages/Mypage";
+import PostDetail from "./Pages/PostDetail";
 import Login from "./Pages/Login";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
+          <Route path="/PostDetail" element={<PostDetail />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
