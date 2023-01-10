@@ -61,6 +61,7 @@ const Serachdiv = styled.div`
       position: absolute;
       top: 255px;
       left: 22%;
+      color: black;
     }
   }
 `;
@@ -98,19 +99,65 @@ const Mapdiv = styled.div`
 const Reqdiv = styled.div`
   display: flex;
   flex-direction: row;
+  background-color: aqua;
 `;
 
 const Reqboxdiv = styled.div`
+  background-color: white;
+  color: black;
+  box-shadow: 0px 5px 5px 5px gray;
   display: flex;
   flex-direction: column;
   width: 400px;
   height: 380px;
   border-radius: 20px;
-  color: black;
+  font-size: 8px;
+  text-align: center;
+  align-items: center;
+  impormationdiv {
+    color: white;
+    box-shadow: 0px 5px 5px 5px gray;
+    display: flex;
+    flex-direction: row;
+    background-color: #ff4c29;
+    width: 400px;
+    height: 50px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    divdate {
+      margin: 10px 0px 0px 30px;
+    }
+    divparty {
+      margin: 17px 0px 0px 220px;
+    }
+  }
+  h1 {
+    font-size: 25px;
+    margin-top: 50px;
+  }
+  contentdiv {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+  button {
+    font-size: 20px;
+    width: 170px;
+    height: 50px;
+    background-color: #ff4c29;
+    border-radius: 50px;
+    color: white;
+    border: none;
+    margin-top: 30px;
+  }
+  locationdiv {
+    font-size: 15px;
+    margin-top: 30px;
+  }
 `;
 
 function MainPage() {
-  const [username, setUsername] = useState("어떤 운동 하세요?");
+  const [username, setUsername] = useState("");
 
   const change = (e) => {
     let { value } = { ...e.target };
@@ -127,6 +174,7 @@ function MainPage() {
             <input
               type="text"
               name="search"
+              placeholder="어떤 운동 하세요?"
               value={username}
               onChange={change}
             />
@@ -147,11 +195,17 @@ function MainPage() {
         </Mapdiv>
         <Reqdiv>
           <Reqboxdiv>
-            <divdate>
-              DATE | 11/16
-              <divtime>DATE | 11/16</divtime>
-            </divdate>
-            <divparty>DATE | 11/16</divparty>
+            <impormationdiv>
+              <divdate>
+                DATE | 11/16 <br />
+                PARTY | 11/16
+              </divdate>
+              <divparty>TIME | 11/16V</divparty>
+            </impormationdiv>
+            <h1>농구 할 사람 구해요~~ 🏀</h1>
+            <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
+            <button>JOIN</button>
+            <locationdiv>-마평리 롯대마트-</locationdiv>
           </Reqboxdiv>
         </Reqdiv>
       </Maindiv>
