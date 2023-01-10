@@ -65,26 +65,26 @@ function Signup() {
     <SignupHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </SignupHeader>  
-        이메일:
-        <Input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        닉네임:
+        닉네임
         <Input
           type="nickname"
           value={nickname}
           onChange={e => setNickname(e.target.value)}
         />
-        비밀번호:
+        이메일
+        <Input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        비밀번호
         <Input
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
       <br /> 
-      <Button type="submit">Sign Up</Button>
+      <Button type="submit">회원가입하기</Button>
       <HrefRight><a href = "Login"> 이미 회원이신가요? 로그인하기 </a></HrefRight>
     </Form>
     </SignupContainer>
