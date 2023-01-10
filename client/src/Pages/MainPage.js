@@ -7,6 +7,7 @@ const Maindiv = styled.div`
   /* background-color: yellow; */
   display: flex;
   flex-direction: column;
+  margin: 0px 0px 100px 0px;
 `;
 
 const Serachdiv = styled.div`
@@ -60,7 +61,7 @@ const Serachdiv = styled.div`
     i {
       position: absolute;
       top: 255px;
-      left: 22%;
+      left: 410px;
       color: black;
     }
   }
@@ -99,14 +100,14 @@ const Mapdiv = styled.div`
 const Reqdiv = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: aqua;
 `;
 
 const Reqboxdiv = styled.div`
   background-color: white;
   color: black;
-  box-shadow: 0px 5px 5px 5px gray;
+  box-shadow: 5px 5px 5px 5px gray;
   display: flex;
+  margin: 60px 0px 0px 30px;
   flex-direction: column;
   width: 400px;
   height: 380px;
@@ -116,7 +117,7 @@ const Reqboxdiv = styled.div`
   align-items: center;
   impormationdiv {
     color: white;
-    box-shadow: 0px 5px 5px 5px gray;
+    box-shadow: 5px 5px 5px 5px gray;
     display: flex;
     flex-direction: row;
     background-color: #ff4c29;
