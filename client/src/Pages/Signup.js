@@ -54,9 +54,10 @@ function Signup() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // do something with email and password
+    // do something with email, password, and nickname 
     console.log('email', email);
     console.log('password', password);
+    console.log('nickname', nickname);
   }
 
   return (
