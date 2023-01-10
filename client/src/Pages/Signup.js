@@ -90,8 +90,7 @@ function Signup() {
     </SignupContainer>
   );
 }
-
-//This code is just an example, please bear in mind that this form doesn't cover all aspects of form validation and security which are crucial for a production ready app.
-
-
+//This code is just an example, please bear in mind that this form doesn't 
+//cover all aspects of form validation and security which are crucial 
+//for a production ready app.
 export default Signup;

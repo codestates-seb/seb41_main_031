@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import Mypage from "./Pages/Mypage";
 import PostDetail from "./Pages/PostDetail";
-import Login from "./Pages/Login";
+import Login from "./Pages/login";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import { createGlobalStyle } from "styled-components";
+import Signup from "./Pages/signup";
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -25,7 +26,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
           <Route path="/PostDetail" element={<PostDetail />}></Route>
         </Routes>

@@ -87,7 +87,7 @@ const Login = function LoginForm() {
       <br />
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <Button type="submit">로그인</Button>
-   <HrefRight><a href = "Signup"> 처음이신가요? 시작하기 </a> </HrefRight>
+   <HrefRight><a href = "Signup">처음이신가요? 시작하기 </a></HrefRight>
     </Form>
     </LoginContainer>
   );
