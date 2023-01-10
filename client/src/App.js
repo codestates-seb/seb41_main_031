@@ -25,9 +25,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
-          <Route path="/Mypage" element={<Mypage />}></Route>
-          <Route path="/PostDetail" element={<PostDetail />}></Route>
+          <Route path="/login/" element={<Login />}></Route>
+          <Route path="/mypage/" element={<Mypage />}></Route>
+          <Route path="/post-detail/" element={<PostDetail />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../Asset/3.png";
 
 const Footerdiv = styled.div`
-  width: 1436px;
+  width: 100%;
   display: flex;
   background-color: black;
   flex-direction: column;

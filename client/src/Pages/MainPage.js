@@ -3,7 +3,7 @@ import Map from "../Component/Map";
 import styled from "styled-components";
 
 const Maindiv = styled.div`
-  width: 1436px;
+  width:100%;
   /* background-color: yellow; */
   display: flex;
   flex-direction: column;

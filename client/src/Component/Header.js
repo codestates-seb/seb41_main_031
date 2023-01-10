@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../Asset/2.png";
 
 const Headerdiv = styled.div`
-  width: 1436px;
+  width: 100%;
   height: 80px;
   display: flex;
   flex-direction: row;
