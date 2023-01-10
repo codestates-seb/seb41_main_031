@@ -42,6 +42,11 @@ const LoginHeader = styled.h2`
   margin-bottom: 100px;
 `
 
+const HrefRight = styled.a`
+    display: flex;
+    justify-content: right;
+`
+
 const Login = function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -66,13 +71,13 @@ const Login = function LoginForm() {
     <LoginHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </LoginHeader> 
-    <span>Email</span> 
+    <span>이메일</span> 
         <Input
           type="text"
           value={username}
           onChange={event => setUsername(event.target.value)}
         />
-    <span>Password</span>
+    <span>비밀번호</span>
         <Input
           type="password"
           value={password}
@@ -82,13 +87,12 @@ const Login = function LoginForm() {
       <br />
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <Button type="submit">로그인</Button>
-   <a href = "Signup"> 처음이신가요? 시작하기 </a> 
+   <HrefRight><a href = "Signup"> 처음이신가요? 시작하기 </a> </HrefRight>
     </Form>
     </LoginContainer>
   );
 }
     //admin과 password 입력하면 localhost:3000/dashboard로 이동함 
-
     // send a request to your backend to check the user's credentials
     // if the login is successful, you can redirect the user to another page or show a success message
     // if the login fails, you can update the component's state to display an error message
