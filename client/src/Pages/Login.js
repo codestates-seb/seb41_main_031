@@ -34,14 +34,13 @@ const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100vh;  //기존 100vh
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 400px;
+  width: 720px;
 `;
 
 const Input = styled.input`
@@ -66,6 +65,11 @@ const Button = styled.button`
   }
 `;
 
+const LoginHeader = styled.h2`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+`
 
 const Login = function LoginForm() {
   const [username, setUsername] = useState('');
@@ -92,28 +96,25 @@ const Login = function LoginForm() {
   return (
     <LoginContainer>
     <Form onSubmit={handleSubmit}>
-    <h2>아무나에 오신 걸 환영합니다. <br></br>
-    사람들과의 연결을 경험해보세요!</h2>
-      <label>
-        이메일 :
+    <LoginHeader> 
+    <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
+    </LoginHeader> 
+    <span>Email</span> 
         <Input
           type="text"
           value={username}
           onChange={event => setUsername(event.target.value)}
         />
-      </label>
-      <br />
-      <label>
-        비밀번호 :
+    <span>Password</span>
         <Input
           type="password"
           value={password}
           onChange={event => setPassword(event.target.value)}
         />
-      </label>
+      
       <br />
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      <Button type="submit">Log in</Button>
+      <Button type="submit">로그인</Button>
     </Form>
     </LoginContainer>
   );
