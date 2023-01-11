@@ -6,6 +6,9 @@ import PostDetail from "./Pages/PostDetail";
 import Login from "./Pages/Login";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
+import Mypage from "./Component/Mypage";
+import EditProfile from "./Pages/EditProfile";
+import PostDetail from "./Component/PostDetail"; 
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -25,9 +28,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
-          <Route path="/Mypage" element={<Mypage />}></Route>
-          <Route path="/PostDetail" element={<PostDetail />}></Route>
+          <Route path="Login" element={<Login />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
