@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import exo from "../src/Asset/fonts/exo.css";
 import MainPage from "./Pages/MainPage";
 import Mypage from "./Pages/Mypage";
+import Postup from "./Pages/Postup";
+import PostDetail from "./Pages/PostDetail";
 import Login from "./Pages/Login";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
-import EditProfile from "./Pages/EditProfile";
-import PostDetail from "./Component/PostDetail"; 
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -26,10 +26,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="Login" element={<Login />}></Route>
-          <Route path="/mypage" element={<Mypage />}></Route>
-          <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
-          <Route path="/post-detail" element={<PostDetail />}></Route>
+          <Route path="/login/" element={<Login />}></Route>
+          <Route path="/mypage/" element={<Mypage />}></Route>
+          <Route path="/post-detail/" element={<PostDetail />}></Route>
+          <Route path="/post-up/" element={<Postup />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

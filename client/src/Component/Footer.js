@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../Asset/3.png";
 
 const Footerdiv = styled.div`
-  width: 1436px;
+  width: 100%;
   display: flex;
   background-color: black;
   flex-direction: column;
@@ -140,6 +140,15 @@ function Footer() {
             </a>
             <div>이승현</div>
             <section>Back-End</section>
+          </span>
+        </Authorshipdiv>
+        <hr></hr>
+        <Authorshipdiv>
+          <span>
+            <a href="https://github.com/codestates-seb/seb41_main_031">
+              <i class="fa-brands fa-github fa-8x"></i>
+            </a>
+            <div>Repository</div>
           </span>
         </Authorshipdiv>
         <div1>@Copyright All rights reserved</div1>
