@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Map from "../Component/Map";
 
 const Main = styled.div`
-width : 1440px;
+width : 1000px;
 
 
 `
