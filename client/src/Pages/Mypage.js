@@ -3,7 +3,7 @@ import axios, { formToJSON } from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
 import Delete from '../Component/Delete';
-
+  
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -17,8 +17,8 @@ const Main = styled.div`
 
 @media all and (max-width: 1100px){
 	
-  width : 50vw;
-  height : auto;
+  width : 100%;
+  height : 100%;
 }
 `;
 const LeftBox = styled.div`
