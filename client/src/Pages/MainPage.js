@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Map from "../Component/Map";
 import styled from "styled-components";
+import axios from "axios";
+import Reqboxdiv from "../Component/Reqboxdiv";
 
 const Maindiv = styled.div`
-  width: 1436px;
+  width: 100%;
   /* background-color: yellow; */
   display: flex;
   flex-direction: column;
@@ -48,20 +50,20 @@ const Serachdiv = styled.div`
     margin: 30px 0px 0px 0px;
     border: none;
   }
-  input {
-    width: 640px;
-    height: 60px;
-    font-size: 20px;
-    font-weight: thin;
-    border-radius: 10px;
-    text-align: center;
-    margin: 30px 0px 0px 0px;
-  }
   div {
+    input {
+      width: 640px;
+      height: 60px;
+      font-size: 20px;
+      font-weight: thin;
+      border-radius: 10px;
+      text-align: center;
+      margin: 30px 0px 0px 0px;
+    }
     i {
       position: absolute;
       top: 255px;
-      left: 410px;
+      left: 37%;
       color: black;
     }
   }
@@ -77,7 +79,7 @@ const Setlocdiv = styled.div`
   }
   section {
     position: relative;
-    left: 850px;
+    left: 65%;
     display: flex;
     flex-direction: row;
     span {
@@ -92,7 +94,7 @@ const Setlocdiv = styled.div`
   }
 `;
 const Mapdiv = styled.div`
-  width: 1200px;
+  width: 80vw;
   border-radius: 30px;
   margin: 80px 0px 0px 100px;
 `;
@@ -102,68 +104,34 @@ const Reqdiv = styled.div`
   flex-direction: row;
 `;
 
-const Reqboxdiv = styled.div`
-  background-color: white;
-  color: black;
-  box-shadow: 5px 5px 5px 5px gray;
-  display: flex;
-  margin: 60px 0px 0px 30px;
-  flex-direction: column;
-  width: 400px;
-  height: 380px;
-  border-radius: 20px;
-  font-size: 8px;
-  text-align: center;
-  align-items: center;
-  impormationdiv {
-    color: white;
-    box-shadow: 5px 5px 5px 5px gray;
-    display: flex;
-    flex-direction: row;
-    background-color: #ff4c29;
-    width: 400px;
-    height: 50px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    divdate {
-      margin: 10px 0px 0px 30px;
-    }
-    divparty {
-      margin: 17px 0px 0px 220px;
-    }
-  }
-  h1 {
-    font-size: 25px;
-    margin-top: 50px;
-  }
-  contentdiv {
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 30px;
-  }
-  button {
-    font-size: 20px;
-    width: 170px;
-    height: 50px;
-    background-color: #ff4c29;
-    border-radius: 50px;
-    color: white;
-    border: none;
-    margin-top: 30px;
-  }
-  locationdiv {
-    font-size: 15px;
-    margin-top: 30px;
-  }
-`;
-
 function MainPage() {
   const [username, setUsername] = useState("");
+  const [data1, setdata] = useState([]);
 
   const change = (e) => {
     let { value } = { ...e.target };
     setUsername(value);
   };
+
+  useEffect(() => {
+    console.log("Works!before");
+    setTimeout(function () {
+      console.log("Works!");
+      axios
+        .get("http://localhost:4000/data")
+        .then(function (response) {
+          // response
+          setdata(response.data);
+          console.log(response.data); //데이터 전송 성공시
+        })
+        .catch(function (error) {
+          // 오류발생시 실행
+        })
+        .then(function (response) {
+          // 항상 실행
+        }); //컴포넌트가 리랜더링 될때마다 실행
+    }, 3000);
+  }, []);
 
   return (
     <>
@@ -195,19 +163,20 @@ function MainPage() {
           <Map />
         </Mapdiv>
         <Reqdiv>
-          <Reqboxdiv>
-            <impormationdiv>
-              <divdate>
-                DATE | 11/16 <br />
-                PARTY | 11/16
-              </divdate>
-              <divparty>TIME | 11/16V</divparty>
-            </impormationdiv>
-            <h1>농구 할 사람 구해요~~ 🏀</h1>
-            <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
-            <button>JOIN</button>
-            <locationdiv>-마평리 롯대마트-</locationdiv>
-          </Reqboxdiv>
+          {data1.map((id) => {
+            return (
+              <Reqboxdiv
+                name={id.name}
+                img={id.img}
+                Date={id.Date}
+                Time={id.Time}
+                Time_after={id.Time_after}
+                Party={id.Party}
+                item={id.item}
+                Location={id.Location}
+              />
+            );
+          })}
         </Reqdiv>
       </Maindiv>
     </>

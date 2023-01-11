@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../Asset/2.png";
 
 const Headerdiv = styled.div`
-  width: 1436px;
+  width: 100%;
   height: 80px;
   display: flex;
   flex-direction: row;
@@ -12,11 +12,11 @@ const Headerdiv = styled.div`
   }
   span {
     font-weight: bold;
-    margin: 25px 0px 0px 0px;
+    margin: 25px 55% 0px 0px;
   }
   i {
     position: relative;
-    left: 1100px;
+    left: 20%;
     margin: 25px 20px 0px 20px;
   }
 `;

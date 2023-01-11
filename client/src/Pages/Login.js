@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
 const LoginContainer = styled.div`
   display: flex;
@@ -28,6 +28,7 @@ const Button = styled.button`
   font-size: 16px;
   color: white;
   border: 1px solid #ccc;
+
   border-radius: 10px;
   background-color: #FF4C29;
   &:hover {
@@ -59,19 +60,20 @@ const Login = function LoginForm() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+
   function handleSubmit(event) {
     event.preventDefault();
 
     // Check the entered username and password against a list of valid credentials
     if (email === 'admin@gmail.com' && password === 'password') {
       // Redirect the user to the logged-in version of the app
-      window.location.replace('/MainPage');
+      window.location.replace("/MainPage");
     } else {
       // Display an error message to the user
       setErrorMessage('이메일은 admin@gmail.com, 비밀번호는 password입니다.');
     }
   }
- 
+
   return (
     <LoginContainer>
     <Form onSubmit={handleSubmit}>
@@ -85,12 +87,12 @@ const Login = function LoginForm() {
           onChange={event => setEmail(event.target.value)}
         />
         <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
+
         <Input
           type="password"
           value={password}
-          onChange={event => setPassword(event.target.value)}
-        />
-      
+          onChange={(event) => setPassword(event.target.value)}
+        />  
       <br />
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <Button type="submit">로그인</Button>
@@ -98,10 +100,43 @@ const Login = function LoginForm() {
     </Form>
     </LoginContainer>
   );
-}
-    //admin과 password 입력하면 localhost:3000/dashboard로 이동함 
-    // send a request to your backend to check the user's credentials
-    // if the login is successful, you can redirect the user to another page or show a success message
-    // if the login fails, you can update the component's state to display an error message
+};
+//admin과 password 입력하면 localhost:3000/dashboard로 이동함
+// send a request to your backend to check the user's credentials
+// if the login is successful, you can redirect the user to another page or show a success message
+// if the login fails, you can update the component's state to display an error message
 
-    export default Login;
+export default Login;
+// =======
+
+// const LoginContainer = styled.div``;
+// const LoginButtonColor = styled.button`
+//   background-color: blue;
+//   border-color: blue;
+// `;
+// function Login() {
+//   return (
+//     <LoginContainer>
+//       <div>아무나에 오신 걸 환영합니다.</div>
+//       <div>사람들과의 연결을 경험해보세요!</div>
+//       <div>Email</div>
+//       <input type="text" placeholder="이메일을 입력해주세요"></input>
+//       <br></br>
+//       <div>Password</div>
+//       <input type="password" placeholder="비밀번호를 입력해주세요"></input>
+//       <br></br>
+//       <LoginButton />
+//     </LoginContainer>
+//   );
+// }
+
+// function LoginButton() {
+//   return (
+//     <LoginButtonColor>
+//       <button id="LoginButton">Login</button>
+//     </LoginButtonColor>
+//   );
+// }
+
+// export default Login;
+// >>>>>>> Stashed changes
