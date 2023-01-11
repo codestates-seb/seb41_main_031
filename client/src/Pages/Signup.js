@@ -7,50 +7,58 @@ const SignupContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;  
+  width: 100vw;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 720px;
+  width: 50vw;
 `;
 
 const Input = styled.input`
-  margin: 10px 0;
-  padding: 8px;
+  margin: 1vw;
+  padding: 2vw;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
 `;
 
 const Button = styled.button`
-  margin: 10px 0;
-  padding: 8px;
+  margin: 1vw;
+  padding: 2vw;
   font-size: 16px;
   color: white;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: rgba(30,30,255,0.75);
+  border-radius: 10px;
+  background-color: #FF4C29;
   &:hover {
     cursor: pointer;
-    background-color: #ddd;
+    background-color: #000000;
   }
 `;
 
 const SignupHeader = styled.h2`
   display: flex;
   justify-content: center;
-  margin-bottom: 100px;
+  margin-bottom: 10%;
 `
 const HrefRight = styled.a`
     display: flex;
     justify-content: right;
+    margin-right: 15px;
+    margin-bottom: 60px;
+    font-size: 18px;
+`
+const SignupFont = styled.span`
+  font-size: 18px;
 `
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -58,6 +66,15 @@ function Signup() {
     console.log('email', email);
     console.log('password', password);
     console.log('nickname', nickname);
+     // Check the entered username and password against a list of valid credentials
+     if (nickname === 'admin' && password === 'password' && email === 'admin@gmail.com') {
+      // Redirect the user to the logged-in version of the app
+      window.location.replace('/login');
+    } else {
+      // Display an error message to the user
+     setErrorMessage('닉네임은 admin, 이메일은 admin@gmail.com, 비밀번호는 password이어야 합니다.');
+    }
+
   }
 
   return (
@@ -66,27 +83,29 @@ function Signup() {
     <SignupHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </SignupHeader>  
-        닉네임
+        <SignupFont>&nbsp;&nbsp;&nbsp;닉네임</SignupFont>
         <Input
           type="nickname"
           value={nickname}
           onChange={e => setNickname(e.target.value)}
         />
-        이메일
+        <SignupFont>&nbsp;&nbsp;&nbsp;이메일</SignupFont>
         <Input
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        비밀번호
+        <SignupFont>&nbsp;&nbsp;&nbsp;비밀번호</SignupFont>
         <Input
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
       <br /> 
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <Button type="submit">회원가입하기</Button>
-      <HrefRight><a href = "Login"> 이미 회원이신가요? 로그인하기 </a></HrefRight>
+      <HrefRight>이미 계정이 있으세요?&nbsp;&nbsp;<a href = "login">로그인하기</a></HrefRight>
+
     </Form>
     </SignupContainer>
   );

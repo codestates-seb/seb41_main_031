@@ -5,50 +5,57 @@ const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;  
+  height: auto;  
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 720px;
+  width: 50vw;
 `;
 
 const Input = styled.input`
-  margin: 10px 0;
-  padding: 8px;
+  margin: 1vw;
+  padding: 2vw;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
 `;
 
 const Button = styled.button`
-  margin: 10px 0;
-  padding: 8px;
+  margin: 1vw;
+  padding: 2vw;
   font-size: 16px;
   color: white;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: rgba(30,30,255,0.75);
+  border-radius: 10px;
+  background-color: #FF4C29;
   &:hover {
     cursor: pointer;
-    background-color: #ddd;
+    background-color: #000000;
   }
 `;
 
 const LoginHeader = styled.h2`
   display: flex;
   justify-content: center;
-  margin-bottom: 100px;
+  margin-bottom: 10%;
 `
 
 const HrefRight = styled.a`
     display: flex;
     justify-content: right;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+`
+
+const LoginFont = styled.span`
+  font-size: 18px;
 `
 
 const Login = function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -56,12 +63,12 @@ const Login = function LoginForm() {
     event.preventDefault();
 
     // Check the entered username and password against a list of valid credentials
-    if (username === 'admin' && password === 'password') {
+    if (email === 'admin@gmail.com' && password === 'password') {
       // Redirect the user to the logged-in version of the app
       window.location.replace('/MainPage');
     } else {
       // Display an error message to the user
-      setErrorMessage('아이디 혹은 비밀번호가 정확하지 않습니다');
+      setErrorMessage('이메일은 admin@gmail.com, 비밀번호는 password입니다.');
     }
   }
  
@@ -71,13 +78,13 @@ const Login = function LoginForm() {
     <LoginHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </LoginHeader> 
-    <span>이메일</span> 
+        <LoginFont>&nbsp;&nbsp;&nbsp;이메일</LoginFont>
         <Input
           type="text"
-          value={username}
-          onChange={event => setUsername(event.target.value)}
+          value={email}
+          onChange={event => setEmail(event.target.value)}
         />
-    <span>비밀번호</span>
+        <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
         <Input
           type="password"
           value={password}
@@ -87,7 +94,7 @@ const Login = function LoginForm() {
       <br />
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <Button type="submit">로그인</Button>
-   <HrefRight><a href = "Signup">처음이신가요? 시작하기 </a></HrefRight>
+   <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
     </Form>
     </LoginContainer>
   );
