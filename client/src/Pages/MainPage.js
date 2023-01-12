@@ -95,6 +95,7 @@ const Setlocdiv = styled.div`
 `;
 const Mapdiv = styled.div`
   width: 80vw;
+  height: 800px;
   border-radius: 30px;
   margin: 80px 0px 0px 100px;
 `;
