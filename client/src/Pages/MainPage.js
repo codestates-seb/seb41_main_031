@@ -123,7 +123,7 @@ function MainPage() {
     setTimeout(function () {
       console.log("Works!");
       axios
-        .get("http://localhost:4000/data")
+        .get("http://localhost:5523/data")
         .then(function (response) {
           // response
           setdata(response.data);

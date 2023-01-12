@@ -4,7 +4,7 @@ import MainPage from "./Pages/MainPage";
 import Mypage from "./Pages/Mypage";
 import Postup from "./Pages/Postup";
 import PostDetail from "./Component/PostDetail";
-import Login from "./Pages/Login";
+import Login from "./Pages/login";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import { createGlobalStyle } from "styled-components";
