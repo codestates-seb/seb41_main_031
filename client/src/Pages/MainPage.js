@@ -94,19 +94,15 @@ const Setlocdiv = styled.div`
   }
 `;
 const Mapdiv = styled.div`
-  width: 100vw;
+  width: 80vw;
+  height: 800px;
   border-radius: 30px;
-  /* margin: 80px 0px 0px 100px; */
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+  margin: 80px 0px 0px 100px;
 `;
 
 const Reqdiv = styled.div`
-  margin-top: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
 `;
 
 function MainPage() {
