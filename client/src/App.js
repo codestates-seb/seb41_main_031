@@ -5,6 +5,7 @@ import Mypage from "./Pages/Mypage";
 import Postup from "./Pages/Postup";
 import PostDetail from "./Component/PostDetail";
 import Login from "./Pages/login";
+import Signup from "./Pages/signup";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import { createGlobalStyle } from "styled-components";
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/login/" element={<Login />}></Route>
+          <Route path="/signup/" element={<Signup />}></Route>
           <Route path="/mypage/" element={<Mypage />}></Route>
           <Route path="/post-detail/" element={<PostDetail />}></Route>
           <Route path="/post-up/" element={<Postup />}></Route>
