@@ -54,6 +54,40 @@ const SignupFont = styled.span`
   font-size: 18px;
 `
 
+// const MiddleLeftLine = styled.span`
+//   display: inline-flex;
+//   margin-top: 4vh;
+//   border-bottom: 1px solid black;
+//   width: 21vw;
+// `
+// const MiddleRightLine = styled.span`
+//   display: inline-flex;
+//   margin-top: 4vh;
+//   border-top: 1px solid black;
+//   width: 21vw; 
+// `
+// const FacebookLoginForm = styled.div`
+//   margin: 1vw;
+//   padding: 2vw;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `
+// const GoogleLoginForm = styled.div`
+//   margin: 1vw;
+//   padding: 2vw;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `
+// const KakaoLoginForm = styled.div`
+//   margin: 1vw;
+//   padding: 2vw;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `
+
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -102,10 +136,16 @@ function Signup() {
           onChange={e => setPassword(e.target.value)}
         />
       <br /> 
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+      {errorMessage && <pre><div style={{ color: 'red' }}>  {errorMessage}</div></pre>}
       <Button type="submit">회원가입하기</Button>
+      {/* <div>&nbsp;&nbsp;&nbsp;<MiddleLeftLine></MiddleLeftLine>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;또는&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <MiddleRightLine></MiddleRightLine></div> */}
+      {/* <FacebookLoginForm>페이스북으로 회원가입하기</FacebookLoginForm>
+      <GoogleLoginForm>구글로 회원가입하기</GoogleLoginForm>
+      <KakaoLoginForm>카카오로 회원가입하기</KakaoLoginForm> */}
       <HrefRight>이미 계정이 있으세요?&nbsp;&nbsp;<a href = "login">로그인하기</a></HrefRight>
-
     </Form>
     </SignupContainer>
   );
