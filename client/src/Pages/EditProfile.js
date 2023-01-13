@@ -345,7 +345,7 @@ return(
      <BottomBox>
         <EditButton>프로필 변경하기</EditButton>
         <Link to = "/mypage">
-        <BackButton onClick = {() => alert('이메일 주소에 @를 입력해주세요')}>
+        <BackButton>
           뒤로가기
           </BackButton>
         </Link>

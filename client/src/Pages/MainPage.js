@@ -115,6 +115,7 @@ const ModalBackdrop = styled.div`
 `;
 
 function MainPage() {
+  
   const [username, setUsername] = useState("");
   const [postisOpen, setpostIsOpen] = useState(false);
   const [postdeisOpen, setpostdedeisOpen] = useState(false);

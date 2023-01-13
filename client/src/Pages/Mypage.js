@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import {Link } from 'react-router-dom';
+import axios from 'axios';
+
+import React, { useState, useEffect } from 'react';
+import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
 
 const Main = styled.div`
 width : 100%;
@@ -226,12 +229,26 @@ display: flex;
 
 function Mypage() {
   
-  function Alert(){
+  
+  const navigate = useNavigate();
 
-    const Returnvalue = window.confirm('정말 탈퇴하시겠습니까?')
+  const Deleteuser = (e) => {
+    e.preventDefault();
+    if (window.confirm('정말 탈퇴하시겠습니까?')) {
+      
+      setTimeout(function (){
+        axios
+        .delete('http://localhost:5500/data/1')
+        .then(() => {
+          window.location.reload();
+          alert('그동안 이용해주셔서 감사합니다.');
+          navigate('/');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+  };
     
-    return alert(Returnvalue);
-  }
   
   
   
@@ -254,7 +271,7 @@ function Mypage() {
       <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
       </Link>
-      <WithdrawButton onClick = {() => Alert}>
+      <WithdrawButton onClick = {Deleteuser}>
         탈퇴하기
       </WithdrawButton>
     </BottomBox>
