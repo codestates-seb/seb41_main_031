@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Map from "./Map";
+import Map from "../Component/Map";
 
 const Main = styled.div`
-  width: 1440px;
+  width: 1000px;
 `;
 const Header = styled.div``;
 const LeftBox = styled.div`
