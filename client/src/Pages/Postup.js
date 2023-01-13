@@ -3,20 +3,21 @@ import Map from "../Component/Map";
 import styled from "styled-components";
 
 const Postupdiv = styled.div`
-  width: 100%;
-  /* background-color: yellow; */
+  // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있습니다.
+  width: 60%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 const Contnentdiv = styled.div`
-  /* background-color: yellow; */
   display: flex;
   flex-direction: row;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 const Postinputdiv = styled.div`
-  /* background-color: yellow; */
   display: flex;
   flex-direction: column;
   div {
@@ -28,7 +29,7 @@ const Postinputdiv = styled.div`
     border-radius: 20px;
     border: solid 1px rgba(0, 0, 0, 0.7);
     padding-top: 30px;
-    margin: 30px 0px 60px 180px;
+    margin: 30px 0px 60px 100px;
     box-shadow: 5px 5px 5px 5px gray;
   }
 `;
@@ -42,7 +43,8 @@ const Viewinputdiv = styled.div`
   border-radius: 20px;
   text-align: left;
   align-items: center;
-  margin: 30px 0px 0px 80px;
+  margin: 30px 100px 0px 100px;
+
   box-shadow: 5px 5px 5px 5px gray;
   sidemap {
     width: 530px;
@@ -74,17 +76,18 @@ const Viewinputdiv = styled.div`
 const Postbuttondiv = styled.button`
   /* background-color: yellow; */
   width: 740px;
-  height: 70px;
+  height: 90px;
   font-weight: bold;
   border: none;
   border-radius: 20px;
   color: white;
-  font-size: 30px;
+  font-size: 35px;
   background-color: #ff4c29;
+  margin-top: 60px;
   margin-bottom: 30px;
 `;
 
-function Postup() {
+function Postup({ openModal }) {
   const [username, setUsername] = useState("");
   const change = (e) => {
     let { value } = { ...e.target };
@@ -116,7 +119,7 @@ function Postup() {
             <div1>2023년 1월22일 19:00시쯤</div1>
           </Viewinputdiv>
         </Contnentdiv>
-        <Postbuttondiv>게시글 등록</Postbuttondiv>
+        <Postbuttondiv onClick={openModal}>게시글 등록</Postbuttondiv>
       </Postupdiv>
     </>
   );

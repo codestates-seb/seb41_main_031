@@ -37,7 +37,6 @@ const Map = () => {
       style={{
         width: "80%",
         height: "100%",
-        display: "block",
         borderRadius: "20px",
       }}
     ></div>

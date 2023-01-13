@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Map from "../Component/Map";
 import styled from "styled-components";
+import Postup from "./Postup";
 import DummyData from "../Asset/DummyData";
 import Reqboxdiv from "../Component/Reqboxdiv";
 
@@ -110,8 +111,23 @@ const Reqdiv = styled.div`
   justify-content: space-around;
 `;
 
+const ModalBackdrop = styled.div`
+  // TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
 function MainPage() {
   const [username, setUsername] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [data1, setdata1] = useState([]);
 
   const change = (e) => {
@@ -130,14 +146,24 @@ function MainPage() {
     getData();
   }, []);
 
+  function openModal() {
+    setIsOpen(!isOpen);
+  }
+
   return (
     <>
+      {isOpen && (
+        <ModalBackdrop onClick={openModal}>
+          <Postup openModal={openModal} />
+        </ModalBackdrop>
+      )}
+
       <Maindiv>
         {console.log(DummyData)}
         <Serachdiv>
           <div1>WHAT’S YOUR FAVORITE SPORT?🔍</div1>
           <div>
-            <i class="fa-solid fa-magnifying-glass  fa-2x"></i>
+            {!isOpen && <i class="fa-solid fa-magnifying-glass  fa-2x"></i>}
             <input
               type="text"
               name="search"
@@ -147,7 +173,7 @@ function MainPage() {
             />
           </div>
           <div2>🔥Make YOUR TEAM!!🔥</div2>
-          <button>Let’s do It!!!</button>
+          <button onClick={openModal}>Let’s do It!!!</button>
           <div3>TRY EVERY THING WITH YOUR TEAM</div3>
         </Serachdiv>
         <Setlocdiv>
@@ -157,9 +183,7 @@ function MainPage() {
             <i class="fa-sharp fa-solid fa-caret-down fa-2x"></i>
           </section>
         </Setlocdiv>
-        <Mapdiv>
-          <Map />
-        </Mapdiv>
+        <Mapdiv>{!isOpen && <Map />}</Mapdiv>
         <Reqdiv>
           {data1.map((id) => {
             return (
