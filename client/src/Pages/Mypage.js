@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link } from 'react-router-dom';
 
 const Main = styled.div`
 width : 100%;
@@ -143,7 +144,7 @@ display: flex;
 const BottomBox = styled.div`
 clear: both;
 margin-top : 100px;
-
+margin-bottom : 60px;
 `;
 const EditButton = styled.button`
 
@@ -221,7 +222,20 @@ display: flex;
   align-items: center;
 `
 
+
+
 function Mypage() {
+  
+  function Alert(){
+
+    const Returnvalue = window.confirm('정말 탈퇴하시겠습니까?')
+    
+    return alert(Returnvalue);
+  }
+  
+  
+  
+  
   return (
   <Main>
     <MiddleBox>
@@ -237,8 +251,12 @@ function Mypage() {
     </RightBox>
     </MiddleBox>
     <BottomBox>
+      <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
-      <WithdrawButton>탈퇴하기</WithdrawButton>
+      </Link>
+      <WithdrawButton onClick = {() => Alert}>
+        탈퇴하기
+      </WithdrawButton>
     </BottomBox>
   </Main>
   

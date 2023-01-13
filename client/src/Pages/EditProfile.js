@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link } from 'react-router-dom';
 
 const Main = styled.div`
 width : 100%;
@@ -180,6 +181,7 @@ display: flex;
 const BottomBox = styled.div`
 
 margin-top : 50px;
+margin-bottom : 50px;
 
 
 `  
@@ -342,7 +344,11 @@ return(
      </MiddleBox>
      <BottomBox>
         <EditButton>프로필 변경하기</EditButton>
-        <BackButton>뒤로가기</BackButton>
+        <Link to = "/mypage">
+        <BackButton onClick = {() => alert('이메일 주소에 @를 입력해주세요')}>
+          뒤로가기
+          </BackButton>
+        </Link>
      </BottomBox>
      
     </Main>

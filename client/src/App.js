@@ -7,6 +7,9 @@ import Signup from "./Pages/Signup";
 import Nav from "./Component/Nav";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
+
+import EditProfile from "./Pages/EditProfile";
+
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -29,7 +32,11 @@ function App() {
           <Route path="/Login/" element={<Login />}></Route>
           <Route path="/Signup/" element={<Signup />}></Route>
           <Route path="/mypage/" element={<Mypage />}></Route>
-          <Route path="/Nav/" element={<Nav />}></Route>
+          <Route path="/post-detail/" element={<PostDetail />}></Route>
+          <Route path="/post-up/" element={<Postup />}></Route>
+          <Route path="/mypage" element={<Mypage />}></Route>
+          <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
+          <Route path="/post-detail" element={<PostDetail />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
