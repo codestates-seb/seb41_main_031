@@ -55,6 +55,11 @@ const LoginFont = styled.span`
   font-size: 18px;
 `
 
+const ErrorMessage = styled.div`
+display: flex;
+margin-left: 15px;
+`
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -94,7 +99,8 @@ function Login() {
       onChange={(event) => setPassword(event.target.value)}
     />  
     <br />
-    {errorMessage && <pre><div style={{ color: 'red' }}>  {errorMessage}</div></pre>}
+    <ErrorMessage>{errorMessage && <div style={{ color: 'red' }}>
+      {errorMessage}</div>}</ErrorMessage>
     <Button type="submit">로그인</Button>
     <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
     </Form>

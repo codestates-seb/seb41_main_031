@@ -87,11 +87,15 @@ const SignupFont = styled.span`
 //   border: 1px solid #ccc;
 //   border-radius: 10px;
 // `
+ const ErrorMessage = styled.div`
+    display: flex;
+    margin-left: 15px;
+ `
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [nickName, setNickName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleSubmit(event) {
@@ -99,16 +103,15 @@ function Signup() {
     // do something with email, password, and nickname 
     console.log('email', email);
     console.log('password', password);
-    console.log('nickname', nickname);
+    console.log('nickname', nickName);
      // Check the entered username and password against a list of valid credentials
-     if (nickname === 'admin' && password === 'password' && email === 'admin@gmail.com') {
+     if (nickName === 'admin' && password === 'password' && email === 'admin@gmail.com') {
       // Redirect the user to the logged-in version of the app
       window.location.replace('/login');
     } else {
       // Display an error message to the user
      setErrorMessage('닉네임은 admin, 이메일은 admin@gmail.com, 비밀번호는 password이어야 합니다.');
     }
-
   }
 
   return (
@@ -120,8 +123,8 @@ function Signup() {
         <SignupFont>&nbsp;&nbsp;&nbsp;닉네임</SignupFont>
         <Input
           type="nickname"
-          value={nickname}
-          onChange={e => setNickname(e.target.value)}
+          value={nickName}
+          onChange={e => setNickName(e.target.value)}
         />
         <SignupFont>&nbsp;&nbsp;&nbsp;이메일</SignupFont>
         <Input
@@ -136,7 +139,8 @@ function Signup() {
           onChange={e => setPassword(e.target.value)}
         />
       <br /> 
-      {errorMessage && <pre><div style={{ color: 'red' }}>  {errorMessage}</div></pre>}
+      <ErrorMessage>{errorMessage && <div style={{ color: 'red' }}>  
+      {errorMessage}</div>}</ErrorMessage>
       <Button type="submit">회원가입하기</Button>
       {/* <div>&nbsp;&nbsp;&nbsp;<MiddleLeftLine></MiddleLeftLine>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;또는&nbsp;&nbsp;
@@ -150,7 +154,5 @@ function Signup() {
     </SignupContainer>
   );
 }
-//This code is just an example, please bear in mind that this form doesn't 
-//cover all aspects of form validation and security which are crucial 
-//for a production ready app.
+
 export default Signup;
