@@ -35,7 +35,7 @@ const Map = () => {
       id="map"
       ref={mapContainer}
       style={{
-        width: "100%",
+        width: "80%",
         height: "100%",
         display: "block",
         borderRadius: "20px",

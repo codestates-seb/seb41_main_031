@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Map from "../Component/Map";
 import styled from "styled-components";
-import axios from "axios";
+import DummyData from "../Asset/DummyData";
 import Reqboxdiv from "../Component/Reqboxdiv";
 
 const Maindiv = styled.div`
@@ -94,20 +94,25 @@ const Setlocdiv = styled.div`
   }
 `;
 const Mapdiv = styled.div`
-  width: 80vw;
+  width: 100vw;
   height: 800px;
   border-radius: 30px;
-  margin: 80px 0px 0px 100px;
+  /* margin: 80px 0px 0px 100px; */
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 `;
 
 const Reqdiv = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 `;
 
 function MainPage() {
   const [username, setUsername] = useState("");
-  const [data1, setdata] = useState([]);
+  const [data1, setdata1] = useState([]);
 
   const change = (e) => {
     let { value } = { ...e.target };
@@ -115,28 +120,20 @@ function MainPage() {
   };
 
   useEffect(() => {
-    console.log("Works!before");
-    setTimeout(function () {
-      console.log("Works!");
-      axios
-        .get("http://localhost:4000/data")
-        .then(function (response) {
-          // response
-          setdata(response.data);
-          console.log(response.data); //데이터 전송 성공시
-        })
-        .catch(function (error) {
-          // 오류발생시 실행
-        })
-        .then(function (response) {
-          // 항상 실행
-        }); //컴포넌트가 리랜더링 될때마다 실행
-    }, 3000);
+    const promise = DummyData;
+    const getData = () => {
+      promise.then((dummyData) => {
+        console.log(dummyData);
+        setdata1(dummyData);
+      });
+    };
+    getData();
   }, []);
 
   return (
     <>
       <Maindiv>
+        {console.log(DummyData)}
         <Serachdiv>
           <div1>WHAT’S YOUR FAVORITE SPORT?🔍</div1>
           <div>
