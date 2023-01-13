@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Postup from "./Postup";
 import DummyData from "../Asset/DummyData";
 import Reqboxdiv from "../Component/Reqboxdiv";
+import PostDetail from "../Component/PostDetail";
 
 const Maindiv = styled.div`
   width: 100%;
@@ -127,7 +128,8 @@ const ModalBackdrop = styled.div`
 
 function MainPage() {
   const [username, setUsername] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [postisOpen, setpostIsOpen] = useState(false);
+  const [postdeisOpen, setpostdedeisOpen] = useState(false);
   const [data1, setdata1] = useState([]);
 
   const change = (e) => {
@@ -146,15 +148,23 @@ function MainPage() {
     getData();
   }, []);
 
-  function openModal() {
-    setIsOpen(!isOpen);
+  function openpostModal() {
+    setpostIsOpen(!postisOpen);
+  }
+  function openpostdeModal() {
+    setpostdedeisOpen(!postdeisOpen);
   }
 
   return (
     <>
-      {isOpen && (
-        <ModalBackdrop onClick={openModal}>
-          <Postup openModal={openModal} />
+      {postisOpen && (
+        <ModalBackdrop onClick={openpostModal}>
+          <Postup openModal={openpostModal} />
+        </ModalBackdrop>
+      )}
+      {postdeisOpen && (
+        <ModalBackdrop onClick={openpostdeModal}>
+          <PostDetail />
         </ModalBackdrop>
       )}
 
@@ -163,7 +173,9 @@ function MainPage() {
         <Serachdiv>
           <div1>WHAT’S YOUR FAVORITE SPORT?🔍</div1>
           <div>
-            {!isOpen && <i class="fa-solid fa-magnifying-glass  fa-2x"></i>}
+            {!postisOpen && !postdeisOpen && (
+              <i class="fa-solid fa-magnifying-glass  fa-2x"></i>
+            )}
             <input
               type="text"
               name="search"
@@ -173,7 +185,7 @@ function MainPage() {
             />
           </div>
           <div2>🔥Make YOUR TEAM!!🔥</div2>
-          <button onClick={openModal}>Let’s do It!!!</button>
+          <button onClick={openpostModal}>Let’s do It!!!</button>
           <div3>TRY EVERY THING WITH YOUR TEAM</div3>
         </Serachdiv>
         <Setlocdiv>
@@ -183,7 +195,7 @@ function MainPage() {
             <i class="fa-sharp fa-solid fa-caret-down fa-2x"></i>
           </section>
         </Setlocdiv>
-        <Mapdiv>{!isOpen && <Map />}</Mapdiv>
+        <Mapdiv>{!postisOpen && !postdeisOpen && <Map />}</Mapdiv>
         <Reqdiv>
           {data1.map((id) => {
             return (
@@ -196,6 +208,7 @@ function MainPage() {
                 Party={id.Party}
                 item={id.item}
                 Location={id.Location}
+                openModal={openpostdeModal}
               />
             );
           })}
