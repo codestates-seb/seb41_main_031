@@ -47,6 +47,7 @@ public class MemberDto {
         private Long memberId;
         private String email;
         private String region;
+        private String gender;
         private String image;
         private String nickname;
         private int age;
