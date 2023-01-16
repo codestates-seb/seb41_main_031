@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 const Main = styled.div`
 width : 100%;
@@ -21,6 +22,7 @@ margin-top : 90px;
 `
 const Nickname =  styled.input.attrs({
    type: "text",
+   
    required: true,
    placeholder: "변경할 닉네임"
  })`
@@ -311,6 +313,62 @@ justify-content : center;
 
 
 function EditProfile() {
+
+  const [form, setForm] = useState({
+    nickname : '',
+    email : '',
+    region : '',
+    previouspassword : '',
+    newpassword : ''
+  })
+
+  const [isValid, setIsValid] = useState({
+    isEmail : false,
+    isPassword : false
+  })
+
+  
+
+
+  //이메일 정규식
+
+
+  
+
+  const Print = ()=>{
+    console.log(form.email)
+    console.log(isValid.isEmail)
+  }
+
+
+  const onChangeprofile = (e) => {
+    const { name, value } = e.target;   
+    setForm({ ...form, [name]: value });
+  };
+
+
+  const Valid = ()=>{
+    
+
+    const Effect = useEffect(()=>{
+      const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      
+      if(!emailRegex.test(form.email)){
+        setIsValid({...isValid, isEmail: false})
+      } else{
+        setIsValid({...isValid, isEmail : true})
+      }
+    },[form.email])
+
+
+    return Effect;
+  }
+
+
+
+
+
 return(
     <Main>
      <MiddleBox>   
@@ -325,25 +383,56 @@ return(
       </NicknameBox>
         <EmailBox>
           <span className = 'Email'>이메일: </span>
-          <Email></Email>
+          <Email
+          name = "email"
+          value= {form.email}
+          onChange = {
+            onChangeprofile
+            }
+            
+          ></Email>
        </EmailBox>
        <RegionBox>
        <span className = 'Region'>지역: </span>
-       <Region></Region>
+       <Region
+       name = "region"
+       value= {form.region}
+       onChange = {
+         onChangeprofile
+         }
+       />
        </RegionBox>
       </InformBox>
       <PreviousPasswordBox>
           <span className = 'Previous'>이전 비밀번호</span>
-          <PreviousPassword></PreviousPassword>
+          <PreviousPassword
+          name = "previouspassword"
+          value= {form.previouspassword}
+          onChange = {
+            onChangeprofile
+            }
+          />
         </PreviousPasswordBox>
         <NewPasswordBox>
           <span className ='New'>새로운 비밀번호</span>
-          <NewPassword></NewPassword>
+          <NewPassword
+          name = "newpassword"
+          value= {form.newpassword}
+          onChange = {
+            onChangeprofile
+            }
+          />
         </NewPasswordBox>
      </RightBox>
      </MiddleBox>
      <BottomBox>
-        <EditButton>프로필 변경하기</EditButton>
+        <EditButton 
+        onClick = {()=> 
+        {
+          Print()
+          Valid() 
+                  }}>
+        프로필 변경하기</EditButton>
         <Link to = "/mypage">
         <BackButton>
           뒤로가기

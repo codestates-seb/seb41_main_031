@@ -3,7 +3,7 @@ import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FcAlarmClock } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
-
+import Map from "../Component/Map";
 import styled, { keyframes } from "styled-components";
 
 
@@ -332,7 +332,7 @@ function PostDetail(){
             <span>운동종목</span>
             <MapContents>
             <span><HiLocationMarker className = 'location'/>한강 시민공원 농구장</span>
-            <Place ></Place>
+            <Place ><Map/></Place>
             </MapContents>
           </MapBox>
         </LeftBox> 
