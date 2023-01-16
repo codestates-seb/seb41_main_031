@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 
 const Main = styled.div`
 width : 100%;
@@ -324,7 +324,8 @@ function EditProfile() {
 
   const [isValid, setIsValid] = useState({
     isEmail : false,
-    isPassword : false
+    isPassword : false,
+    isClicked : false
   })
 
   
@@ -346,25 +347,33 @@ function EditProfile() {
     setForm({ ...form, [name]: value });
   };
 
-
-  const Valid = ()=>{
+  useEffect(()=>{
+    const emailRegex =
+    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     
+    if(!emailRegex.test(form.email)){
+      setIsValid({...isValid, isEmail: false})
+    } else{
+      setIsValid({...isValid, isEmail : true})
+    }
+  },[form.email])
 
-    const Effect = useEffect(()=>{
-      const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-      
-      if(!emailRegex.test(form.email)){
-        setIsValid({...isValid, isEmail: false})
-      } else{
-        setIsValid({...isValid, isEmail : true})
-      }
-    },[form.email])
+  function Clicked(){
+  
+    setIsValid({...isValid, isClicked: true})
+    console.log(isValid.isClicked)
+}
+
+useEffect(()=>{
+  if(form.email ==='')
+  {setIsValid({...isValid, isClicked: false})}
+},[form.email])
 
 
-    return Effect;
-  }
 
+
+
+ 
 
 
 
@@ -391,6 +400,16 @@ return(
             }
             
           ></Email>
+          <span>
+          <span>
+          {form.email ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isEmail === true?
+           '이메일 형식에 맞습니다':'The email is not a valid email address.'
+        }
+            </span>
+          </span>
        </EmailBox>
        <RegionBox>
        <span className = 'Region'>지역: </span>
@@ -410,6 +429,7 @@ return(
           value= {form.previouspassword}
           onChange = {
             onChangeprofile
+            
             }
           />
         </PreviousPasswordBox>
@@ -430,7 +450,8 @@ return(
         onClick = {()=> 
         {
           Print()
-          Valid() 
+          Clicked()
+          
                   }}>
         프로필 변경하기</EditButton>
         <Link to = "/mypage">
