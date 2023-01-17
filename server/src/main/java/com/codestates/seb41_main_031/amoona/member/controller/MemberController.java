@@ -1,15 +1,26 @@
 package com.codestates.seb41_main_031.amoona.member.controller;
 
 import com.codestates.seb41_main_031.amoona.member.dto.MemberDto;
+import com.codestates.seb41_main_031.amoona.member.mapper.MemberMapper;
+import com.codestates.seb41_main_031.amoona.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/members")
+@Validated
 public class MemberController {
+    private final MemberService memberService;
+    private final MemberMapper mapper;
+
+    public MemberController(MemberService memberService, MemberMapper mapper) {
+        this.memberService = memberService;
+        this.mapper = mapper;
+    }
 
     // TODO DTO, Service 구현
     // 회원 가입
