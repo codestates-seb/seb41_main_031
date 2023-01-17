@@ -131,7 +131,7 @@ function MainPage() {
     setTimeout(function () {
       console.log("Works!");
       axios
-        .get("http://localhost:5523/data")
+        .get("http://localhost:8083/data")
         .then(function (response) {
           // response
           setdata(response.data);
