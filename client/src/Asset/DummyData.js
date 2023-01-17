@@ -1,7 +1,7 @@
 import axios from "axios";
 
-async function DummyData() {
-  const result = await axios.get("http://localhost:4000/data");
+async function fetchData() {
+  const result = await axios.get("http://localhost:5500/data");
   console.log(result.data);
   return result.data;
 }
