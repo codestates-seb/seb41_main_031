@@ -7,7 +7,7 @@ const Map = ({ maplevel }) => {
   const mapContainer = useRef(null);
   const { kakao } = window;
   const position = new kakao.maps.LatLng(33.450701, 126.570667);
-  const geocoder = new kakao.maps.services.Geocoder();
+  // const geocoder = new kakao.maps.services.Geocoder();
   const mapOptions = {
     center: position, // 지도의 중심좌표
     level: maplevel, // 지도의 확대 레벨
@@ -15,9 +15,8 @@ const Map = ({ maplevel }) => {
 
   useEffect(() => {
     const map = new kakao.maps.Map(mapContainer.current, mapOptions);
-
-    const marker = new kakao.maps.Marker({ position }), // 마커 생성
-      infowindow = new kakao.maps.InfoWindow({ zindex: 1 });
+    const marker = new kakao.maps.Marker({ position }); // 마커 생성
+    // infowindow = new kakao.maps.InfoWindow({ zindex: 1 });
     // 커스텀 오버레이에 표출될 내용
     const content = `
       <div class="customoverlay">
