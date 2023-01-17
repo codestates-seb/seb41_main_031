@@ -16,7 +16,7 @@ const Form = styled.form`
 
 const Input = styled.input`
   margin: 1vw;
-  padding: 2vw;
+  padding: 1.8vw;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -55,7 +55,12 @@ const LoginFont = styled.span`
   font-size: 18px;
 `
 
-const Login = function LoginForm() {
+const ErrorMessage = styled.div`
+display: flex;
+margin-left: 15px;
+`
+
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -70,7 +75,7 @@ const Login = function LoginForm() {
       window.location.replace("/MainPage");
     } else {
       // Display an error message to the user
-      setErrorMessage('이메일은 admin@gmail.com, 비밀번호는 password입니다.');
+     setErrorMessage('이메일은 admin@gmail.com, 비밀번호는 password입니다.');
     }
   }
 
@@ -80,23 +85,24 @@ const Login = function LoginForm() {
     <LoginHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </LoginHeader> 
-        <LoginFont>&nbsp;&nbsp;&nbsp;이메일</LoginFont>
-        <Input
-          type="text"
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-        />
-        <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
+    <LoginFont>&nbsp;&nbsp;&nbsp;이메일</LoginFont>
+    <Input
+      type="text"
+      value={email}
+      onChange={event => setEmail(event.target.value)}
+    />
+    <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
 
-        <Input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />  
-      <br />
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      <Button type="submit">로그인</Button>
-   <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
+    <Input
+      type="password"
+      value={password}
+      onChange={(event) => setPassword(event.target.value)}
+    />  
+    <br />
+    <ErrorMessage>{errorMessage && <div style={{ color: 'red' }}>
+      {errorMessage}</div>}</ErrorMessage>
+    <Button type="submit">로그인</Button>
+    <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
     </Form>
     </LoginContainer>
   );
@@ -107,36 +113,3 @@ const Login = function LoginForm() {
 // if the login fails, you can update the component's state to display an error message
 
 export default Login;
-// =======
-
-// const LoginContainer = styled.div``;
-// const LoginButtonColor = styled.button`
-//   background-color: blue;
-//   border-color: blue;
-// `;
-// function Login() {
-//   return (
-//     <LoginContainer>
-//       <div>아무나에 오신 걸 환영합니다.</div>
-//       <div>사람들과의 연결을 경험해보세요!</div>
-//       <div>Email</div>
-//       <input type="text" placeholder="이메일을 입력해주세요"></input>
-//       <br></br>
-//       <div>Password</div>
-//       <input type="password" placeholder="비밀번호를 입력해주세요"></input>
-//       <br></br>
-//       <LoginButton />
-//     </LoginContainer>
-//   );
-// }
-
-// function LoginButton() {
-//   return (
-//     <LoginButtonColor>
-//       <button id="LoginButton">Login</button>
-//     </LoginButtonColor>
-//   );
-// }
-
-// export default Login;
-// >>>>>>> Stashed changes

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import Mypage from "./Pages/Mypage";
 import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 import Nav from "./Component/Nav";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
@@ -25,7 +26,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/login/" element={<Login />}></Route>
+          <Route path="/Login/" element={<Login />}></Route>
+          <Route path="/Signup/" element={<Signup />}></Route>
           <Route path="/mypage/" element={<Mypage />}></Route>
           <Route path="/Nav/" element={<Nav />}></Route>
         </Routes>
