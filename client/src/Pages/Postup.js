@@ -99,10 +99,10 @@ function Postup({ openModal }) {
         <Contnentdiv>
           <Postinputdiv>
             <div> 위치를 선택해주세요</div>
-            <div> 위치를 선택해주세요</div>
-            <div> 위치를 선택해주세요</div>
-            <div> 위치를 선택해주세요</div>
-            <div> 위치를 선택해주세요</div>
+            <div> 종목을 선택해주세요</div>
+            <div> 인원을 선택해주세요</div>
+            <div> 날짜를 선택해주세요</div>
+            <div> 시간을 선택해주세요</div>
           </Postinputdiv>
           <Viewinputdiv>
             <span1>운동장소</span1>

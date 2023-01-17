@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Map from "../Component/Map";
 import styled from "styled-components";
 import Postup from "./Postup";
+import Nav from "../Component/Nav";
 import DummyData from "../Asset/DummyData";
 import Reqboxdiv from "../Component/Reqboxdiv";
 import PostDetail from "../Component/PostDetail";
@@ -78,21 +79,7 @@ const Setlocdiv = styled.div`
     font-size: 32px;
     font-weight: bold;
     margin: 25px 0px 25px 50px;
-  }
-  section {
-    position: relative;
-    left: 65%;
-    display: flex;
-    flex-direction: row;
-    span {
-      margin: 30px 0px 25px 50px;
-      font-size: 20px;
-      text-decoration: underline;
-      text-decoration-thickness: 5px;
-    }
-    i {
-      margin: 30px 0px 25px 10px;
-    }
+    z-index: "2";
   }
 `;
 const Mapdiv = styled.div`
@@ -103,6 +90,7 @@ const Mapdiv = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  z-index: "0";
 `;
 
 const Reqdiv = styled.div`
@@ -190,11 +178,9 @@ function MainPage() {
         </Serachdiv>
         <Setlocdiv>
           <div>NOW METTIONG....</div>
-          <section>
-            <span>내 주변</span>
-            <i class="fa-sharp fa-solid fa-caret-down fa-2x"></i>
-          </section>
+          {!postisOpen && !postdeisOpen && <Nav />}
         </Setlocdiv>
+
         <Mapdiv>{!postisOpen && !postdeisOpen && <Map />}</Mapdiv>
         <Reqdiv>
           {data1.map((id) => {
