@@ -6,7 +6,7 @@ import Nav from "../Component/Nav";
 import DummyData from "../Asset/DummyData";
 import Reqboxdiv from "../Component/Reqboxdiv";
 import PostDetail from "../Component/PostDetail";
-
+import axios from 'axios';
 const Maindiv = styled.div`
   width: 100%;
   /* background-color: yellow; */
@@ -131,10 +131,10 @@ function MainPage() {
     setTimeout(function () {
       console.log("Works!");
       axios
-        .get("http://localhost:8083/data")
+        .get("http://localhost:5500/data/")
         .then(function (response) {
           // response
-          setdata(response.data);
+          setdata1(response.data);
           console.log(response.data); //데이터 전송 성공시
         })
         .catch(function (error) {

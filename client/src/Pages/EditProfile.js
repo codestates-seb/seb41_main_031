@@ -337,6 +337,7 @@ function EditProfile() {
     isClicked : false
   })
 
+ 
   
 
 
@@ -395,21 +396,57 @@ function EditProfile() {
 const navigate = useNavigate();
 
 const Edituser = (e) => {
-  if(isValid.isPassword === true){
-  if (window.confirm('프로필을 변경하시겠습니까?')) {
+
+  if(form.nickname!==''&&isValid.isEmail&&form.region!==''&&isValid.isPassword){
+    if (window.confirm('이메일과 비밀번호를 변경하시겠습니까?')) {
+      
+      setTimeout(function (){
+        axios
+        .post('http://localhost:5500/data/1')
+        .then(() => {
+          window.location.reload();
+          alert('이메일과 비밀번호가 변경되었습니다');
+          navigate('/');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+    }
+  else if(isValid.isPassword){
+  if (window.confirm('비밀번호를 변경하시겠습니까?')) {
     
     setTimeout(function (){
       axios
       .post('http://localhost:5500/data/1')
       .then(() => {
         window.location.reload();
-        alert('그동안 이용해주셔서 감사합니다.');
+        alert('비밀번호가 변경되었습니다.');
         navigate('/');
       })
       .catch((err) => alert(err.response.data.message));
     }, 3000)
     } 
   }
+
+ else if(isValid.isEmail){
+    if (window.confirm('이메일을 변경하시겠습니까?')) {
+      
+      setTimeout(function (){
+        axios
+        .post('http://localhost:5500/data/1')
+        .then(() => {
+          window.location.reload();
+          alert('이메일이 변경되었습니다.');
+          navigate('/');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+    }
+
+    
+   
+      
 };
 
 
@@ -452,7 +489,7 @@ return(
                 ? null
           : isValid.isClicked === false?
            null : isValid.isEmail === true?
-           '이메일 형식에 맞습니다':'이메일 형식에 맞지 않습니다.'
+            null:'이메일 형식에 맞지 않습니다.'
         }
             </span>
           </span>
@@ -494,7 +531,7 @@ return(
                 ? null
           : isValid.isClicked === false?
            null : isValid.isPassword === true?
-           '비밀번호 형식에 맞습니다':'비밀번호 형식에 맞지 않습니다.'
+           null:'비밀번호 형식에 맞지 않습니다.'
         }
             </span>
      </RightBox>
