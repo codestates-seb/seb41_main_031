@@ -1,5 +1,6 @@
 package com.codestates.seb41_main_031.amoona.member.entity;
 
+import com.codestates.seb41_main_031.amoona.audit.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
@@ -31,8 +32,6 @@ public class Member {
     private String gender;
 
     private int age;
-
-    // todo extends로 createdAt, modifiedAt 추가
 
     // todo Post와 다대다 연관관계 매핑
 }
