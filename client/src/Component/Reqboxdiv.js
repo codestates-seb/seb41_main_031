@@ -80,6 +80,7 @@ function Reqboxdiv({
   Party,
   item,
   Location,
+  openModal,
 }) {
   return (
     <>
@@ -97,7 +98,7 @@ function Reqboxdiv({
         </impormationdiv>
         <h1>{item} 할 사람 구해요~~ 🏀</h1>
         <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
-        <button>JOIN</button>
+        <button onClick={openModal}>JOIN</button>
         <locationdiv>-{Location}-</locationdiv>
       </Reqbox>
     </>
