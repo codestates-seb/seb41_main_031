@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, axios } from 'react-router-dom';
+import { useEffect,useState,axios } from 'react-router-dom';
 
 
 
@@ -7,16 +7,16 @@ import { useEffect, axios } from 'react-router-dom';
 function Withdrawal(){
 
 
-  const [username, setUsername] = useState("");
+ 
   const [data1, setdata] = useState([]);
 
-  
+
     useEffect(() => {
         console.log("Works!before");
         setTimeout(function () {
           console.log("Works!");
           axios
-            .get("http://localhost:4000/data")
+            .get("http://localhost:5500/data")
             .then(function (response) {
               // response
               setdata(response.data);

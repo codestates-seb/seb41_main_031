@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import {Link } from 'react-router-dom';
 import React, { useState, useEffect,useRef } from 'react';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import axios from "axios";
+import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
 
 const Main = styled.div`
 width : 100%;
+
 `
 const LeftBox = styled.div`` 
 const Image = styled.div`
@@ -295,6 +299,11 @@ justify-content : center;
   
 }
 
+.emailalert{
+  color : red;
+  
+  
+}
 
 `
 const RegionBox= styled.div`
@@ -337,8 +346,11 @@ function EditProfile() {
   
 
   const Print = ()=>{
-    console.log(form.email)
+    console.log('이메일 '+form.email)
     console.log(isValid.isEmail)
+    console.log('비밀번호 '+form.newpassword)
+    console.log(isValid.isPassword)
+    
   }
 
 
@@ -353,21 +365,53 @@ function EditProfile() {
     
     if(!emailRegex.test(form.email)){
       setIsValid({...isValid, isEmail: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
     } else{
       setIsValid({...isValid, isEmail : true})
     }
   },[form.email])
 
+  useEffect(()=>{
+    const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    
+    if(!passwordRegex.test(form.newpassword)){
+      setIsValid({...isValid, isPassword: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isPassword : true})
+    }
+  },[form.newpassword])
+
+
+
   function Clicked(){
   
     setIsValid({...isValid, isClicked: true})
-    console.log(isValid.isClicked)
+    
 }
 
-useEffect(()=>{
-  if(form.email ==='')
-  {setIsValid({...isValid, isClicked: false})}
-},[form.email])
+
+const navigate = useNavigate();
+
+const Edituser = (e) => {
+  if(isValid.isPassword === true){
+  if (window.confirm('프로필을 변경하시겠습니까?')) {
+    
+    setTimeout(function (){
+      axios
+      .post('http://localhost:5500/data/1')
+      .then(() => {
+        window.location.reload();
+        alert('그동안 이용해주셔서 감사합니다.');
+        navigate('/');
+      })
+      .catch((err) => alert(err.response.data.message));
+    }, 3000)
+    } 
+  }
+};
+
 
 
 
@@ -380,6 +424,8 @@ useEffect(()=>{
 
 return(
     <Main>
+    <Skeleton width={"100%"} />
+    <Skeleton width={"100px"} />
      <MiddleBox>   
      <LeftBox>
         <Image></Image>
@@ -401,12 +447,12 @@ return(
             
           ></Email>
           <span>
-          <span>
+          <span className = 'emailalert'>
           {form.email ===''
                 ? null
           : isValid.isClicked === false?
            null : isValid.isEmail === true?
-           '이메일 형식에 맞습니다':'The email is not a valid email address.'
+           '이메일 형식에 맞습니다':'이메일 형식에 맞지 않습니다.'
         }
             </span>
           </span>
@@ -443,12 +489,20 @@ return(
             }
           />
         </NewPasswordBox>
+        <span className = 'passwordalert'>
+          {form.newpassword ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isPassword === true?
+           '비밀번호 형식에 맞습니다':'비밀번호 형식에 맞지 않습니다.'
+        }
+            </span>
      </RightBox>
      </MiddleBox>
      <BottomBox>
         <EditButton 
         onClick = {()=> 
-        {
+        {Edituser() 
           Print()
           Clicked()
           
