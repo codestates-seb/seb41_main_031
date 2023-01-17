@@ -21,7 +21,7 @@ public class MemberDto {
                 message = "비밀번호는 최소 8자, 최소 하나의 문자 및 하나의 숫자를 포함해야 합니다.")
         private String password;
         @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
-        private String nickName;
+        private String nickname;
     }
 
     // 회원 프로필 정보 수정 dto
