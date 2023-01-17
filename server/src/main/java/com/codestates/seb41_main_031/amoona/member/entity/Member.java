@@ -20,7 +20,7 @@ public class Member {
     private String password;
 
     @Column(length = 255, nullable = false)
-    private String nickName;
+    private String nickname;
 
     private String region;
 
@@ -29,6 +29,5 @@ public class Member {
     private String gender;
 
     private int age;
-
     // todo Post와 다대다 연관관계 매핑
 }
