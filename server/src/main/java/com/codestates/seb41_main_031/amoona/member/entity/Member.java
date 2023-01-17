@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,4 +32,7 @@ public class Member {
 
     private int age;
     // todo Post와 다대다 연관관계 매핑
+
+    @ElementCollection(fetch = FetchType.EAGER) // 사용자 등록 시, 사용자의 권한을 등록하는 권한 테이블 생성을 위한 애너테이션
+    private List<String> roles = new ArrayList<>();
 }

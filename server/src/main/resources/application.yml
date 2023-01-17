@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/amoona
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 1440
+  refresh-token-expiration-minutes: 20160
+
+mail:
+  address:
+    admin: admin@email.com
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
