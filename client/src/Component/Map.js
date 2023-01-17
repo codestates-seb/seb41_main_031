@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { connect } from "react-redux";
 
 const Map = ({ maplevel }) => {
+  const [address, setAddress] = useState("");
+  const kakao = window.kakao;
   const data = useSelector((state) => state);
   const mapContainer = useRef(null);
   const { kakao } = window;
@@ -11,6 +13,16 @@ const Map = ({ maplevel }) => {
   const mapOptions = {
     center: position, // 지도의 중심좌표
     level: maplevel, // 지도의 확대 레벨
+  };
+
+  const getAddress = async (lat, lng) => {
+    const coord = new kakao.maps.LatLng(lat, lng);
+    const geocoder = new kakao.maps.services.Geocoder();
+    geocoder.reverseGeocode(coord, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        setAddress(result[0].address.address_name);
+      }
+    });
   };
 
   useEffect(() => {
@@ -35,15 +47,21 @@ const Map = ({ maplevel }) => {
   });
 
   return (
-    <div
-      id="map"
-      ref={mapContainer}
-      style={{
-        width: "80%",
-        height: "100%",
-        borderRadius: "20px",
-      }}
-    ></div>
+    <>
+      <div
+        id="map"
+        ref={mapContainer}
+        style={{
+          width: "80%",
+          height: "100%",
+          borderRadius: "20px",
+        }}
+      ></div>
+      <button onClick={() => getAddress(37.566826, 126.9786567)}>
+        Get Address
+      </button>
+      <div>{address}</div>
+    </>
   );
 };
 function mapStateToProps(state) {
