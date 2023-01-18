@@ -46,6 +46,18 @@ const Map = ({ maplevel }) => {
 
     kakao.maps.event.addListener(map, "click", (mouseEvent) => {
       getAddress(mouseEvent.latLng.getLat(), mouseEvent.latLng.getLng());
+      var geocoder = new kakao.maps.services.Geocoder();
+
+      var coord = new kakao.maps.LatLng(37.56496830314491, 126.93990862062978);
+      var callback = function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          console.log(
+            "그런 너를 마주칠까 " + result[0].address.address_name + "을 못가"
+          );
+        }
+      };
+
+      geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
     });
   });
 
