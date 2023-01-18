@@ -78,6 +78,8 @@ function Login() {
      setErrorMessage('이메일은 admin@gmail.com, 비밀번호는 password입니다.');
     }
   }
+// 3항 연산자로 if loggedin 로직 이용하면 데이터셋이 입력됐을때 메인페이지로 이동하게 하면 됨 
+// 그외 에러 처리 + 유효성 검사 개발 
 
   return (
     <LoginContainer>

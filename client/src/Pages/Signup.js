@@ -79,7 +79,9 @@ function Signup() {
      setErrorMessage('닉네임은 admin, 이메일은 admin@gmail.com, 비밀번호는 password이어야 합니다.');
     }
   }
-
+// 입력 후 데이터셋 저장   
+// 회원가입 성공 시 로그인 창으로 이동 
+// 회원가입 실패 시 에러 처리 (유효성 검사) 개발 
   return (
     <SignupContainer>
     <Form onSubmit={handleSubmit}>
