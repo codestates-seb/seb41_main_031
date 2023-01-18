@@ -9,7 +9,12 @@
       "Time_after": "PM",
       "Party": "3/6",
       "item": "농구",
-      "Location": "월드컵 공원"
+      "Location": "월드컵 공원",
+      "Email" : "leg1770@naver.com",
+      "Nickname" : "leejk",
+      "Region" : "서울",
+      "Sex" : "남자",
+      "Age" : "21살"
     },
     {
       "id": "2",

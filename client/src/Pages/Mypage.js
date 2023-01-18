@@ -1,17 +1,18 @@
 import styled from 'styled-components';
-
+import axios, { formToJSON } from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
 const Main = styled.div`
 width : 100%;
 `;
 const LeftBox = styled.div`
 float:left;
 `;
-const Image = styled.div`
+const Image = styled.img`
 width: 12rem;
     height: 12rem;
     border-radius: 70%;
     overflow: hidden;
-    background-color : green;
     margin-right : 80px;
     margin-top : 30px;
     `;
@@ -20,7 +21,7 @@ const RightBox = styled.div`
 margin-top : 50px;
 `
 
-const EmailBox = styled.div`
+const EmailButton = styled.button`
 
 width : 200px;
 height : 35px;
@@ -47,7 +48,7 @@ display: flex;
 
 margin-bottom : 15px;
 `;
-const NicknameBox = styled.div`
+const NicknameButton = styled.button`
 
 width : 200px;
 height : 35px;
@@ -70,7 +71,7 @@ display: flex;
   align-items: center;
   margin-bottom : 15px;
 `;
-const RegionBox = styled.div`
+const RegionButton = styled.button`
 
 width : 200px;
 height : 35px;
@@ -93,7 +94,7 @@ display: flex;
   align-items: center;
   margin-bottom : 15px;
 `;
-const SexBox = styled.div`
+const SexButton = styled.button`
 
 width : 200px;
 height : 35px;
@@ -116,7 +117,7 @@ display: flex;
   align-items: center;
   margin-bottom : 15px;
 `;
-const AgeBox = styled.div`
+const AgeButton = styled.button`
 
 width : 200px;
 height : 35px;
@@ -143,7 +144,7 @@ display: flex;
 const BottomBox = styled.div`
 clear: both;
 margin-top : 100px;
-
+margin-bottom : 60px;
 `;
 const EditButton = styled.button`
 
@@ -221,24 +222,165 @@ display: flex;
   align-items: center;
 `
 
+
+
 function Mypage() {
+  
+  
+  const navigate = useNavigate();
+
+  const Deleteuser = (e) => {
+    e.preventDefault();
+    if (window.confirm('정말 탈퇴하시겠습니까?')) {
+      
+      setTimeout(function (){
+        axios
+        .delete('http://localhost:5500/data/1')
+        .then(() => {
+          window.location.reload();
+          alert('그동안 이용해주셔서 감사합니다.');
+          navigate('/');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+  };
+    
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    console.log("Works!before");
+    setTimeout(function () {
+      console.log("Works!");
+      axios
+        .get("http://localhost:5500/data/1")
+        .then(function (response) {
+          // response
+          setData(response.data);
+          //데이터 전송 성공시
+        })
+        .catch(function (error) {
+          // 오류발생시 실행
+        })
+        .then(function (response) {
+          // 항상 실행
+        }); //컴포넌트가 리랜더링 될때마다 실행
+    }, 3000);},[])
+    
+
+    const [click, setClick] = useState({
+      email : false,
+      nickname : false,
+      region : false,
+      sex : false,
+      age : false
+    })
+    
+    function Emailclick (){
+
+      setClick({...click, email : true})
+
+      if(click.email){
+        setClick({...click, email : false})
+      }
+  
+    }
+    
+    
+
+    function Nicknameclick (){
+
+      setClick({...click, nickname : true})
+
+      if(click.nickname){
+        setClick({...click, nickname : false})
+      }
+  
+    }
+
+    function Regionclick (){
+
+      setClick({...click, region : true})
+
+      if(click.region){
+        setClick({...click, region : false})
+      }
+  
+    }
+
+    function Sexclick (){
+
+      setClick({...click, sex : true})
+
+      if(click.sex){
+        setClick({...click, sex : false})
+      }
+  
+    }
+   
+    function Ageclick (){
+
+      setClick({...click, age : true})
+
+      if(click.age){
+        setClick({...click, age : false})
+      }
+  
+    }
+  
   return (
   <Main>
     <MiddleBox>
     <LeftBox>
-      <Image></Image>
+      <Image src={data.img}>
+
+      </Image>
     </LeftBox>
     <RightBox>
-        <EmailBox>이메일</EmailBox>
-        <NicknameBox>닉네임</NicknameBox>
-        <RegionBox>지역</RegionBox>
-        <SexBox>성별</SexBox>
-        <AgeBox>나이</AgeBox>
+        <EmailButton
+        onClick = {()=>{
+          Emailclick()
+        }}
+        >
+        {click.email ? data.Email: '이메일'}
+        </EmailButton>
+        <NicknameButton
+        onClick = {()=>{
+          Nicknameclick()
+        }}
+        >
+          {click.nickname ? data.Nickname: '닉네임'}
+          </NicknameButton>
+        <RegionButton
+        onClick = {()=>{
+          Regionclick()
+        }}
+        >
+        {click.region ? data.Region: '지역'}
+        </RegionButton>
+        <SexButton
+        onClick = {()=>{
+          Sexclick()
+        }}
+        >
+          {click.sex ? data.Sex: '성별'}
+        </SexButton>
+        <AgeButton
+        onClick = {()=>{
+          Ageclick()
+        }}
+        >
+          {click.age ? data.Age: '나이'}
+          </AgeButton>
     </RightBox>
     </MiddleBox>
     <BottomBox>
+      <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
-      <WithdrawButton>탈퇴하기</WithdrawButton>
+      </Link>
+      <WithdrawButton onClick = {Deleteuser}>
+        탈퇴하기
+      </WithdrawButton>
     </BottomBox>
   </Main>
   

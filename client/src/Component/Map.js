@@ -7,7 +7,7 @@ const Map = ({ maplevel }) => {
   const [locontent, setlocontent] = useState("우리집");
   const data = useSelector((state) => state);
   const mapContainer = useRef(null);
-  const { kakao } = window;
+
   const position = new kakao.maps.LatLng(33.450701, 126.570667);
   const [markerPositionlat, setmarkerPositionlat] = useState(33.450701);
   const [markerPositionlng, setmarkerPositionlng] = useState(126.570667);

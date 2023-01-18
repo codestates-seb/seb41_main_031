@@ -1,7 +1,13 @@
 import styled from 'styled-components';
+import React, { useState, useEffect,useRef } from 'react';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import axios from "axios";
+import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
 
 const Main = styled.div`
 width : 100%;
+
 `
 const LeftBox = styled.div`` 
 const Image = styled.div`
@@ -20,6 +26,7 @@ margin-top : 90px;
 `
 const Nickname =  styled.input.attrs({
    type: "text",
+   
    required: true,
    placeholder: "변경할 닉네임"
  })`
@@ -180,6 +187,7 @@ display: flex;
 const BottomBox = styled.div`
 
 margin-top : 50px;
+margin-bottom : 50px;
 
 
 `  
@@ -291,6 +299,11 @@ justify-content : center;
   
 }
 
+.emailalert{
+  color : red;
+  
+  
+}
 
 `
 const RegionBox= styled.div`
@@ -309,8 +322,147 @@ justify-content : center;
 
 
 function EditProfile() {
+
+  const [form, setForm] = useState({
+    nickname : '',
+    email : '',
+    region : '',
+    previouspassword : '',
+    newpassword : ''
+  })
+
+  const [isValid, setIsValid] = useState({
+    isEmail : false,
+    isPassword : false,
+    isClicked : false
+  })
+
+ 
+  
+
+
+  //이메일 정규식
+
+
+  
+
+  const Print = ()=>{
+    console.log('이메일 '+form.email)
+    console.log(isValid.isEmail)
+    console.log('비밀번호 '+form.newpassword)
+    console.log(isValid.isPassword)
+    
+  }
+
+
+  const onChangeprofile = (e) => {
+    const { name, value } = e.target;   
+    setForm({ ...form, [name]: value });
+  };
+
+  useEffect(()=>{
+    const emailRegex =
+    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    
+    if(!emailRegex.test(form.email)){
+      setIsValid({...isValid, isEmail: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isEmail : true})
+    }
+  },[form.email])
+
+  useEffect(()=>{
+    const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    
+    if(!passwordRegex.test(form.newpassword)){
+      setIsValid({...isValid, isPassword: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isPassword : true})
+    }
+  },[form.newpassword])
+
+
+
+  function Clicked(){
+  
+    setIsValid({...isValid, isClicked: true})
+    
+}
+
+
+const navigate = useNavigate();
+
+const Edituser = (e) => {
+
+  if(form.nickname!==''&&isValid.isEmail&&form.region!==''&&isValid.isPassword){
+    if (window.confirm('이메일과 비밀번호를 변경하시겠습니까?')) {
+      
+      setTimeout(function (){
+        axios
+        .post('http://localhost:5500/data/1')
+        .then(() => {
+          window.location.reload();
+          alert('이메일과 비밀번호가 변경되었습니다');
+          navigate('/');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+    }
+  else if(isValid.isPassword){
+  if (window.confirm('비밀번호를 변경하시겠습니까?')) {
+    
+    setTimeout(function (){
+      axios
+      .post('http://localhost:5500/data/1')
+      .then(() => {
+        window.location.reload();
+        alert('비밀번호가 변경되었습니다.');
+        navigate('/');
+      })
+      .catch((err) => alert(err.response.data.message));
+    }, 3000)
+    } 
+  }
+
+ else if(isValid.isEmail){
+    if (window.confirm('이메일을 변경하시겠습니까?')) {
+      
+      setTimeout(function (){
+        axios
+        .post('http://localhost:5500/data/1')
+        .then(() => {
+          window.location.reload();
+          alert('이메일이 변경되었습니다.');
+          navigate('/');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+    }
+
+    
+   
+      
+};
+
+
+
+
+
+
+ 
+
+
+
+
 return(
     <Main>
+    <Skeleton width={"100%"} />
+    <Skeleton width={"100px"} />
      <MiddleBox>   
      <LeftBox>
         <Image></Image>
@@ -323,26 +475,81 @@ return(
       </NicknameBox>
         <EmailBox>
           <span className = 'Email'>이메일: </span>
-          <Email></Email>
+          <Email
+          name = "email"
+          value= {form.email}
+          onChange = {
+            onChangeprofile
+            }
+            
+          ></Email>
+          <span>
+          <span className = 'emailalert'>
+          {form.email ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isEmail === true?
+            null:'이메일 형식에 맞지 않습니다.'
+        }
+            </span>
+          </span>
        </EmailBox>
        <RegionBox>
        <span className = 'Region'>지역: </span>
-       <Region></Region>
+       <Region
+       name = "region"
+       value= {form.region}
+       onChange = {
+         onChangeprofile
+         }
+       />
        </RegionBox>
       </InformBox>
       <PreviousPasswordBox>
           <span className = 'Previous'>이전 비밀번호</span>
-          <PreviousPassword></PreviousPassword>
+          <PreviousPassword
+          name = "previouspassword"
+          value= {form.previouspassword}
+          onChange = {
+            onChangeprofile
+            
+            }
+          />
         </PreviousPasswordBox>
         <NewPasswordBox>
           <span className ='New'>새로운 비밀번호</span>
-          <NewPassword></NewPassword>
+          <NewPassword
+          name = "newpassword"
+          value= {form.newpassword}
+          onChange = {
+            onChangeprofile
+            }
+          />
         </NewPasswordBox>
+        <span className = 'passwordalert'>
+          {form.newpassword ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isPassword === true?
+           null:'비밀번호 형식에 맞지 않습니다.'
+        }
+            </span>
      </RightBox>
      </MiddleBox>
      <BottomBox>
-        <EditButton>프로필 변경하기</EditButton>
-        <BackButton>뒤로가기</BackButton>
+        <EditButton 
+        onClick = {()=> 
+        {Edituser() 
+          Print()
+          Clicked()
+          
+                  }}>
+        프로필 변경하기</EditButton>
+        <Link to = "/mypage">
+        <BackButton>
+          뒤로가기
+          </BackButton>
+        </Link>
      </BottomBox>
      
     </Main>
