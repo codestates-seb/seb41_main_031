@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Map = ({ maplevel }) => {
+  const dispatch = useDispatch();
   const [address, setAddress] = useState("");
   const [locontent, setlocontent] = useState("우리집");
   const data = useSelector((state) => state);
   const mapContainer = useRef(null);
-
+  const { kakao } = window;
   const position = new kakao.maps.LatLng(33.450701, 126.570667);
   const [markerPositionlat, setmarkerPositionlat] = useState(33.450701);
   const [markerPositionlng, setmarkerPositionlng] = useState(126.570667);
@@ -77,12 +79,13 @@ const Map = ({ maplevel }) => {
       var callback = function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
           setlocontent(result[0].address.address_name);
+          dispatch({ type: "SET_LOCATION", maplocation: locontent });
         }
       };
 
       geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
     });
-  });
+  }, []);
 
   return (
     <>

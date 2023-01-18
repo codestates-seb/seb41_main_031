@@ -3,7 +3,7 @@ import Map from "../Component/Map";
 import styled from "styled-components";
 import Postup from "./Postup";
 import Nav from "../Component/Nav";
-import DummyData from "../Asset/DummyData";
+import DummyData from "../Asset/DummyData"; //이름 바꾸기
 import Reqboxdiv from "../Component/Reqboxdiv";
 import PostDetail from "../Component/PostDetail";
 
@@ -146,7 +146,7 @@ function MainPage() {
   return (
     <>
       {postisOpen && (
-        <ModalBackdrop onClick={openpostModal}>
+        <ModalBackdrop>
           <Postup openModal={openpostModal} />
         </ModalBackdrop>
       )}
@@ -157,7 +157,6 @@ function MainPage() {
       )}
 
       <Maindiv>
-        {console.log(DummyData)}
         <Serachdiv>
           <div1>WHAT’S YOUR FAVORITE SPORT?🔍</div1>
           <div>

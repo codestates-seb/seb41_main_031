@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Map from "../Component/Map";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Postupdiv = styled.div`
   // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있습니다.
@@ -34,6 +35,12 @@ const Postinputdiv = styled.div`
     padding-top: 12px;
     margin: 10px 0px 30px 60px;
     box-shadow: 5px 5px 5px 5px gray;
+    button {
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      margin: 0px 20px 20px 20px;
+    }
   }
 `;
 
@@ -92,34 +99,83 @@ const Postbuttondiv = styled.button`
   margin-bottom: 70px;
 `;
 
+const ModalBackdrop = styled.div`
+  // TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 90%;
+  div {
+    margin-top: 60px;
+  }
+  i {
+    position: absolute;
+    top: 30px;
+    right: 7%;
+    background-color: black;
+    color: white;
+  }
+`;
+
 function Postup({ openModal }) {
+  const data = useSelector((state) => state);
+  const [postisOpen, setpostIsOpen] = useState(false);
+  const [location, setlocation] = useState("위치를 선택해 주세요");
+  const [member, setmember] = useState(1);
   const [username, setUsername] = useState("");
+
+  function openpostModal() {
+    setpostIsOpen(!postisOpen);
+    setlocation(data.maplocation);
+  }
+  function mius() {
+    let value = member;
+    setmember(value - 1);
+  }
+  function plus() {
+    let value = member;
+    setmember(value + 1);
+  }
+
   const change = (e) => {
     let { value } = { ...e.target };
     setUsername(value);
   };
   return (
     <>
+      {postisOpen && (
+        <ModalBackdrop>
+          <i class="fa-solid fa-circle-xmark fa-2x" onClick={openpostModal}></i>
+          <Map></Map>
+        </ModalBackdrop>
+      )}
       <Postupdiv>
         <Contnentdiv>
           <Postinputdiv>
-            <div> 위치를 선택해주세요</div>
+            <div onClick={openpostModal}> {location}</div>
             <div> 종목을 선택해주세요</div>
-            <div> 인원을 선택해주세요</div>
+            <div>
+              <button onClick={mius}>-</button>
+              {member}
+              <button onClick={plus}>+</button>
+            </div>
             <div> 날짜를 선택해주세요</div>
             <div> 시간을 선택해주세요</div>
           </Postinputdiv>
           <Viewinputdiv>
             <span1>운동장소</span1>
-            <div2>서울 상암월드컵경기장 보조경기장</div2>
-            <sidemap>
-              <Map />
-            </sidemap>
-
+            <div2>{location}</div2>
+            <sidemap>{!postisOpen && <Map />}</sidemap>
             <span1>종목</span1>
             <div1>축구</div1>
             <span1>인원</span1>
-            <div1>4명</div1>
+            <div1>{member}명</div1>
             <span1>날짜와 시간</span1>
             <div1>2023년 1월22일 19:00시쯤</div1>
           </Viewinputdiv>

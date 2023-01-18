@@ -4,7 +4,7 @@ import MainPage from "./Pages/MainPage";
 import Mypage from "./Pages/Mypage";
 import Postup from "./Pages/Postup";
 import PostDetail from "./Component/PostDetail";
-
+import Timedata from "./Component/time_data";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Nav from "./Component/Nav";
@@ -38,6 +38,7 @@ function App() {
           <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
           <Route path="/post-detail/" element={<PostDetail />}></Route>
           <Route path="/post-up/" element={<Postup />}></Route>
+          <Route path="/time_data/" element={<Timedata />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
           <Route path="/post-detail" element={<PostDetail />}></Route>
