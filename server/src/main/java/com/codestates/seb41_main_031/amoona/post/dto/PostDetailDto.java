@@ -1,30 +1,26 @@
 package com.codestates.seb41_main_031.amoona.post.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-import java.time.LocalDateTime;
-
-@NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class PostResponseDto {
+@Getter
+public class PostDetailDto {
 
     private Long postId;
 
-    private int playerNum;
+    private String nickname;
+
+    private String image;
 
     private String location;
 
     private String event;
 
+    private int playerNum;
+
     private String date;
 
     private String time;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime modifiedAt;
 
 }

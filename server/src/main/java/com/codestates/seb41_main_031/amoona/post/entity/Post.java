@@ -25,10 +25,15 @@ public class Post {
     @Column(length = 30, nullable = false)
     private String event;
 
-    private LocalDateTime time;     // 날짜, 시간 선택 어떻게 받아올지??
+    private String date;
+
+    private String time;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;
+
+//    @OneToMany(mappedBy = "post")
+//    private List<Post> posts;
 
 }

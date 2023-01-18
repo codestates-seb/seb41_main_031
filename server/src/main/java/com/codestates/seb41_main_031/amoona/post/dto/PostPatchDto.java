@@ -20,5 +20,8 @@ public class PostPatchDto {
     @NotBlank
     private String event;
 
-//    private LocalDateTime time;
+    private String date;
+
+    private String time;
+
 }
