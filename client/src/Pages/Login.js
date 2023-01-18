@@ -91,6 +91,7 @@ function Login() {
     <Input
       type="text"
       value={email}
+      placeholder = 'Please type your E-mail'
       onChange={event => setEmail(event.target.value)}
     />
     <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
@@ -98,6 +99,7 @@ function Login() {
     <Input
       type="password"
       value={password}
+      placeholder = 'Please type your password'
       onChange={(event) => setPassword(event.target.value)}
     />  
     <br />

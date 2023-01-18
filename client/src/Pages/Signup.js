@@ -92,18 +92,21 @@ function Signup() {
         <Input
           type="nickname"
           value={nickName}
+          placeholder = 'Please type your nickname'
           onChange={e => setNickName(e.target.value)}
         />
         <SignupFont>&nbsp;&nbsp;&nbsp;이메일</SignupFont>
         <Input
           type="email"
           value={email}
+          placeholder = 'Please type your E-mail'
           onChange={e => setEmail(e.target.value)}
         />
         <SignupFont>&nbsp;&nbsp;&nbsp;비밀번호</SignupFont>
         <Input
           type="password"
           value={password}
+          placeholder = 'Please type your password'
           onChange={e => setPassword(e.target.value)}
         />
       <br /> 
