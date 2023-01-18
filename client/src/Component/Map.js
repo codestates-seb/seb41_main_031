@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 const Map = ({ maplevel }) => {
   const [address, setAddress] = useState("");
-  const kakao = window.kakao;
   const data = useSelector((state) => state);
   const mapContainer = useRef(null);
   const { kakao } = window;
@@ -16,8 +15,8 @@ const Map = ({ maplevel }) => {
   };
 
   const getAddress = async (lat, lng) => {
-    const coord = new kakao.maps.LatLng(lat, lng);
     const geocoder = new kakao.maps.services.Geocoder();
+    const coord = new kakao.maps.LatLng(lat, lng);
     geocoder.reverseGeocode(coord, (result, status) => {
       if (status === kakao.maps.services.Status.OK) {
         setAddress(result[0].address.address_name);
@@ -44,6 +43,10 @@ const Map = ({ maplevel }) => {
 
     // 마커가 지도 위에 표시되도록 설정
     marker.setMap(map);
+
+    kakao.maps.event.addListener(map, "click", (mouseEvent) => {
+      getAddress(mouseEvent.latLng.getLat(), mouseEvent.latLng.getLng());
+    });
   });
 
   return (
