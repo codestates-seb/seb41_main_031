@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const Postupdiv = styled.div`
   // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있습니다.
-  width: 60%;
-
+  width: 55%;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,16 +20,19 @@ const Contnentdiv = styled.div`
 const Postinputdiv = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 10px;
+
   div {
-    width: 550px;
-    height: 110px;
-    font-size: 36px;
+    width: 400px;
+    height: 60px;
+    font-size: 25px;
     color: rgba(0, 0, 0, 0.7);
     text-align: center;
     border-radius: 20px;
     border: solid 1px rgba(0, 0, 0, 0.7);
-    padding-top: 30px;
-    margin: 30px 0px 60px 100px;
+    padding-top: 12px;
+    margin: 10px 0px 30px 60px;
     box-shadow: 5px 5px 5px 5px gray;
   }
 `;
@@ -38,53 +41,55 @@ const Viewinputdiv = styled.div`
   display: flex;
   flex-direction: column;
   border: solid 1px rgba(0, 0, 0, 0.7);
-  width: 670px;
-  height: 910px;
+  width: 450px;
+  height: 510px;
   border-radius: 20px;
   text-align: left;
   align-items: center;
-  margin: 30px 100px 0px 100px;
-
+  margin: 20px 40px 20px 100px;
+  padding-bottom: 20px;
   box-shadow: 5px 5px 5px 5px gray;
   sidemap {
-    width: 530px;
+    width: 450px;
+    padding-left: 70px;
     height: 240px;
-    background-color: aliceblue;
+    text-align: center;
+    align-items: center;
   }
   span1 {
-    width: 540px;
-    font-size: 30px;
-    margin: 30px 0px 10px 0px;
+    width: 450px;
+    font-size: 20px;
+    margin: 10px 0px 5px 30px;
     font-weight: bold;
   }
   div1 {
-    width: 540px;
-    height: 80px;
+    width: 370px;
+    height: 40px;
     border: solid 1px rgba(0, 0, 0, 0.7);
     border-radius: 20px;
-    font-size: 30px;
-    padding: 20px 0px 0px 30px;
+    font-size: 20px;
+    padding: 0px 0px 0px 30px;
     box-shadow: 5px 5px 5px 5px gray;
   }
   div2 {
-    width: 540px;
-    font-size: 20px;
+    width: 400px;
+    font-size: 10px;
     margin-bottom: 20px;
   }
 `;
 
 const Postbuttondiv = styled.button`
   /* background-color: yellow; */
-  width: 740px;
-  height: 90px;
+  width: 500px;
+  height: 60px;
   font-weight: bold;
   border: none;
   border-radius: 20px;
   color: white;
-  font-size: 35px;
+  font-size: 30px;
   background-color: #ff4c29;
-  margin-top: 60px;
-  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 70px;
 `;
 
 function Postup({ openModal }) {
