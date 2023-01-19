@@ -38,11 +38,11 @@ function App() {
           <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
           <Route path="/post-detail/" element={<PostDetail />}></Route>
           <Route path="/post-up/" element={<Postup />}></Route>
-          <Route path="/time_data/" element={<Timedata />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
           <Route path="/post-detail" element={<PostDetail />}></Route>
         </Routes>
+
         <Footer />
       </BrowserRouter>
     </>

@@ -2,11 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Reqbox = styled.div`
-  background-color: white;
   color: black;
   box-shadow: 5px 5px 5px 5px gray;
   display: flex;
-  margin: 60px 0px 0px 60px;
   flex-direction: column;
   width: 400px;
   height: 380px;
@@ -14,6 +12,7 @@ const Reqbox = styled.div`
   font-size: 8px;
   text-align: center;
   align-items: center;
+  margin: 20px 20px 20px 20px;
   impormationdiv {
     color: white;
     box-shadow: 5px 5px 5px 5px gray;

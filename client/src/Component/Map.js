@@ -93,7 +93,7 @@ const Map = ({ maplevel }) => {
         id="map"
         ref={mapContainer}
         style={{
-          width: "80%",
+          width: "100%",
           height: "100%",
           borderRadius: "20px",
         }}
