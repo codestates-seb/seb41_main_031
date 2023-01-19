@@ -55,11 +55,14 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer()) // Custom Configurer 를 추가해 개발자 입맛대로 커스터마이징 함
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.POST, "/*/members").permitAll() // 회원 가입
-                        .antMatchers(HttpMethod.PATCH, "/*/members/**").hasRole("USER") // 회원 정보 수정
-                        .antMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN") // 모든 회원 정보 조회
-                        .antMatchers(HttpMethod.GET,"/*/members/**").hasAnyRole("USER", "ADMIN") // 특정 회원 정보 조회
-                        .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER") // 회원 삭제
+                        .antMatchers(HttpMethod.POST, "/members").permitAll() // 회원 가입
+                        .antMatchers(HttpMethod.GET, "/members/**").hasRole("USER") // 회원 정보 조회
+                        .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER") // 회원 정보 수정
+                        .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN") // 모든 회원 정보 조회
+                        .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER") // 회원 삭제
+                        .antMatchers(HttpMethod.POST, "/posts").hasRole("USER") // 게시글 등록
+                        .antMatchers(HttpMethod.PATCH, "/posts/**").hasRole("USER") // 게시글 수정
+                        .antMatchers(HttpMethod.DELETE, "/posts/**").hasAnyRole("USER", "ADMIN") // 게시글 삭제
                         .anyRequest().permitAll()
                 );
         return http.build();
