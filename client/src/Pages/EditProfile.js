@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 import Skeleton from "react-loading-skeleton";
@@ -18,6 +19,35 @@ const Image = styled.div`
   margin-right: 80px;
   margin-bottom: 60px;
 `;
+=======
+import styled from 'styled-components';
+import React, { useState, useEffect,useRef } from 'react';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import axios, { formToJSON } from "axios";
+import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
+
+const Main = styled.div`
+@media all and (max-width: 1100px){
+	
+  width : 70%;
+  height : 70%;
+}
+
+`
+const LeftBox = styled.div`` 
+const Image = styled.img`
+    width: 17rem;
+    height: 17rem;; 
+    border-radius: 70%;
+    border : solid 3px;
+    overflow: hidden;
+    background-color : white;
+    margin-right : 80px;
+    margin-bottom : 60px;
+    
+`
+>>>>>>> 27d4d5e (dfdfdf)
 const RightBox = styled.div`
   float: right;
   margin-top: 90px;
@@ -163,8 +193,16 @@ const NewPassword = styled.input.attrs({
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   margin-bottom: 15px;
   margin-top: 10px;
+=======
+  margin-bottom : 15px;
+  margin-top : 10px;
+
+
+  
+>>>>>>> 27d4d5e (dfdfdf)
 `;
 const MiddleBox = styled.div`
   display: flex;
@@ -225,6 +263,7 @@ const BackButton = styled.button`
   background: #ff4c29;
   border-radius: 15px;
 
+<<<<<<< HEAD
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
@@ -233,6 +272,10 @@ const BackButton = styled.button`
   display: flex;
   align-items: center;
   text-align: center;
+=======
+background-image: linear-gradient(to bottom, #ff4c29, #f26933, #e67e43, #da8e57, #cf9c6f);
+border-radius: 15px;
+>>>>>>> 27d4d5e (dfdfdf)
 
   color: #f9fbff;
 
@@ -251,9 +294,18 @@ const PreviousPasswordBox = styled.div`
   font-size: 0.7rem;
 `;
 const NewPasswordBox = styled.div`
+<<<<<<< HEAD
   margin-top: 20px;
   font-size: 0.7rem;
 `;
+=======
+margin-top : 20px;
+font-size :  0.7rem;
+.passwordalert{
+    color : red;
+  }
+`
+>>>>>>> 27d4d5e (dfdfdf)
 
 const InformBox = styled.div`
   margin-right: 350px;
@@ -350,6 +402,7 @@ function EditProfile() {
 
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   const Edituser = (e) => {
     if (
       form.nickname !== "" &&
@@ -480,6 +533,259 @@ function EditProfile() {
         </EditButton>
         <Link to="/mypage">
           <BackButton>뒤로가기</BackButton>
+=======
+  function Clicked(){
+  
+    setIsValid({...isValid, isClicked: true})
+    
+}
+
+
+const navigate = useNavigate();
+
+const [data, setData] = useState([]);
+
+  useEffect(() => {
+    console.log("Works!before");
+    setTimeout(function () {
+      console.log("Works!");
+      axios
+        .get("http://localhost:5500/data/1")
+        .then(function (response) {
+          // response
+          setData(response.data);
+          //데이터 전송 성공시
+        })
+        .catch(function (error) {
+          // 오류발생시 실행
+        })
+        .then(function (response) {
+          // 항상 실행
+        }); //컴포넌트가 리랜더링 될때마다 실행
+    }, 3000);},[])
+
+const Fulluser = () => 
+
+{
+  
+  if(form.nickname!==''&&form.email!==''&&form.region!==''        //모두 입력했을 때
+  &&form.previouspassword!==''&&form.newpassword!==''){  
+    if (window.confirm('닉네임, 이메일, 지역, 비밀번호를 모두 변경하시겠습니까?')) {
+  
+      if((form.nickname === data.Nickname)){
+        alert('예전 닉네임과 같습니다')
+      }
+
+    if(!(form.nickname === data.Nickname))
+    {
+      setTimeout(function (){
+        axios
+        .patch(`http://localhost:5500/data/${1}`,{
+          
+          Nickname : form.nickname
+
+        })
+        .then(() => {
+          window.location.reload();
+          alert('닉네임 변경이 완료되었습니다.');
+          navigate('/mypage/editprofile');
+        })
+        .catch((err) => alert(err.response.data.message));
+      }, 3000)
+      } 
+
+
+      if((form.email === data.Email)){
+        alert('예전 이메일과 같습니다')
+      }
+
+      if(!(form.email === data.Email)&&isValid.isEmail)
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+           Email : form.email
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('이메일 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+
+
+        if((form.region === data.Region)){
+          alert('예전 지역과 같습니다')
+        }
+
+
+        if(!(form.region === data.Region))
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+           Region : form.region
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('지역 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+
+        if(!(form.previouspassword === data.Password)){
+          alert('예전 비밀번호와 일치하지 않습니다')
+        }
+
+        if((form.previouspassword === data.Password)){
+          if(form.newpassword === data.Password){
+            alert('새로운 비밀번호가 예전 비밀번호와 같습니다')
+          }
+        }
+
+
+        if((form.previouspassword === data.Password)&&!(form.newpassword === data.Password)&&
+        isValid.isPassword)
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+           Password : form.newpassword
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('비밀번호 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+      }
+  }  
+  }
+
+
+  const Emailalert = ()=> {
+    return (
+      form.email ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isEmail === true?
+            null:'이메일 형식에 맞지 않습니다.'
+    )
+  }
+
+  const Passwordalert = ()=>{
+    return (form.newpassword ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isPassword === true?
+           null:'비밀번호 형식에 맞지 않습니다.')
+  }
+  
+return(
+    <Main>
+    <Skeleton width={"100%"} />
+    <Skeleton width={"100px"} />
+     <MiddleBox>   
+     <LeftBox>
+        <Image
+        Logo src = {data.img}
+        ></Image>
+     </LeftBox>
+     <RightBox>
+      <InformBox>
+      <NicknameBox>
+        <span className = 'Nickname'>닉네임: </span> 
+        <Nickname
+        name = "nickname"
+        value= {form.nickname}
+        onChange = {
+          onChangeprofile
+          }
+        >
+
+        </Nickname>
+      </NicknameBox>
+        <EmailBox>
+          <span className = 'Email'>이메일: </span>
+          <Email
+          name = "email"
+          value= {form.email}
+          onChange = {
+            onChangeprofile
+            }
+            
+          ></Email>
+          <span>
+          <span className = 'emailalert'>
+          {Emailalert()} 
+            </span>
+          </span>
+       </EmailBox>
+       <RegionBox>
+       <span className = 'Region'>지역: </span>
+       <Region
+       name = "region"
+       value= {form.region}
+       onChange = {
+         onChangeprofile
+         }
+       />
+       </RegionBox>
+      </InformBox>
+      <PreviousPasswordBox>
+          <span className = 'Previous'>이전 비밀번호</span>
+          <PreviousPassword
+          name = "previouspassword"
+          value= {form.previouspassword}
+          onChange = {
+            onChangeprofile
+            }
+          />
+        </PreviousPasswordBox>
+        <NewPasswordBox>
+          <span className ='New'>새로운 비밀번호</span>
+          <NewPassword
+          name = "newpassword"
+          value= {form.newpassword}
+          onChange = {
+            onChangeprofile
+            }
+          />
+
+<span className = 'passwordalert'>
+          {Passwordalert()}
+            </span>
+        </NewPasswordBox>
+        
+     </RightBox>
+     </MiddleBox>
+     <BottomBox>
+        <EditButton 
+        onClick = {()=> 
+        {Fulluser()
+        
+          Print()
+          Clicked()
+          
+                  }}>
+        프로필 변경하기</EditButton>
+        <Link to = "/mypage">
+        <BackButton>
+          뒤로가기
+          </BackButton>
+>>>>>>> 27d4d5e (dfdfdf)
         </Link>
       </BottomBox>
     </Main>

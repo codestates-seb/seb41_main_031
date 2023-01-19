@@ -10,7 +10,7 @@ const Map = ({ maplevel }) => {
   const [map, setMap] = useState(null);
   const mapRef = useRef(null);
   const mapContainer = useRef(null);
-
+  const {kakao} = window;
   const position = new kakao.maps.LatLng(33.450701, 126.570667);
   const [lat, setlat] = useState(33.450701);
   const [lng, setlng] = useState(126.570667);

@@ -2,19 +2,36 @@ import styled from 'styled-components';
 import axios, { formToJSON } from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
+
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
+import { BsFillPersonFill } from "react-icons/bs";
+import { AiTwotoneMail } from "react-icons/ai";
+import { ImLocation } from "react-icons/im";
+import { TfiAlarmClock } from "react-icons/tfi";
+
+
+
 const Main = styled.div`
-width : 100%;
+
+@media all and (max-width: 1100px){
+	
+  width : 70%;
+  height : 70%;
+}
 `;
 const LeftBox = styled.div`
 float:left;
 `;
 const Image = styled.img`
-width: 12rem;
+    width: 12rem;
     height: 12rem;
     border-radius: 70%;
     overflow: hidden;
     margin-right : 80px;
     margin-top : 30px;
+    border : solid 2px;
     `;
 const RightBox = styled.div`
 
@@ -26,11 +43,9 @@ const EmailButton = styled.button`
 width : 200px;
 height : 35px;
 background: rgba(255, 255, 255, 0.08);
-border: 1px solid rgba(0, 0, 0, 0.4);
+border: 0px;
 border-radius: 50px;
-text-align : center;
-
-
+text-align : left;
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 400;
@@ -41,19 +56,21 @@ align-items: center;
 text-align: center;
 
 color: rgba(0, 0, 0, 0.7);
-display: flex;
-  justify-content: center;
-  align-items: center;
-
-
 margin-bottom : 15px;
+
+.emailicon{
+margin-left : 10px;
+}
+.emaildata{
+  margin-left : 5px}
+}
 `;
 const NicknameButton = styled.button`
 
 width : 200px;
 height : 35px;
 background: rgba(255, 255, 255, 0.08);
-border: 1px solid rgba(0, 0, 0, 0.4);
+border: 0px;
 border-radius: 50px;
 
 font-family: 'Poppins';
@@ -61,22 +78,29 @@ font-style: normal;
 font-weight: 400;
 font-size: 0.9rem;
 line-height: 48px;
+
 display: flex;
 align-items: center;
-text-align: center;
+text-align: left;
 
 color: rgba(0, 0, 0, 0.7);
-display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom : 15px;
+
+margin-bottom : 15px;
+
+.nicknameicon{
+  margin-left : 10px;
+}
+
+.nicknamedata{
+  margin-left : 5px;
+}
 `;
 const RegionButton = styled.button`
 
 width : 200px;
 height : 35px;
 background: rgba(255, 255, 255, 0.08);
-border: 1px solid rgba(0, 0, 0, 0.4);
+border: 0px;
 border-radius: 50px;
 
 font-family: 'Poppins';
@@ -84,22 +108,30 @@ font-style: normal;
 font-weight: 400;
 font-size: 0.9rem;
 line-height: 48px;
+
 display: flex;
 align-items: center;
-text-align: center;
+text-align: left;
 
 color: rgba(0, 0, 0, 0.7);
-display: flex;
-  justify-content: center;
-  align-items: center;
+
   margin-bottom : 15px;
+
+  .regionicon{
+    margin-left : 10px;
+  }
+  
+  .regiondata{
+    margin-left : 5px;
+  }
+  
 `;
 const SexButton = styled.button`
 
 width : 200px;
 height : 35px;
 background: rgba(255, 255, 255, 0.08);
-border: 1px solid rgba(0, 0, 0, 0.4);
+border: 0px;
 border-radius: 50px;
 
 font-family: 'Poppins';
@@ -107,22 +139,29 @@ font-style: normal;
 font-weight: 400;
 font-size: 0.9rem;
 line-height: 48px;
+
 display: flex;
 align-items: center;
-text-align: center;
+text-align: left;
 
 color: rgba(0, 0, 0, 0.7);
-display: flex;
-  justify-content: center;
-  align-items: center;
+
   margin-bottom : 15px;
+
+  .sexicon{
+    margin-left : 6px;
+  }
+  
+  .sexdata{
+    margin-left : 5px;
+  }
 `;
 const AgeButton = styled.button`
 
 width : 200px;
 height : 35px;
 background: rgba(255, 255, 255, 0.08);
-border: 1px solid rgba(0, 0, 0, 0.4);
+border: 0px;
 border-radius: 50px;
 
 font-family: 'Poppins';
@@ -130,15 +169,22 @@ font-style: normal;
 font-weight: 400;
 font-size: 0.9rem;
 line-height: 48px;
+
 display: flex;
 align-items: center;
-text-align: center;
+text-align: left;
 
 color: rgba(0, 0, 0, 0.7);
-display: flex;
-  justify-content: center;
-  align-items: center;
+
   margin-bottom : 15px;
+
+  .ageicon{
+    margin-left : 10px;
+  }
+  
+  .agedata{
+    margin-left : 5px;
+  }
 `;
 
 const BottomBox = styled.div`
@@ -267,67 +313,6 @@ function Mypage() {
         }); //컴포넌트가 리랜더링 될때마다 실행
     }, 3000);},[])
     
-
-    const [click, setClick] = useState({
-      email : false,
-      nickname : false,
-      region : false,
-      sex : false,
-      age : false
-    })
-    
-    function Emailclick (){
-
-      setClick({...click, email : true})
-
-      if(click.email){
-        setClick({...click, email : false})
-      }
-  
-    }
-    
-    
-
-    function Nicknameclick (){
-
-      setClick({...click, nickname : true})
-
-      if(click.nickname){
-        setClick({...click, nickname : false})
-      }
-  
-    }
-
-    function Regionclick (){
-
-      setClick({...click, region : true})
-
-      if(click.region){
-        setClick({...click, region : false})
-      }
-  
-    }
-
-    function Sexclick (){
-
-      setClick({...click, sex : true})
-
-      if(click.sex){
-        setClick({...click, sex : false})
-      }
-  
-    }
-   
-    function Ageclick (){
-
-      setClick({...click, age : true})
-
-      if(click.age){
-        setClick({...click, age : false})
-      }
-  
-    }
-  
   return (
   <Main>
     <MiddleBox>
@@ -337,40 +322,25 @@ function Mypage() {
       </Image>
     </LeftBox>
     <RightBox>
-        <EmailButton
-        onClick = {()=>{
-          Emailclick()
-        }}
-        >
-        {click.email ? data.Email: '이메일'}
+        <EmailButton >
+             <AiTwotoneMail className = 'emailicon'/>
+             <span className = 'emaildata'>{data.Email}</span>
         </EmailButton>
-        <NicknameButton
-        onClick = {()=>{
-          Nicknameclick()
-        }}
-        >
-          {click.nickname ? data.Nickname: '닉네임'}
+        <NicknameButton>
+        <BsFillPersonFill className = 'nicknameicon'/>
+        <span className = 'nicknamedata'>{data.Nickname}</span>
           </NicknameButton>
-        <RegionButton
-        onClick = {()=>{
-          Regionclick()
-        }}
-        >
-        {click.region ? data.Region: '지역'}
+        <RegionButton>
+        <ImLocation className = 'regionicon'/>
+        <span className = 'regiondata'>{data.Region}</span>
         </RegionButton>
-        <SexButton
-        onClick = {()=>{
-          Sexclick()
-        }}
-        >
-          {click.sex ? data.Sex: '성별'}
+        <SexButton>
+        <FontAwesomeIcon icon={faVenusMars} className = 'sexicon'/>
+        <span className = 'sexdata'>{data.Sex}</span>
         </SexButton>
-        <AgeButton
-        onClick = {()=>{
-          Ageclick()
-        }}
-        >
-          {click.age ? data.Age: '나이'}
+        <AgeButton>
+        <TfiAlarmClock className = 'ageicon'/>
+        <span className = 'agedata'>{data.Age}</span>
           </AgeButton>
     </RightBox>
     </MiddleBox>
