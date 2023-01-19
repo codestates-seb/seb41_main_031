@@ -268,7 +268,9 @@ display: flex;
   align-items: center;
 `
 
-
+const fe = ()=>{
+  console.log('dfdfdfdfd');
+}
 
 function Mypage() {
   
@@ -348,7 +350,7 @@ function Mypage() {
       <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
       </Link>
-      <WithdrawButton onClick = {Deleteuser}>
+      <WithdrawButton onClick = {fe}>
         탈퇴하기
       </WithdrawButton>
     </BottomBox>
