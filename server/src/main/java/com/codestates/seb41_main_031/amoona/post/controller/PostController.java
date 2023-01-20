@@ -1,7 +1,7 @@
 package com.codestates.seb41_main_031.amoona.post.controller;
 
-import com.codestates.seb41_main_031.amoona.dto.MultiResponseDto;
-import com.codestates.seb41_main_031.amoona.dto.SingleResponseDto;
+import com.codestates.seb41_main_031.amoona.dtoUtils.MultiResponseDto;
+import com.codestates.seb41_main_031.amoona.dtoUtils.SingleResponseDto;
 import com.codestates.seb41_main_031.amoona.post.dto.PostPatchDto;
 import com.codestates.seb41_main_031.amoona.post.dto.PostPostDto;
 import com.codestates.seb41_main_031.amoona.post.dto.PostResponseDto;
