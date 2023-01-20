@@ -4,6 +4,7 @@ import com.codestates.seb41_main_031.amoona.exception.BusinessLogicException;
 import com.codestates.seb41_main_031.amoona.exception.ExceptionCode;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import com.codestates.seb41_main_031.amoona.member.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Component
 public class MemberDetailsService implements UserDetailsService { // UserDetailsService 인터페이스 구현
+    @Autowired
     private final MemberRepository memberRepository;
     private final CustomAuthorityUtils authorityUtils;
 
