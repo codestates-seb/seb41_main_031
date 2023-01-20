@@ -1,13 +1,12 @@
 package com.codestates.seb41_main_031.amoona.memberPost.entity;
 
+import com.codestates.seb41_main_031.amoona.member.entity.Member;
+import com.codestates.seb41_main_031.amoona.post.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
