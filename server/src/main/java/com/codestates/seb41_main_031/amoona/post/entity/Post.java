@@ -1,17 +1,20 @@
 package com.codestates.seb41_main_031.amoona.post.entity;
 
+import com.codestates.seb41_main_031.amoona.audit.BaseTimeEntity;
+import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Post {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

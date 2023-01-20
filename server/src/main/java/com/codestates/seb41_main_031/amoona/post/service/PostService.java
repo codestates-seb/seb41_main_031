@@ -2,6 +2,8 @@ package com.codestates.seb41_main_031.amoona.post.service;
 
 import com.codestates.seb41_main_031.amoona.exception.BusinessLogicException;
 import com.codestates.seb41_main_031.amoona.exception.ExceptionCode;
+import com.codestates.seb41_main_031.amoona.member.entity.Member;
+import com.codestates.seb41_main_031.amoona.member.repository.MemberRepository;
 import com.codestates.seb41_main_031.amoona.post.entity.Post;
 import com.codestates.seb41_main_031.amoona.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
