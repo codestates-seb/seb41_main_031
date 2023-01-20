@@ -21,6 +21,8 @@ function reducer(state = initialState, action) {
   }
 }
 
+
+
 let store = createStore(reducer);
 
 render(
