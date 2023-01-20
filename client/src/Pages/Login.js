@@ -61,16 +61,22 @@ margin-left: 15px;
 `
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [login, setLogin] = useState({
+    email: '',
+    password: ''
+  }); 
 
+  const onChangeLogin = (e) => {
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
 
     // Check the entered username and password against a list of valid credentials
-    if (email === 'admin@gmail.com' && password === 'password') {
+    if (login.email === 'admin@gmail.com' && login.password === 'password') {
       // Redirect the user to the logged-in version of the app
       window.location.replace("/MainPage");
     } else {
@@ -89,18 +95,20 @@ function Login() {
     </LoginHeader> 
     <LoginFont>&nbsp;&nbsp;&nbsp;이메일</LoginFont>
     <Input
-      type="text"
-      value={email}
+      name = "email"
+      type= "text"
+      value={login.email}
       placeholder = 'Please type your E-mail'
-      onChange={event => setEmail(event.target.value)}
+      onChange={onChangeLogin}
     />
     <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
 
     <Input
+      name="password"
       type="password"
-      value={password}
+      value={login.password}
       placeholder = 'Please type your password'
-      onChange={(event) => setPassword(event.target.value)}
+      onChange={onChangeLogin}
     />  
     <br />
     <ErrorMessage>{errorMessage && <div style={{ color: 'red' }}>

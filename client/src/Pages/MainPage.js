@@ -174,10 +174,10 @@ function MainPage() {
           </div>
           <div2>🔥Make YOUR TEAM!!🔥</div2>
           <button onClick={openpostModal}>Let’s do It!!!</button>
-          <div3>TRY EVERY THING WITH YOUR TEAM</div3>
+          <div3>TRY EVERYTHING WITH YOUR TEAM</div3>
         </Serachdiv>
         <Setlocdiv>
-          <div>NOW METTIONG....</div>
+          <div>NOW MEETING....</div>
           {!postisOpen && !postdeisOpen && <Nav />}
         </Setlocdiv>
 
