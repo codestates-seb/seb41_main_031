@@ -17,8 +17,8 @@ const Main = styled.div`
 
 @media all and (max-width: 1100px){
 	
-  width : 70%;
-  height : 70%;
+  width : 50vw;
+  height : auto;
 }
 `;
 const LeftBox = styled.div`
@@ -319,8 +319,10 @@ function Mypage() {
   <Main>
     <MiddleBox>
     <LeftBox>
-      <Image src={data.img}>
-
+      <Image 
+      src={data.img}
+      type = 'file'
+      >
       </Image>
     </LeftBox>
     <RightBox>
@@ -350,7 +352,7 @@ function Mypage() {
       <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
       </Link>
-      <WithdrawButton onClick = {fe}>
+      <WithdrawButton onClick = {Deleteuser}>
         탈퇴하기
       </WithdrawButton>
     </BottomBox>
