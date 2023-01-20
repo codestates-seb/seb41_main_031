@@ -1,17 +1,19 @@
 package com.codestates.seb41_main_031.amoona.post.entity;
 
+import com.codestates.seb41_main_031.amoona.audit.BaseTimeEntity;
+import com.codestates.seb41_main_031.amoona.memberPost.entity.MemberPost;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Post {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +31,7 @@ public class Post {
 
     private String time;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime modifiedAt;
-
-//    @OneToMany(mappedBy = "post")
-//    private List<Post> posts;
+    @OneToMany(mappedBy = "post")
+    private List<MemberPost> memberPosts;
 
 }

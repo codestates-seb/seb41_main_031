@@ -2,6 +2,8 @@ package com.codestates.seb41_main_031.amoona.post.service;
 
 import com.codestates.seb41_main_031.amoona.exception.BusinessLogicException;
 import com.codestates.seb41_main_031.amoona.exception.ExceptionCode;
+import com.codestates.seb41_main_031.amoona.member.entity.Member;
+import com.codestates.seb41_main_031.amoona.member.repository.MemberRepository;
 import com.codestates.seb41_main_031.amoona.post.entity.Post;
 import com.codestates.seb41_main_031.amoona.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,17 +19,17 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
-//    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    public Post createPost(Post post/*, String email*/) {       //     MemberRepository에 Optional<Member> findByEmail(String email); 추가필요
+    public Post createPost(Post post, String email) {
 
-//        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-//        post.setMember(member);
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+//        post.setMemberPosts();
 
         return postRepository.save(post);
     }
 
-    public Post updatePost(Post post/*, String email*/) {
+    public Post updatePost(Post post, String email) {
         Post findPost = postRepository.findById(post.getPostId()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
 
 //        if ( !findPost.getMember().getEmail().equals(email)){
@@ -40,7 +41,6 @@ public class PostService {
         findPost.setEvent(post.getEvent());
         findPost.setDate(post.getDate());
         findPost.setTime(post.getTime());
-        findPost.setModifiedAt(LocalDateTime.now().withNano(0));
 
         return postRepository.save(findPost);
     }
@@ -54,7 +54,7 @@ public class PostService {
                 Sort.by("postId").descending()));
     }
 
-    public void deletePost(Long postId/*, String email*/) {
+    public void deletePost(Long postId, String email) {
         Post findPost = postRepository.findById(postId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
 //        if (!findPost.getMember().getEmail().equals(email)) {
 //            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
