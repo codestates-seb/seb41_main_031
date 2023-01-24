@@ -70,8 +70,7 @@ function MainPage() {
         <Mapdiv className={`${isMapVisible ? "fade-in" : "fade-out"}`}>
           <Map />
         </Mapdiv>
-
-        {/* <Nav /> */}
+        <Nav />
         <Reqdiv isReqVisible={isReqVisible}>
           {data1.map((id) => {
             return (
@@ -134,7 +133,6 @@ const Reqdiv = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  transition: opacity 500ms, visibility 500ms;
   animation: ${({ isReqVisible }) =>
     isReqVisible ? "fadeInLeft 2s" : "fadeOutRight 2s"};
 `;
@@ -149,6 +147,7 @@ const ModalBackdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
 `;

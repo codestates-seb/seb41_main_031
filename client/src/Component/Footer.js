@@ -6,10 +6,8 @@ function Footer() {
   return (
     <>
       <Footerdiv>
-        <Footerdiv1></Footerdiv1>
         <Repositoryalldiv>
           <Repositorydiv>
-            <img src={logo} alt="logo_img" />
             <span>AMOONA</span>
             <ul>
               <li>Repository</li>
@@ -86,7 +84,6 @@ const Footerdiv = styled.div`
     text-align: center;
   }
 `;
-const Footerdiv1 = styled.div``;
 
 const Impormationdiv = styled.div`
   display: flex;
@@ -128,13 +125,9 @@ const Repositorydiv = styled.div`
   }
   span {
     font-weight: bold;
-    margin: 60px 20px 20px 0px;
-  }
-  img {
-    /* margin: 0px 0px 20px 30px; */
-    width: auto;
-    height: 80px;
-    margin: 30px 0px 20px 30px;
+    font-size: 40px;
+    color: Pink;
+    margin: 40px 20px 20px 50px;
   }
 `;
 

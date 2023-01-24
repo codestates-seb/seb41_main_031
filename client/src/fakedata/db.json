@@ -9,12 +9,14 @@
       "Time_after": "PM",
       "Party": "3/6",
       "item": "농구",
-      "Location": "월드컵 공원",
       "Email": "leg1770@naver.com",
       "Nickname": "leejk",
       "Region": "서울",
       "Sex": "남자",
-      "Age": "21살"
+      "Age": "21살",
+      "address": "월드컵 공원",
+      "lat": "30",
+      "lng": "126"
     },
     {
       "id": "2",
@@ -25,7 +27,9 @@
       "Time_after": "PM",
       "Party": "3/6",
       "item": "농구",
-      "Location": "월드컵 공원"
+      "address": "월드컵 공원",
+      "lat": "30",
+      "lng": "126"
     },
     {
       "id": "3",
@@ -36,7 +40,9 @@
       "Time_after": "PM",
       "Party": "3/6",
       "item": "농구",
-      "Location": "월드컵 공원"
+      "address": "월드컵 공원",
+      "lat": "40",
+      "lng": "126"
     },
     {
       "id": "4",
@@ -47,7 +53,9 @@
       "Time_after": "PM",
       "Party": "3/6",
       "item": "농구",
-      "Location": "월드컵 공원"
+      "address": "월드컵 공원",
+      "lat": "50",
+      "lng": "126"
     }
   ]
 }

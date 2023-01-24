@@ -14,6 +14,7 @@ function Search() {
       {postisOpen && (
         <ModalBackdrop>
           <Postup openModal={openpostModal} />
+          <i class="fa-solid fa-circle-xmark fa-2x" onClick={openpostModal}></i>
         </ModalBackdrop>
       )}
       {/* {postdeisOpen && (
@@ -22,7 +23,11 @@ function Search() {
         </ModalBackdrop>
       )} */}
       <Serachdiv>
-        <div1>WHAT’S YOUR FAVORITE SPORT?🔍</div1>
+        <div4>
+          운동하고 싶은 사람 <strong>AMOONA</strong>
+          모여라 ~📢
+        </div4>
+        <div1>WHAT’S YOUR FAVORITE SPORT?</div1>
         <div>
           <i class="fa-solid fa-magnifying-glass  fa-2x"></i>
 
@@ -32,6 +37,24 @@ function Search() {
         <div2>🔥Make YOUR TEAM!!🔥</div2>
         <button onClick={openpostModal}>Let’s do It!!!</button>
         <div3>TRY EVERY THING WITH YOUR TEAM</div3>
+        <divimg1>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMO-UOwU4h5K52vo7Tb9ii5LOkNZepTvl6Gw&usqp=CAU"
+            alt="running"
+          ></img>
+        </divimg1>
+        <divimg2>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNj6FR_cj7rlX6B4LUQiW5BQgZRcY_58HxARmK_sj1NbGCQc74oSxqZREo_E3tF_kYVxA&usqp=CAU"
+            alt="running"
+          ></img>
+        </divimg2>
+        <divimg3>
+          <img
+            src="https://media.istockphoto.com/id/692622300/ko/%EC%82%AC%EC%A7%84/%EB%AA%87-%EA%B0%80%EC%A7%80-%ED%8F%AC%EC%9D%B8%ED%8A%B8%EB%A5%BC-%EC%96%BB%EA%B3%A0.jpg?s=612x612&w=0&k=20&c=jUlqWVS-vNNMJgVtm3k5-oEltdl0QXUf3317-uNQkHY="
+            alt="soccer"
+          ></img>
+        </divimg3>
       </Serachdiv>
     </>
   );
@@ -57,21 +80,32 @@ const Serachdiv = styled.div`
   align-items: center;
   color: white;
   div1 {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: bold;
-    margin: 80px 0px 0px 0px;
+    margin: 100px 0px 0px 0px;
+    z-index: 1;
   }
   div2 {
-    font-size: 32px;
+    font-size: 30px;
     font-weight: bold;
     margin: 80px 0px 0px 0px;
+    z-index: 1;
   }
   div3 {
-    font-size: 32px;
+    font-size: 30px;
     font-weight: medium;
-    margin: 30px 0px 25px 0px;
+    margin: 50px 0px 50px 0px;
+    z-index: 1;
+  }
+  div4 {
+    font-size: 70px;
+    font-weight: bold;
+    margin: 200px 0px 0px 0px;
+    color: rgba(44, 57, 75, 0.8);
+    z-index: 1;
   }
   button {
+    z-index: 1;
     border-radius: 25px;
     background-color: #475262;
     width: 330px;
@@ -88,6 +122,7 @@ const Serachdiv = styled.div`
   }
   div {
     position: relative;
+    z-index: 1;
     input {
       width: 640px;
       height: 60px;
@@ -109,18 +144,64 @@ const Serachdiv = styled.div`
       color: black;
     }
   }
+  divimg1 {
+    position: absolute;
+    left: 30px;
+    top: 70%;
+    transform: translateY(-50%);
+    img {
+      border-radius: 20px;
+      height: 60vh;
+      width: 30vw;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+  }
+  divimg2 {
+    position: absolute;
+    left: 68%;
+    top: 60%;
+    transform: translateY(-50%);
+    img {
+      border-radius: 20px;
+      height: 70vh;
+      width: 30vw;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+  }
+  divimg3 {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 20px;
+    z-index: 0;
+    img {
+      border-radius: 20px;
+      height: 70vh;
+      width: 40vw;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+  }
 `;
 
 const ModalBackdrop = styled.div`
   // TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
   position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
-  top: 0;
-  left: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+  z-index: 2;
+  i {
+    position: absolute;
+    top: 10%;
+    right: 15%;
+    color: white;
+    z-index: 1;
+  }
 `;

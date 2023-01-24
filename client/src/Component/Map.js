@@ -1,47 +1,102 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import DummyData from "../Asset/DummyData";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
 
 const Map = ({ maplevel }) => {
+  const [address, setAddress] = useState([]);
   const dispatch = useDispatch();
-  const [address, setAddress] = useState("");
-  const [locontent, setlocontent] = useState("우리집");
-  const data = useSelector((state) => state);
+  const [map, setMap] = useState(null);
+  const mapRef = useRef(null);
   const mapContainer = useRef(null);
   const { kakao } = window;
   const position = new kakao.maps.LatLng(33.450701, 126.570667);
-  const [markerPositionlat, setmarkerPositionlat] = useState(33.450701);
-  const [markerPositionlng, setmarkerPositionlng] = useState(126.570667);
-  const markerPosition = new kakao.maps.LatLng(
-    markerPositionlat,
-    markerPositionlng
-  );
-  // const geocoder = new kakao.maps.services.Geocoder();
-
-  const getAddress = async (lat, lng) => {
-    const geocoder = new kakao.maps.services.Geocoder();
-    const coord = new kakao.maps.LatLng(lat, lng);
-    geocoder.reverseGeocode(coord, (result, status) => {
-      if (status === kakao.maps.services.Status.OK) {
-        setAddress(result[0].address.address_name);
-      }
-    });
+  const [lat, setlat] = useState(33.450701);
+  const [lng, setlng] = useState(126.570667);
+  const mapOptions = {
+    center: position, // 지도의 중심좌표
+    level: maplevel, // 지도의 확대 레벨
   };
 
-  useEffect(() => {
-    const mapOptions = {
-      center: position, // 지도의 중심좌표
-      level: maplevel, // 지도의 확대 레벨
-    };
-    var infowindow = new kakao.maps.InfoWindow({
-      position: new kakao.maps.LatLng(markerPositionlat, markerPositionlng),
-      content: locontent,
-    });
-    const map = new kakao.maps.Map(mapContainer.current, mapOptions);
+  const imageSrc =
+    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+  const imageSize = new kakao.maps.Size(24, 35);
+  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-    const marker = new kakao.maps.Marker({ position: markerPosition }); // 마커 생성
-    const mymarker = new kakao.maps.Marker({ position: position }); // 마커 생성
+  const [podata, setpodata] = useState([]);
+  // const geocoder = new kakao.maps.services.Geocoder();
+
+  // const getAddress = async (lat, lng) => {
+  //   const coord = new kakao.maps.LatLng(lat, lng);
+  //   const geocoder = new kakao.maps.services.Geocoder();
+  //   geocoder.reverseGeocode(coord, (result, status) => {
+  //     if (status === kakao.maps.services.Status.OK) {
+  //       setAddress(result[0].address.address_name);
+  //     }
+  //   });
+  // };
+  useEffect(() => {
+    const geocoder = new kakao.maps.services.Geocoder();
+    const coord = new kakao.maps.LatLng(lat, lng);
+    const callback = function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        setAddress({
+          address: result[0].address.address_name,
+          lat: lat,
+          lng: lng,
+        });
+      }
+    };
+    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+    dispatch({ type: "SET_LOCATION", maplocation: address.address });
+  }, [lng]);
+
+  useEffect(() => {
+    const promise = DummyData;
+    const getData = () => {
+      promise.then((dummyData) => {
+        console.log(dummyData);
+        setpodata(dummyData);
+      });
+    };
+    getData();
+  }, []);
+
+  // useEffect(() => {
+  //   const marker = new kakao.maps.Marker({
+  //     map: map,
+  //     position: new kakao.maps.LatLng(
+  //       parseInt(address.lat),
+  //       parseInt(address.lng)
+  //     ),
+  //     title: address.address,
+  //     image: markerImage,
+  //   });
+
+  //   marker.setMap(map);
+  //   const infoWindow = new kakao.maps.InfoWindow({
+  //     content: `<div>${address.address}</div>`,
+  //   });
+  //   infoWindow.open(map, marker);
+  // }, [address]);
+
+  useEffect(() => {
+    const map = new kakao.maps.Map(mapContainer.current, mapOptions);
+    const positions = [
+      {
+        map: map,
+        position: new kakao.maps.LatLng(33.450701, 126.570667),
+        title: address.address,
+      },
+      {
+        map: map,
+        position: new kakao.maps.LatLng(address.lat, address.lng),
+        title: address.address,
+      },
+    ];
+
+    // const addressesWithoutFirst = address.slice(1);
     // infowindow = new kakao.maps.InfoWindow({ zindex: 1 });
     // 커스텀 오버레이에 표출될 내용
     const content = `
@@ -57,35 +112,36 @@ const Map = ({ maplevel }) => {
     });
 
     // 마커가 지도 위에 표시되도록 설정
-
-    setTimeout(() => {
+    positions.map((item) => {
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: item.position,
+        title: item.item,
+      });
       marker.setMap(map);
-      infowindow.open(map, marker);
-    }, 500);
-    mymarker.setMap(map);
-
-    kakao.maps.event.addListener(map, "click", (mouseEvent) => {
-      getAddress(mouseEvent.latLng.getLat(), mouseEvent.latLng.getLng());
-
-      // 마커가 표시될 위치입니다
-      setmarkerPositionlat(mouseEvent.latLng.getLat());
-      setmarkerPositionlng(mouseEvent.latLng.getLng());
-      var geocoder = new kakao.maps.services.Geocoder();
-
-      var coord = new kakao.maps.LatLng(
-        mouseEvent.latLng.getLat(),
-        mouseEvent.latLng.getLng()
-      );
-      var callback = function (result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-          setlocontent(result[0].address.address_name);
-          dispatch({ type: "SET_LOCATION", maplocation: locontent });
-        }
-      };
-
-      geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+      const infoWindow = new kakao.maps.InfoWindow({
+        content: `<div style="width:200px; text-align :center; color: black; font-size: 7px;">${address.address}</div>`,
+      });
+      infoWindow.open(map, marker);
     });
-  }, []);
+
+    podata.map((item) => {
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(parseInt(item.lat), parseInt(item.lng)),
+        title: item.item,
+        image: markerImage,
+      });
+      console.log(parseInt(item.lng));
+      marker.setMap(map);
+    });
+
+    kakao.maps.event.addListener(map, "click", (event) => {
+      console.log(event.latLng.getLat(), event.latLng.getLng());
+      setlat(event.latLng.getLat());
+      setlng(event.latLng.getLng());
+    });
+  }, [maplevel, address]);
 
   return (
     <>

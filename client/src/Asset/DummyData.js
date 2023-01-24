@@ -1,12 +1,12 @@
 import axios from "axios";
 
-async function fetchData() {
+async function DummyData() {
   const result = await axios.get("http://localhost:4000/data");
   console.log(result.data);
   return result.data;
 }
 
-export default fetchData();
+export default DummyData();
 
 //   useEffect(() => {
 //     console.log("Works!before");

@@ -41,19 +41,20 @@ function NavigationBar() {
             )}
           </span>
         </div>
+
+        {expanded.includes("내 주변(500m)") && (
+          <ul>
+            <NavBar expanded1>
+              <div1 onClick={() => ZoomClick(1)}>내 주변</div1>
+              <div1 onClick={() => ZoomClick(3)}>50m</div1>
+              <div1 onClick={() => ZoomClick(4)}>100m</div1>
+              <div1 onClick={() => ZoomClick(5)}>250m</div1>
+              <div1 onClick={() => ZoomClick(6)}>500m</div1>
+              <div1 onClick={() => ZoomClick(7)}>1Km</div1>
+            </NavBar>
+          </ul>
+        )}
       </Setlocsection>
-      {expanded.includes("내 주변(500m)") && (
-        <ul>
-          <NavBar expanded1>
-            <div1 onClick={() => ZoomClick(1)}>내 주변</div1>
-            <div1 onClick={() => ZoomClick(3)}>50m</div1>
-            <div1 onClick={() => ZoomClick(4)}>100m</div1>
-            <div1 onClick={() => ZoomClick(5)}>250m</div1>
-            <div1 onClick={() => ZoomClick(6)}>500m</div1>
-            <div1 onClick={() => ZoomClick(7)}>1Km</div1>
-          </NavBar>
-        </ul>
-      )}
     </Setlocdiv>
   );
 }
@@ -62,29 +63,27 @@ export default NavigationBar;
 
 const Setlocdiv = styled.div`
   width: 100%;
-  height: 60px;
+  height: 300px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  background-color: aqua;
+  padding: 100px 100px 0px 40px;
+  justify-content: space-between;
   div {
     font-size: 32px;
     font-weight: bold;
     margin: 25px 0px 25px 50px;
-    z-index: "2";
-  }
-  Setlocsection {
   }
 `;
 
 const Setlocsection = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   div {
     display: flex;
     flex-direction: row;
     span {
-      margin: 0px 0px 0px 0px;
       font-size: 20px;
       text-decoration: underline;
       text-decoration-thickness: 5px;
@@ -104,7 +103,6 @@ const NavBar = styled.nav`
   overflow: hidden;
   transform: translateY(-100%);
   transition: all 0.5s ease-in-out;
-  margin: 0px 30px 0px 50px;
   display: flex;
   flex-direction: column;
   ${(props) =>
@@ -115,7 +113,6 @@ const NavBar = styled.nav`
     `}
 
   div1 {
-    padding-left: 10px;
     width: 120px;
     font-size: 20px;
     line-height: 30px;
