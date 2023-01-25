@@ -8,8 +8,8 @@ import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
 const Main = styled.div`
 @media all and (max-width: 1100px){
 	
-  width : 70%;
-  height : 70%;
+  width : 80%;
+  height : 80%;
 }
 
 `
@@ -277,9 +277,14 @@ font-size : 0.7rem;
 const NewPasswordBox = styled.div`
 margin-top : 20px;
 font-size :  0.7rem;
-.passwordalert{
-    color : red;
-  }
+
+.passwordwrap{
+  display: block
+  display:flex;
+  text-align : center;
+  color : red;
+    font-size : 1rem;
+}
 `
 
 const InformBox = styled.div`
@@ -311,9 +316,17 @@ justify-content : center;
 
 .emailalert{
   color : red;
-  
-  
+  font-size : 1rem;
+  display:flex;
+  justify-content : center;
+  margin-bottom : 10px;
+
 }
+
+.emailwrap{
+  display: block
+}
+
 
 `
 const RegionBox= styled.div`
@@ -460,14 +473,111 @@ const NicknameEdit = () =>
   }  
   }
 
-  const EmailEdit = ()=>{
-    if(form.nickname===''&&form.email!==''&&form.region===''        //모두 입력했을 때
-  &&form.previouspassword===''&&form.newpassword===''){
+  const EmailEdit = () => 
+
+  {
     
-  }
-  }
+    if(form.nickname===''&&form.email!==''&&form.region===''        //모두 입력했을 때
+    &&form.previouspassword===''&&form.newpassword===''){  
+      if (window.confirm('이메일을 변경하시겠습니까?')) {
+    
+        if((form.email === data.Email)&&isValid.isEmail){
+          alert('예전 이메일과 같습니다. 다시 입력해주세요')
+        }
+  
+      if(!(form.email === data.Email)&&isValid.isEmail)
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+            Email : form.email
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('이메일 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+        }
+  
+    }  
+    }
 
+    const RegionEdit = () => 
 
+  {
+    
+    if(form.nickname===''&&form.email===''&&form.region!==''        //모두 입력했을 때
+    &&form.previouspassword===''&&form.newpassword===''){  
+      if (window.confirm('지역을 변경하시겠습니까?')) {
+    
+        if((form.region === data.Region)){
+          alert('예전 지역과 같습니다. 다시 입력해주세요')
+        }
+  
+      if(!(form.region === data.Region))
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+            Region : form.region
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('지역 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+        }
+  
+    }  
+    }
+
+    const PasswordEdit = () => 
+
+  {
+    
+    if(form.nickname===''&&form.email===''&&form.region===''        //모두 입력했을 때
+    &&form.previouspassword!==''&&form.newpassword!==''){  
+      if (window.confirm('비밀번호를 변경하시겠습니까?')) {
+    
+        if((form.newpassword === data.password)&&isValid.isPassword){
+          alert('예전 비밀번호와 같습니다. 다시 입력해주세요')
+        }
+
+        if((form.previouspassword !== data.password)&&isValid.isPassword){
+          alert('예전 비밀번호와 입력한 비밀번호가 다릅니다. 다시 입력해주세요')
+        }
+  
+      if(!(form.newpassword === data.password)&&(form.previouspassword === data.password)&&isValid.isPassword)
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+            Password : form.password
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('비밀번호 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+        }
+  
+    }  
+    }
   const Emailalert = ()=> {
     return (
       form.email ===''
@@ -517,8 +627,6 @@ const NicknameEdit = () =>
         ref={fileInput}/>
 return(
     <Main>
-    <Skeleton width={"100%"} />
-    <Skeleton width={"100px"} />
      <MiddleBox>   
      <LeftBox>
         <Image
@@ -543,19 +651,18 @@ return(
       </NicknameBox>
         <EmailBox>
           <span className = 'Email'>이메일: </span>
+          <div className = 'emailwrap'>
           <Email
           name = "email"
           value= {form.email}
           onChange = {
             onChangeprofile
             }
-            
           ></Email>
-          <span>
           <span className = 'emailalert'>
           {Emailalert()} 
             </span>
-          </span>
+            </div>
        </EmailBox>
        <RegionBox>
        <span className = 'Region'>지역: </span>
@@ -580,6 +687,7 @@ return(
         </PreviousPasswordBox>
         <NewPasswordBox>
           <span className ='New'>새로운 비밀번호</span>
+          <div className = 'passwordwrap'>
           <NewPassword
           name = "newpassword"
           value= {form.newpassword}
@@ -591,6 +699,7 @@ return(
 <span className = 'passwordalert'>
           {Passwordalert()}
             </span>
+            </div>
         </NewPasswordBox>
         
      </RightBox>
@@ -599,7 +708,9 @@ return(
         <EditButton 
         onClick = {()=> 
         { NicknameEdit()
-        
+          EmailEdit()
+          RegionEdit()
+          PasswordEdit()
           Print()
           Clicked()
           

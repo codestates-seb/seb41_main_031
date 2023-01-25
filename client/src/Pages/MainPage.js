@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "animate.css/animate.min.css";
+
 import Map from "../Component/Map";
 import styled from "styled-components";
 import Search from "../Component/Search";
@@ -10,11 +10,11 @@ import PostDetail from "../Component/PostDetail";
 import axios from 'axios';
 
 const Maindiv = styled.div`
-  width: 100%;
-  /* background-color: yellow; */
-  display: flex;
-  flex-direction: column;
-  margin: 0px 0px 100px 0px;
+width: 100%;
+/* background-color: yellow; */
+display: flex;
+flex-direction: column;
+margin: 0px 0px 100px 0px;
 `;
 
 const Serachdiv = styled.div`
@@ -85,35 +85,42 @@ const Setlocdiv = styled.div`
   }
 `;
 const Mapdiv = styled.div`
-  width: 100vw;
-  height: 800px;
-  border-radius: 30px;
-  /* margin: 80px 0px 0px 100px; */
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-  z-index: "0";
+width: 100%;
+height: 800px;
+margin-top: 50px;
+padding: 0 200px;
+opacity: 0;
+visibility: hidden;
+transition: all 2s;
+&.fade-in {
+  opacity: 1;
+  visibility: visible;
+}
 `;
 
 const Reqdiv = styled.div`
-  margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+margin-top: 50px;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-around;
+animation: ${({ isReqVisible }) =>
+  isReqVisible ? "fadeInLeft 2s" : "fadeOutRight 2s"};
 `;
 
 const ModalBackdrop = styled.div`
-  // TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.6);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+// TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
+position: fixed;
+background-color: rgba(0, 0, 0, 0.6);
+top: 0;
+left: 0;
+bottom: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+
+width: 100%;
+height: 100%;
 `;
 
 function MainPage() {
@@ -217,29 +224,6 @@ function MainPage() {
   );
 }
 
-export default MainPage;
-
-const Maindiv = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0px 0px 100px 0px;
-  padding: 0 40px;
-`;
-
-const Mapdiv = styled.div`
-  width: 100%;
-  height: 800px;
-  margin-top: 50px;
-  padding: 0 200px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 2s;
-  &.fade-in {
-    opacity: 1;
-    visibility: visible;
-  }
-`;
 // const Mapdiv = styled.div`
 //   width: 100vw;
 //   height: 800px;
@@ -251,27 +235,6 @@ const Mapdiv = styled.div`
 //     isMapVisible ? "fadeInRight 2s" : "fadeOutLeft 2s"};
 // `;
 
-const Reqdiv = styled.div`
-  margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  animation: ${({ isReqVisible }) =>
-    isReqVisible ? "fadeInLeft 2s" : "fadeOutRight 2s"};
-`;
 
-const ModalBackdrop = styled.div`
-  // TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.6);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  width: 100%;
-  height: 100%;
-`;
+export default MainPage;

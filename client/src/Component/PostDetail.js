@@ -3,8 +3,13 @@ import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FcAlarmClock } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
+import { GiSoccerBall } from "react-icons/gi";
+import { GiShuttlecock } from "react-icons/gi";
+import { FaVolleyballBall  } from "react-icons/fa";
 import Map from "../Component/Map";
 import styled, { keyframes } from "styled-components";
+import React, { useState, useEffect,useRef } from 'react';
+import axios, { formToJSON } from "axios";
 
 
 const Rotate = keyframes` 
@@ -57,6 +62,28 @@ position: relative;
   margin-bottom : 20px;
 }
 
+.Soccer{
+  color : blue;
+  margin-right : 25px;
+  margin-bottom : 20px;
+
+}
+
+.Badminton{
+ 
+  margin-right : 25px;
+  margin-bottom : 20px;
+
+}
+
+.Volleyball{
+ 
+  margin-right : 25px;
+  margin-bottom : 20px;
+
+}
+.
+
 animation: ${Rotate} 0.9s linear 1;
 `
 const LeftBox = styled.div`
@@ -101,6 +128,29 @@ margin-bottom : 37px;
 
 .Basketball2{
   color : red;
+  margin-left : 12px;
+  margin-right : 10px;
+  width : 1.5rem;
+  height : 1.5rem;
+}
+
+.Soccer2{
+  color : blue;
+  margin-left : 12px;
+  margin-right : 10px;
+  width : 1.5rem;
+  height : 1.5rem;
+}
+
+.Badminton2{
+  margin-left : 12px;
+  margin-right : 10px;
+  width : 1.5rem;
+  height : 1.5rem;
+}
+
+
+.Volleyball2{
   margin-left : 12px;
   margin-right : 10px;
   width : 1.5rem;
@@ -312,16 +362,85 @@ font-weight : bold;
 
 function PostDetail(){
 
+const [data,setData] = useState([]);
+
+
+
+useEffect(() => {
+  console.log("Works!before");
+  setTimeout(function () {
+    console.log("Works!");
+    axios
+      .get("http://localhost:5500/data/1")
+      .then(function (response) {
+        // response
+        setData(response.data);
+        //데이터 전송 성공시
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+      })
+      .then(function (response) {
+        // 항상 실행
+      }); //컴포넌트가 리랜더링 될때마다 실행
+  }, 3000);},[])
+
+
+const ChangeIcon = ()=> {
+
+  if (data.item === '농구' ){
+    return <FontAwesomeIcon icon={faBasketball} className ='Basketball' />
+  }
+
+  if (data.item === '축구'){
+    return <GiSoccerBall className = 'Soccer'/>
+  }
+
+  if(data.item === '배드민턴'){
+    return <GiShuttlecock className = 'Badminton'/>
+  }
+  
+  if(data.item === '배구'){
+     return <FaVolleyballBall className = 'Volleyball'/> 
+  }
+}
+
+const ChangeIcon2 = ()=> {
+
+  if (data.item === '농구' ){
+    return <FontAwesomeIcon icon={faBasketball} className ='Basketball2'/>
+  }
+
+  if (data.item === '축구'){
+    return <GiSoccerBall className = 'Soccer2'/>
+  }
+
+  if(data.item === '배드민턴'){
+    return <GiShuttlecock className = 'Badminton2'/>
+  }
+
+  if(data.item === '배구'){
+    return <FaVolleyballBall className = 'Volleyball2'/> 
+ }
+}
+
+
+function PartycompleteCheck(){
+  
+  
+  return '모집중';
+}
+
     return(
        <MainBox>
       <Main>
         
-        <Header><FontAwesomeIcon icon={faBasketball} className ='Basketball' />농구하실 분 구해요~~</Header>
+        <Header>{ChangeIcon()}농구하실 분 구해요~~</Header>
         <MiddleBox>
         <LeftBox>
           <EventsBox>
             <span className ='Events'>종목</span>
-            <Events><FontAwesomeIcon icon={faBasketball} className ='Basketball2' />농구</Events>
+            <Events>{ChangeIcon2()}{data.item}</Events>
           </EventsBox>
           <DateTimeBox>
             <span>날짜와 시간</span>  
@@ -331,7 +450,7 @@ function PostDetail(){
           <MapBox>
             <span>운동종목</span>
             <MapContents>
-            <span><HiLocationMarker className = 'location'/>한강 시민공원 농구장</span>
+            <span><HiLocationMarker className = 'location'/>{data.address}</span>
             <Place ><Map/></Place>
             </MapContents>
           </MapBox>
@@ -342,8 +461,8 @@ function PostDetail(){
             <span className = 'people'>모집인원</span>
             </PartyPeople>
             <Party>
-              <span className = 'Continue'>모집중</span> 
-              <span className = 'PartyCount'>5/10</span>
+              <span className = 'Continue'>{PartycompleteCheck()}</span> 
+              <span className = 'PartyCount'>{data.Party}</span>
             </Party>
             <People>
               <PeopleImage/>
@@ -356,7 +475,10 @@ function PostDetail(){
         </RightBox>
         </MiddleBox>
         <BottomBox>
-          <AttendButton>모임 참가하기</AttendButton>
+          <AttendButton
+          >
+            모임 참가하기
+            </AttendButton>
         </BottomBox>
     
       </Main>  

@@ -40,7 +40,6 @@ function App() {
           <Route path="/post-up/" element={<Postup />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
-          <Route path="/post-detail" element={<PostDetail />}></Route>
           <Route path="/Timedata" element={<Timedata />}></Route>
         </Routes>
 
