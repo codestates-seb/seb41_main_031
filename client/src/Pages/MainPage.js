@@ -8,6 +8,7 @@ import DummyData from "../Asset/DummyData"; //이름 바꾸기
 import Reqboxdiv from "../Component/Reqboxdiv";
 import PostDetail from "../Component/PostDetail";
 import axios from 'axios';
+
 const Maindiv = styled.div`
   width: 100%;
   /* background-color: yellow; */
