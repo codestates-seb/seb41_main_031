@@ -1,7 +1,7 @@
 package com.codestates.seb41_main_031.amoona.post.controller;
 
-import com.codestates.seb41_main_031.amoona.dto.MultiResponseDto;
-import com.codestates.seb41_main_031.amoona.dto.SingleResponseDto;
+import com.codestates.seb41_main_031.amoona.dtoUtils.MultiResponseDto;
+import com.codestates.seb41_main_031.amoona.dtoUtils.SingleResponseDto;
 import com.codestates.seb41_main_031.amoona.post.dto.PostPatchDto;
 import com.codestates.seb41_main_031.amoona.post.dto.PostPostDto;
 import com.codestates.seb41_main_031.amoona.post.dto.PostResponseDto;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,11 +28,11 @@ public class PostController {
     private final PostMapper postMapper;
 
     @PostMapping
-    public ResponseEntity postPost(@Valid @RequestBody PostPostDto postPostDto/*,
-                                   @AuthenticationPrincipal String email*/) {
+    public ResponseEntity postPost(@Valid @RequestBody PostPostDto postPostDto,
+                                   @AuthenticationPrincipal String email) {
 
         Post post = postMapper.postPostDtoToPost(postPostDto);
-        Post savedPost = postService.createPost(post/*, email*/);
+        Post savedPost = postService.createPost(post, email);
         PostResponseDto response = postMapper.postToPostResponseDto(savedPost);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -39,12 +40,12 @@ public class PostController {
 
     @PatchMapping("/{postId}")
     public ResponseEntity patchPost(@PathVariable("postId") @Positive Long postId,
-                                    @Valid @RequestBody PostPatchDto postPatchDto/*,
-                                    @AuthenticationPrincipal String email*/) {
+                                    @Valid @RequestBody PostPatchDto postPatchDto,
+                                    @AuthenticationPrincipal String email) {
 
         Post post = postMapper.postPatchDtoToPost(postPatchDto);
         post.setPostId(postId);
-        Post response = postService.updatePost(post/*, email*/);
+        Post response = postService.updatePost(post, email);
 
         return new ResponseEntity<>(postMapper.postToPostResponseDto(response), HttpStatus.OK);
     }
@@ -66,15 +67,15 @@ public class PostController {
         List<Post> posts = pagePosts.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(postMapper.postsToPostResponseDtos(posts), pagePosts),
+                new MultiResponseDto<>(postMapper.postsToPostListDtos(posts), pagePosts),
                 HttpStatus.OK);
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity deletePost(@PathVariable("postId") @Positive Long postId/*,
-                                     @AuthenticationPrincipal String email*/) {
+    public ResponseEntity deletePost(@PathVariable("postId") @Positive Long postId,
+                                     @AuthenticationPrincipal String email) {
 
-        postService.deletePost(postId/*, email*/);
+        postService.deletePost(postId, email);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
