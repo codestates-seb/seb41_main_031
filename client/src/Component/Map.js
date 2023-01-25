@@ -96,12 +96,12 @@ const Map = ({ maplevel }) => {
       },
     ];
 
-    // const addressesWithoutFirst = address.slice(1);
+    const addressesWithoutFirst = positions.slice(1);
     // infowindow = new kakao.maps.InfoWindow({ zindex: 1 });
     // 커스텀 오버레이에 표출될 내용
     const content = `
       <div class="customoverlay">
-        <span>내위치</span>
+        <span style="border 2px soled black">내위치</span>
       </div>`;
 
     // 커스텀 오버레이 생성
@@ -112,7 +112,7 @@ const Map = ({ maplevel }) => {
     });
 
     // 마커가 지도 위에 표시되도록 설정
-    positions.map((item) => {
+    addressesWithoutFirst.map((item) => {
       const marker = new kakao.maps.Marker({
         map: map,
         position: item.position,

@@ -2,14 +2,26 @@ import React, { useState } from "react";
 import Map from "../Component/Map";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 function Postup({ openModal }) {
   const data = useSelector((state) => state);
   const sports = ["축구", "배구", "농구", "탁구", "헬스", "기타"];
+  const [sprot, setsprot] = useState("종목을 선택해주세요");
   const [postisOpen, setpostIsOpen] = useState(false);
   const [sportisOpen, setsportisOpen] = useState(false);
+  const [dateisOpen, setdateisOpen] = useState(false);
+  const [timeisOpen, settimeisOpen] = useState(false);
   const [location, setlocation] = useState("위치를 선택해 주세요");
   const [member, setmember] = useState(1);
+  const [date, setDate] = useState(new Date());
+  const dateString = date.toISOString().slice(0, 10);
+  const [gethour, setgethour] = useState(1);
+  const [getmin, setgetmin] = useState(1);
+  const [active, setActive] = useState("");
+  const [time, setTime] = useState(new Date().toLocaleString());
+
   const [username, setUsername] = useState("");
 
   function openpostModal() {
@@ -18,7 +30,19 @@ function Postup({ openModal }) {
   }
   function opensprotsModal() {
     setsportisOpen(!sportisOpen);
-    setlocation(data.maplocation);
+  }
+
+  function opendateModal() {
+    setdateisOpen(!dateisOpen);
+  }
+
+  function opentimeModal() {
+    settimeisOpen(!timeisOpen);
+  }
+  function handleClick() {
+    setInterval(() => {
+      setTime(new Date().toLocaleString());
+    }, 1000);
   }
 
   function mius() {
@@ -28,6 +52,17 @@ function Postup({ openModal }) {
   function plus() {
     let value = member;
     setmember(value + 1);
+  }
+
+  function sport(event) {
+    const buttonName = event.target.value;
+    setsprot(buttonName);
+    setsportisOpen(!sportisOpen);
+  }
+
+  function onClickDay(value) {
+    setDate(value);
+    console.log("Day Clicked: ", value);
   }
 
   const change = (e) => {
@@ -43,38 +78,81 @@ function Postup({ openModal }) {
         </ModalBackdrop>
       )}
       {sportisOpen && (
-        <ModalSportsBackdrop>
-          <Sportsdiv>
-            {sports.map((id) => {
-              return <Sportbutton>{id}</Sportbutton>;
-            })}
-          </Sportsdiv>
-        </ModalSportsBackdrop>
+        <Sportsdiv>
+          {sports.map((id) => {
+            return (
+              <Sportbutton onClick={sport} value={id}>
+                {id}
+              </Sportbutton>
+            );
+          })}
+        </Sportsdiv>
+      )}
+      {dateisOpen && (
+        <Datesdiv>
+          <Calendar onClickDay={onClickDay} value={date} />
+        </Datesdiv>
+      )}
+      {timeisOpen && (
+        <Timediv>
+          <Datediv>
+            <div1>시</div1>
+            <button value="hour" onClick={plus}>
+              <i class="fa-sharp fa-solid fa-chevron-up"></i>
+            </button>
+            <span>{gethour}</span>
+            <button value="hour" onClick={mius}>
+              <i class="fa-sharp fa-solid fa-chevron-down"></i>
+            </button>
+          </Datediv>
+          <Datediv>
+            <div1>분</div1>
+            <button value="min" onClick={plus}>
+              <i class="fa-sharp fa-solid fa-chevron-up"></i>
+            </button>
+            <span>{getmin}</span>
+            <button value="min" onClick={mius}>
+              <i class="fa-sharp fa-solid fa-chevron-down"></i>
+            </button>
+          </Datediv>
+          <AMPM
+            className={"AM" === active ? "active" : ""}
+            onClick={() => setActive("AM")}
+          >
+            <span>AM</span>
+          </AMPM>
+          <AMPM
+            className={"PM" === active ? "active" : ""}
+            onClick={() => setActive("PM")}
+          >
+            <span>PM</span>
+          </AMPM>
+        </Timediv>
       )}
 
       <Postupdiv>
         <Contnentdiv>
           <Postinputdiv>
             <div onClick={openpostModal}> {location}</div>
-            <div onClick={opensprotsModal}> 종목을 선택해주세요</div>
+            <div onClick={opensprotsModal}> {sprot}</div>
             <div>
               <button onClick={mius}>-</button>
               {member}
               <button onClick={plus}>+</button>
             </div>
-            <div> 날짜를 선택해주세요</div>
-            <div> 시간을 선택해주세요</div>
+            <div onClick={opendateModal}> 날짜를 선택해주세요</div>
+            <div onClick={opentimeModal}> 시간을 선택해주세요</div>
           </Postinputdiv>
           <Viewinputdiv>
             <span1>운동장소</span1>
             <div2>{location}</div2>
-            <sidemap>{!postisOpen && !sportisOpen && <Map />}</sidemap>
+            <sidemap>{!postisOpen && <Map />}</sidemap>
             <span1>종목</span1>
-            <div1>축구</div1>
+            <div1>{sprot}</div1>
             <span1>인원</span1>
             <div1>{member}명</div1>
             <span1>날짜와 시간</span1>
-            <div1>2023년 1월22일 19:00시쯤</div1>
+            <div1>{dateString}</div1>
           </Viewinputdiv>
         </Contnentdiv>
         <Postbuttondiv onClick={openModal}>게시글 등록</Postbuttondiv>
@@ -203,30 +281,23 @@ const ModalBackdrop = styled.div`
   }
 `;
 
-const ModalSportsBackdrop = styled.div`
-  // TODO : Modal이 떴을 때의 배경을 깔아주는 CSS를 구현합니다.
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 90%;
-  padding: 0px 200px;
-`;
-
 const Sportsdiv = styled.div`
   /* background-color: yellow; */
-  width: 500px;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  top: 34%;
+  left: 28%;
+  width: 400px;
   height: 60px;
   font-weight: bold;
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 20px;
   font-size: 30px;
   background-color: white;
   color: black;
-  display: flex;
-  flex-direction: row;
 `;
 const Sportbutton = styled.button`
   /* background-color: yellow; */
@@ -237,4 +308,83 @@ const Sportbutton = styled.button`
   border-radius: 20px;
   background-color: white;
   color: black;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+`;
+
+const Datesdiv = styled.div`
+  /* background-color: yellow; */
+  position: fixed;
+  top: 29%;
+  left: 29%;
+`;
+
+const Timediv = styled.div`
+  width: 700px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  color: black;
+  align-items: center;
+  vertical-align: middle;
+`;
+
+const Datediv = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0px 5px 0px 5px;
+  button {
+    width: 100%;
+    height: 30px;
+    border: none;
+    background: linear-gradient(
+      to top,
+      rgba(44, 57, 75, 1),
+      rgba(44, 57, 75, 0.8),
+      rgba(44, 57, 75, 0.5)
+    );
+  }
+  button:hover {
+    background-color: rgba(44, 57, 75, 1);
+  }
+  div1 {
+    margin-bottom: 5px;
+    font-size: 15px;
+  }
+  span {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0px 20px 0px;
+  }
+  i {
+    color: black;
+  }
+`;
+const AMPM = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  padding-top: 20px;
+  span {
+    margin: 20px 0px 20px 0px;
+    font-size: 30px;
+  }
+  &:hover {
+    font-weight: bold;
+    color: var(--black-900);
+  }
+  &.active {
+    align-items: center;
+    font-weight: bold;
+    background: var(--black-050);
+    color: var(--black-900);
+    border-right: 3px solid var(--theme-primary-color);
+  }
 `;

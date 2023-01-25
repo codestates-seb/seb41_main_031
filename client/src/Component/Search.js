@@ -82,13 +82,13 @@ const Serachdiv = styled.div`
   div1 {
     font-size: 40px;
     font-weight: bold;
-    margin: 100px 0px 0px 0px;
+    margin: 60px 0px 0px 0px;
     z-index: 1;
   }
   div2 {
     font-size: 30px;
     font-weight: bold;
-    margin: 80px 0px 0px 0px;
+    margin: 60px 0px 0px 0px;
     z-index: 1;
   }
   div3 {
@@ -100,7 +100,7 @@ const Serachdiv = styled.div`
   div4 {
     font-size: 70px;
     font-weight: bold;
-    margin: 200px 0px 0px 0px;
+    margin: 150px 0px 0px 0px;
     color: rgba(44, 57, 75, 0.8);
     z-index: 1;
   }
