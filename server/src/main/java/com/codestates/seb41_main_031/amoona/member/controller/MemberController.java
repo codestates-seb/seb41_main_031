@@ -1,18 +1,22 @@
 package com.codestates.seb41_main_031.amoona.member.controller;
 
 import com.codestates.seb41_main_031.amoona.auth.jwt.JwtTokenizer;
+import com.codestates.seb41_main_031.amoona.dtoUtils.MultiResponseDto;
 import com.codestates.seb41_main_031.amoona.dtoUtils.SingleResponseDto;
 import com.codestates.seb41_main_031.amoona.member.dto.MemberDto;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import com.codestates.seb41_main_031.amoona.member.mapper.MemberMapper;
 import com.codestates.seb41_main_031.amoona.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -57,6 +61,17 @@ public class MemberController {
         Member findOneMember = memberService.findOneMember(memberId);
         MemberDto.Response response = mapper.memberToMemberResponseDto(findOneMember);
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
+    }
+
+    // 전체회원 조회
+    @GetMapping
+    public ResponseEntity getAllMembers(@Positive @RequestParam int page,
+                                        @Positive @RequestParam int size) {
+        Page<Member> pageMember = memberService.findAllMembers(page-1, size);
+        List<Member> findAllMembers = pageMember.getContent();
+        List<MemberDto.Response> response = mapper.memberListToMemberResponseListDto(findAllMembers);
+
+        return new ResponseEntity(new MultiResponseDto<>(response, pageMember), HttpStatus.OK);
     }
 
     // 회원 삭제
