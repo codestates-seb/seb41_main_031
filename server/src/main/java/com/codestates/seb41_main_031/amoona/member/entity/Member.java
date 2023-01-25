@@ -1,6 +1,8 @@
 package com.codestates.seb41_main_031.amoona.member.entity;
 
 import com.codestates.seb41_main_031.amoona.audit.BaseTimeEntity;
+import com.codestates.seb41_main_031.amoona.memberPost.entity.MemberPost;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,7 @@ public class Member extends BaseTimeEntity {
     private String email;
 
     @Column(length = 255, nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(length = 255, nullable = false)
@@ -34,7 +37,9 @@ public class Member extends BaseTimeEntity {
     private String gender;
 
     private int age;
-    // todo Post와 다대다 연관관계 매핑
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
+    private List<MemberPost> memberPosts;
 
     @ElementCollection(fetch = FetchType.EAGER) // 사용자 등록 시, 사용자의 권한을 등록하는 권한 테이블 생성을 위한 애너테이션
     private List<String> roles = new ArrayList<>();

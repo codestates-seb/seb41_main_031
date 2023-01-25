@@ -67,7 +67,7 @@ public class PostController {
         List<Post> posts = pagePosts.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(postMapper.postsToPostResponseDtos(posts), pagePosts),
+                new MultiResponseDto<>(postMapper.postsToPostListDtos(posts), pagePosts),
                 HttpStatus.OK);
     }
 

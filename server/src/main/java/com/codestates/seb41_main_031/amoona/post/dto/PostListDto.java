@@ -1,5 +1,6 @@
 package com.codestates.seb41_main_031.amoona.post.dto;
 
+import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,9 +10,7 @@ public class PostListDto {
 
     private Long postId;
 
-    private String nickname;
-
-    private String image;
+    private Member member;
 
     private String location;
   

@@ -12,14 +12,14 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class PostPostDto {
 
-    @Range(min = 2, max = 30)
-    private int playerNum;
-
     @NotBlank
     private String location;
 
     @NotBlank
     private String event;
+
+    @Range(min = 2, max = 30)
+    private int playerNum;
 
     private String date;
 

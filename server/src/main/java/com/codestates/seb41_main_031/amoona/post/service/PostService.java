@@ -24,7 +24,7 @@ public class PostService {
     public Post createPost(Post post, String email) {
 
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-//        post.setMemberPosts();
+        post.setMember(member);
 
         return postRepository.save(post);
     }
@@ -32,9 +32,9 @@ public class PostService {
     public Post updatePost(Post post, String email) {
         Post findPost = postRepository.findById(post.getPostId()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
 
-//        if ( !findPost.getMember().getEmail().equals(email)){
-//            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
-//        }
+        if (!findPost.getMember().getEmail().equals(email)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
+        }
 
         findPost.setPlayerNum(post.getPlayerNum());
         findPost.setLocation(post.getLocation());
@@ -56,17 +56,15 @@ public class PostService {
 
     public void deletePost(Long postId, String email) {
         Post findPost = postRepository.findById(postId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
-//        if (!findPost.getMember().getEmail().equals(email)) {
-//            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
-//        }
+        if (!findPost.getMember().getEmail().equals(email)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
+        }
         postRepository.delete(findPost);
     }
 
-    public Post findVerifiedPost(long postId) {
+    public Post findVerifiedPost(Long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
-        Post findPost =
-                optionalPost.orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
+        Post findPost = optionalPost.orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
 
         return findPost;
     }
