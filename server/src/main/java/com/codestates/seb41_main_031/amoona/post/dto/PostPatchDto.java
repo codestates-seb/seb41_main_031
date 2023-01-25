@@ -11,14 +11,14 @@ public class PostPatchDto {
 
     private Long postId;
 
-    @Range(min = 2, max = 30)
-    private int playerNum;
-
     @NotBlank
     private String location;
 
     @NotBlank
     private String event;
+
+    @Range(min = 2, max = 30)
+    private int playerNum;
 
     private String date;
 

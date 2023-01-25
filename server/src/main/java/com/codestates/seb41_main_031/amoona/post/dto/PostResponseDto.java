@@ -13,11 +13,11 @@ public class PostResponseDto {
 
     private Long postId;
 
-    private int playerNum;
-
     private String location;
 
     private String event;
+
+    private int playerNum;
 
     private String date;
 
