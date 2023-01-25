@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import axios, { formToJSON } from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
-
+import Delete from '../Component/Delete';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
@@ -268,32 +268,11 @@ display: flex;
   align-items: center;
 `
 
-const fe = ()=>{
-  console.log('dfdfdfdfd');
-}
+
+
 
 function Mypage() {
   
-  
-  const navigate = useNavigate();
-
-  const Deleteuser = (e) => {
-    e.preventDefault();
-    if (window.confirm('정말 탈퇴하시겠습니까?')) {
-      
-      setTimeout(function (){
-        axios
-        .delete('http://localhost:5500/data/1')
-        .then(() => {
-          window.location.reload();
-          alert('그동안 이용해주셔서 감사합니다.');
-          navigate('/');
-        })
-        .catch((err) => alert(err.response.data.message));
-      }, 3000)
-      } 
-  };
-    
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -315,6 +294,8 @@ function Mypage() {
         }); //컴포넌트가 리랜더링 될때마다 실행
     }, 3000);},[])
     
+  
+  
   return (
   <Main>
     <MiddleBox>
@@ -352,7 +333,7 @@ function Mypage() {
       <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
       </Link>
-      <WithdrawButton onClick = {Deleteuser}>
+      <WithdrawButton onClick = {Delete}>
         탈퇴하기
       </WithdrawButton>
     </BottomBox>
@@ -372,5 +353,3 @@ export default Mypage;
 
 
 
-
-<button class="p-button p-button--primary p-button--inline p-button--fill p-button--large padding--l css-kxpn6i" type="button" aria-disabled="false">계약 신청하기</button>

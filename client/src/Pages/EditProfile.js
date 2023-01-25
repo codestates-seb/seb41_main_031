@@ -564,16 +564,16 @@ const [data, setData] = useState([]);
         }); //컴포넌트가 리랜더링 될때마다 실행
     }, 3000);},[])
 
-const Fulluser = () => 
+const NicknameEdit = () => 
 
 {
   
-  if(form.nickname!==''&&form.email!==''&&form.region!==''        //모두 입력했을 때
-  &&form.previouspassword!==''&&form.newpassword!==''){  
-    if (window.confirm('닉네임, 이메일, 지역, 비밀번호를 모두 변경하시겠습니까?')) {
+  if(form.nickname!==''&&form.email===''&&form.region===''        //모두 입력했을 때
+  &&form.previouspassword===''&&form.newpassword===''){  
+    if (window.confirm('닉네임을 변경하시겠습니까?')) {
   
       if((form.nickname === data.Nickname)){
-        alert('예전 닉네임과 같습니다')
+        alert('예전 닉네임과 같습니다. 다시 입력해주세요')
       }
 
     if(!(form.nickname === data.Nickname))
@@ -593,85 +593,16 @@ const Fulluser = () =>
         .catch((err) => alert(err.response.data.message));
       }, 3000)
       } 
-
-
-      if((form.email === data.Email)){
-        alert('예전 이메일과 같습니다')
       }
 
-      if(!(form.email === data.Email)&&isValid.isEmail)
-      {
-        setTimeout(function (){
-          axios
-          .patch(`http://localhost:5500/data/${1}`,{
-            
-           Email : form.email
-  
-          })
-          .then(() => {
-            window.location.reload();
-            alert('이메일 변경이 완료되었습니다.');
-            navigate('/mypage/editprofile');
-          })
-          .catch((err) => alert(err.response.data.message));
-        }, 3000)
-        } 
-
-
-        if((form.region === data.Region)){
-          alert('예전 지역과 같습니다')
-        }
-
-
-        if(!(form.region === data.Region))
-      {
-        setTimeout(function (){
-          axios
-          .patch(`http://localhost:5500/data/${1}`,{
-            
-           Region : form.region
-  
-          })
-          .then(() => {
-            window.location.reload();
-            alert('지역 변경이 완료되었습니다.');
-            navigate('/mypage/editprofile');
-          })
-          .catch((err) => alert(err.response.data.message));
-        }, 3000)
-        } 
-
-        if(!(form.previouspassword === data.Password)){
-          alert('예전 비밀번호와 일치하지 않습니다')
-        }
-
-        if((form.previouspassword === data.Password)){
-          if(form.newpassword === data.Password){
-            alert('새로운 비밀번호가 예전 비밀번호와 같습니다')
-          }
-        }
-
-
-        if((form.previouspassword === data.Password)&&!(form.newpassword === data.Password)&&
-        isValid.isPassword)
-      {
-        setTimeout(function (){
-          axios
-          .patch(`http://localhost:5500/data/${1}`,{
-            
-           Password : form.newpassword
-  
-          })
-          .then(() => {
-            window.location.reload();
-            alert('비밀번호 변경이 완료되었습니다.');
-            navigate('/mypage/editprofile');
-          })
-          .catch((err) => alert(err.response.data.message));
-        }, 3000)
-        } 
-      }
   }  
+  }
+
+  const EmailEdit = ()=>{
+    if(form.nickname===''&&form.email!==''&&form.region===''        //모두 입력했을 때
+  &&form.previouspassword===''&&form.newpassword===''){
+    
+  }
   }
 
 
@@ -693,6 +624,35 @@ const Fulluser = () =>
            null:'비밀번호 형식에 맞지 않습니다.')
   }
   
+
+  const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+  const [file, setFile] = useState([]);
+  const fileInput = useRef(null)
+
+  const onChangeImage = (e) => {
+    if(e.target.files[0]){
+              setFile(e.target.files[0])
+          }else{ //업로드 취소할 시
+              setImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+              return
+          }
+    //화면에 프로필 사진 표시
+          const reader = new FileReader();
+          reader.onload = () => {
+              if(reader.readyState === 2){
+                  setImage(reader.result)
+              }
+          }
+          reader.readAsDataURL(e.target.files[0])
+      }
+
+      <input 
+ 	    type='file' 
+    	style={{display:'none'}}
+        accept='image/jpg,impge/png,image/jpeg' 
+        name='profile_img'
+        onChange={onChangeImage}
+        ref={fileInput}/>
 return(
     <Main>
     <Skeleton width={"100%"} />
@@ -700,8 +660,10 @@ return(
      <MiddleBox>   
      <LeftBox>
         <Image
-        Logo src = {data.img}
-        ></Image>
+        src = {image}
+        onClick={()=>{fileInput.current.click()}}
+        > 
+        </Image>
      </LeftBox>
      <RightBox>
       <InformBox>
@@ -774,7 +736,7 @@ return(
      <BottomBox>
         <EditButton 
         onClick = {()=> 
-        {Fulluser()
+        { NicknameEdit()
         
           Print()
           Clicked()
