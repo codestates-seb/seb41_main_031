@@ -5,6 +5,9 @@ import com.codestates.seb41_main_031.amoona.exception.BusinessLogicException;
 import com.codestates.seb41_main_031.amoona.exception.ExceptionCode;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import com.codestates.seb41_main_031.amoona.member.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +71,12 @@ public class MemberService {
     // Find one member
     public Member findOneMember(long memberId){
         return findVerifiedMember(memberId);
+    }
+
+    // Find All Members
+    public Page<Member> findAllMembers(int page, int size){
+        Page<Member> pageMembers = memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId")));
+        return pageMembers;
     }
 
     // Delete one member
