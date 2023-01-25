@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../Asset/2.png";
+import Menu from "./Menu"
 
 const Headerdiv = styled.div`
   width: 100%;
@@ -27,8 +28,9 @@ function Header() {
       <Headerdiv>
         <img src={logo} alt="logo_img" />
         <span>AMOONA</span>
-        <i class="fa-regular fa-bell fa-2x"></i>
-        <i class="fa-solid fa-bars fa-2x"></i>
+        {/* <i class="fa-regular fa-bell fa-2x"></i>
+        <i class="fa-solid fa-bars fa-2x"></i> */}
+        <i class="fa-regular fa-bell fa-2x"><Menu /></i>
       </Headerdiv>
     </>
   );
