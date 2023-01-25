@@ -57,7 +57,7 @@ position: relative;
   margin-bottom : 20px;
 }
 
-animation: ${Rotate} 1.6s linear 1;
+animation: ${Rotate} 0.9s linear 1;
 `
 const LeftBox = styled.div`
   
