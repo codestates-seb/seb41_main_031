@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
+
 const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,7 +10,7 @@ const LoginContainer = styled.div`
   height: auto;  
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   flex-direction: column;
   width: 50vw;
@@ -28,7 +30,6 @@ const Button = styled.button`
   font-size: 16px;
   color: white;
   border: 1px solid #ccc;
-
   border-radius: 10px;
   background-color: #FF4C29;
   &:hover {
@@ -58,38 +59,98 @@ const LoginFont = styled.span`
 const ErrorMessage = styled.div`
 display: flex;
 margin-left: 15px;
+.emailalert{
+  color : red;
+  display : block;
+}
+.passwordalert{
+  color : red;
+  
+}
 `
 
+
 function Login() {
-  const [errorMessage, setErrorMessage] = useState('');
+
+
+  
+
   const [login, setLogin] = useState({
     email: '',
-    password: ''
+    newpassword: '',
+
   }); 
+
+  const [isValid, setIsValid] = useState({
+    isEmail : false,
+    isPassword : false,
+    isClicked : false,
+    isPreviospassword : false
+  })
 
   const onChangeLogin = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    // Check the entered username and password against a list of valid credentials
-    if (login.email === 'admin@gmail.com' && login.password === 'password') {
-      // Redirect the user to the logged-in version of the app
-      window.location.replace("/MainPage");
-    } else {
-      // Display an error message to the user
-     setErrorMessage('이메일은 admin@gmail.com, 비밀번호는 password입니다.');
+  useEffect(()=>{
+    const emailRegex =
+    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    
+    if(!emailRegex.test(login.email)){
+      setIsValid({...isValid, isEmail: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isEmail : true})
     }
-  }
-// 3항 연산자로 if loggedin 로직 이용하면 데이터셋이 입력됐을때 메인페이지로 이동하게 하면 됨 
-// 그외 에러 처리 + 유효성 검사 개발 
+  },[login.email])
+
+  useEffect(()=>{
+    const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    
+    if(!passwordRegex.test(login.newpassword)){
+      setIsValid({...isValid, isPassword: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isPassword : true})
+    }
+  },[login.newpassword])
+
+
+function Clicked(){
+  
+    setIsValid({...isValid, isClicked: true})
+    
+}
+
+function Print (){
+  console.log(isValid.isEmail)
+}
+
+const Emailalert = ()=> {
+  return (
+    login.email ===''
+              ? null
+        : isValid.isClicked === false?
+         null : isValid.isEmail === true?
+          null:'이메일 형식에 맞지 않습니다.'
+  )
+}
+
+const Passwordalert = ()=>{
+  return (login.newpassword ===''
+              ? null
+        : isValid.isClicked === false?
+         null : isValid.isPassword === true?
+         null:'비밀번호 형식에 맞지 않습니다.')
+}
+  
 
   return (
+
     <LoginContainer>
-    <Form onSubmit={handleSubmit}>
+    <Form>
     <LoginHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </LoginHeader> 
@@ -104,24 +165,40 @@ function Login() {
     <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
 
     <Input
-      name="password"
+      name="newpassword"
       type="password"
-      value={login.password}
+      value={login.newpassword}
       placeholder = 'Please type your password'
       onChange={onChangeLogin}
-    />  
+    />
     <br />
-    <ErrorMessage>{errorMessage && <div style={{ color: 'red' }}>
-      {errorMessage}</div>}</ErrorMessage>
-    <Button type="submit">로그인</Button>
+    <ErrorMessage>
+      
+      <span className = 'emailalert'>
+      {Emailalert()}
+      </span> &nbsp;&nbsp;
+      <span className = 'passwordalert'>
+      {Passwordalert()}
+      </span>
+      
+    </ErrorMessage>
+
+    <Button
+    onClick = {()=> {
+      
+      Clicked();
+      Print();
+    }}
+    >
+      로그인
+      </Button>
+
     <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
+
     </Form>
+    
     </LoginContainer>
   );
 };
-//admin과 password 입력하면 localhost:3000/dashboard로 이동함
-// send a request to your backend to check the user's credentials
-// if the login is successful, you can redirect the user to another page or show a success message
-// if the login fails, you can update the component's state to display an error message
 
 export default Login;
