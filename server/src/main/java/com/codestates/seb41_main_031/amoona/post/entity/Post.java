@@ -32,8 +32,6 @@ public class Post extends BaseTimeEntity {
 
     private String time;
 
-    private String address;
-
     private String lat;
 
     private String lng;
