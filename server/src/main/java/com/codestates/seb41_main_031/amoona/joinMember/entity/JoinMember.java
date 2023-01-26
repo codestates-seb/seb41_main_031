@@ -1,4 +1,4 @@
-package com.codestates.seb41_main_031.amoona.memberPost.entity;
+package com.codestates.seb41_main_031.amoona.joinMember.entity;
 
 import com.codestates.seb41_main_031.amoona.audit.BaseTimeEntity;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
@@ -13,11 +13,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-public class MemberPost extends BaseTimeEntity {
+public class JoinMember extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberPostId;
+    private Long joinMemberId;
 
     @ManyToOne
     @JoinColumn(name = "memberId")
