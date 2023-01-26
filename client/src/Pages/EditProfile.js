@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React, { useState, useEffect,useRef } from 'react';
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios, { formToJSON } from "axios";
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';

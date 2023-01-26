@@ -17,8 +17,8 @@ const Main = styled.div`
 
 @media all and (max-width: 1100px){
 	
-  width : 50vw;
-  height : auto;
+  width : 100%;
+  height : 100%;
 }
 `;
 const LeftBox = styled.div`
