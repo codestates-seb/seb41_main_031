@@ -1,5 +1,6 @@
 package com.codestates.seb41_main_031.amoona.member.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,13 +14,18 @@ public class MemberDto {
     @AllArgsConstructor
     @Getter
     public static class Post {
+        @ApiModelProperty(example = "abc@abc.com")
         @NotBlank
         @Email
         private String email;
+
+        @ApiModelProperty(example = "a1234567")
         @NotBlank
         @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
                 message = "비밀번호는 최소 8자, 최소 하나의 문자 및 하나의 숫자를 포함해야 합니다.")
         private String password;
+
+        @ApiModelProperty(example = "홍길동")
         @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
         private String nickname;
     }

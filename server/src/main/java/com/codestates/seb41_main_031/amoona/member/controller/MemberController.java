@@ -7,6 +7,8 @@ import com.codestates.seb41_main_031.amoona.member.dto.MemberDto;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import com.codestates.seb41_main_031.amoona.member.mapper.MemberMapper;
 import com.codestates.seb41_main_031.amoona.member.service.MemberService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Api(tags = {"회원"})
 @RestController
 @RequestMapping("/members")
 @Validated
@@ -33,8 +36,8 @@ public class MemberController {
         this.jwtTokenizer = jwtTokenizer;
     }
 
-    // TODO DTO, Service 구현
     // 회원 가입
+    @ApiOperation(value = "회원가입", notes = "회원정보 등록 API")
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post postRequest) {
         Member member = mapper.memberPostToMemberDto(postRequest);
@@ -45,6 +48,7 @@ public class MemberController {
     }
 
     // 회원 정보 수정
+    @ApiOperation(value = "회원정보 수정", notes = "회원정보 수정 API")
     @PatchMapping("/{memberId}")
     public ResponseEntity patchMember(@PathVariable("memberId") Long memberId,
                                       @RequestBody MemberDto.Patch patchRequest) {
@@ -56,6 +60,7 @@ public class MemberController {
     }
 
     // 특정 회원 상세 조회(마이페이지? 프로필?)
+    @ApiOperation(value = "회원 조회", notes = "회원 조회 API")
     @GetMapping("/{memberId}")
     public ResponseEntity getMember(@PathVariable("memberId") Long memberId) {
         Member findOneMember = memberService.findOneMember(memberId);
@@ -63,11 +68,12 @@ public class MemberController {
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
-    // 전체회원 조회
+    // 전체 회원 조회
+    @ApiOperation(value = "전체 회원 조회", notes = "전체 회원 조회 API")
     @GetMapping
     public ResponseEntity getAllMembers(@Positive @RequestParam int page,
                                         @Positive @RequestParam int size) {
-        Page<Member> pageMember = memberService.findAllMembers(page-1, size);
+        Page<Member> pageMember = memberService.findAllMembers(page - 1, size);
         List<Member> findAllMembers = pageMember.getContent();
         List<MemberDto.Response> response = mapper.memberListToMemberResponseListDto(findAllMembers);
 
@@ -75,6 +81,7 @@ public class MemberController {
     }
 
     // 회원 삭제
+    @ApiOperation(value = "회원 탈퇴", notes = "회원정보 삭제 API")
     @DeleteMapping("{memberId}")
     public ResponseEntity deleteMember(@PathVariable("memberId") Long memberId) {
         memberService.deleteOneMember(memberId);
