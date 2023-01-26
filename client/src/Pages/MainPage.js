@@ -52,7 +52,7 @@ function MainPage() {
       });
     };
     getData();
-  }, []);
+  }, [DummyData]);
 
   const change = (e) => {
     let { value } = { ...e.target };
@@ -77,12 +77,11 @@ function MainPage() {
               <Reqboxdiv
                 name={id.name}
                 img={id.img}
-                Date={id.Date}
-                Time={id.Time}
-                Time_after={id.Time_after}
-                Party={id.Party}
-                item={id.item}
-                Location={id.Location}
+                Date={id.date}
+                Time={id.time}
+                Party={id.playerNum}
+                item={id.event}
+                Location={id.location}
                 openModal={openpostdeModal}
               />
             );
