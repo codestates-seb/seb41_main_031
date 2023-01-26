@@ -49,7 +49,7 @@ const Map = ({ maplevel }) => {
       }
     };
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-    dispatch({ type: "SET_LOCATION", maplocation: address.address });
+    dispatch({ type: "SET_ADDRESS", address: address });
   }, [lng]);
 
   useEffect(() => {

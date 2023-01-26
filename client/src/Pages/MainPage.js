@@ -39,16 +39,16 @@ function MainPage() {
     } else {
       setIsMapVisible(false);
     }
-    console.log(scrollPosition);
   }, [scrollPosition]);
   /**/
 
   useEffect(() => {
+    console.log(DummyData);
     const promise = DummyData;
     const getData = () => {
       promise.then((dummyData) => {
-        console.log(dummyData);
         setdata1(dummyData);
+        console.log(data1);
       });
     };
     getData();

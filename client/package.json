@@ -68,5 +68,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:8080"
+  "proxy": "http://54.180.138.46:8080"
 }

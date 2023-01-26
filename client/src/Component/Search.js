@@ -5,7 +5,7 @@ import styled from "styled-components";
 function Search() {
   const [postisOpen, setpostIsOpen] = useState(false);
 
-  function openpostModal() {
+  function openpostupModal() {
     setpostIsOpen(!postisOpen);
   }
 
@@ -13,8 +13,7 @@ function Search() {
     <>
       {postisOpen && (
         <ModalBackdrop>
-          <Postup openModal={openpostModal} />
-          <i class="fa-solid fa-circle-xmark fa-2x" onClick={openpostModal}></i>
+          <Postup openModal={openpostupModal} />
         </ModalBackdrop>
       )}
       {/* {postdeisOpen && (
@@ -30,12 +29,11 @@ function Search() {
         <div1>WHAT’S YOUR FAVORITE SPORT?</div1>
         <div>
           <i class="fa-solid fa-magnifying-glass  fa-2x"></i>
-
           <input type="text" name="search" placeholder="어떤 운동 하세요?" />
         </div>
 
         <div2>🔥Make YOUR TEAM!!🔥</div2>
-        <button onClick={openpostModal}>Let’s do It!!!</button>
+        <button onClick={openpostupModal}>Let’s do It!!!</button>
         <div3>TRY EVERY THING WITH YOUR TEAM</div3>
         <divimg1>
           <img
@@ -197,11 +195,4 @@ const ModalBackdrop = styled.div`
   width: 100%;
   height: 100%;
   z-index: 2;
-  i {
-    position: absolute;
-    top: 10%;
-    right: 15%;
-    color: white;
-    z-index: 1;
-  }
 `;

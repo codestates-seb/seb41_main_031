@@ -1,9 +1,9 @@
 import axios from "axios";
 
 async function DummyData() {
-  const result = axios.get(`/posts?page=1&size=15`);
-  console.log(result);
-  return result;
+  const result = await axios.get(`/posts?page=1&size=15`);
+  console.log(result.data.data);
+  return result.data.data;
 }
 
 export default DummyData();
