@@ -21,7 +21,8 @@ repositories {
 dependencies {
 	// Spring boot 기본값
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

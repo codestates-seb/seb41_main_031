@@ -1,7 +1,7 @@
 package com.codestates.seb41_main_031.amoona.post.dto;
 
+import com.codestates.seb41_main_031.amoona.joinMember.entity.JoinMember;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
-import com.codestates.seb41_main_031.amoona.memberPost.entity.MemberPost;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,7 +15,7 @@ public class PostDetailDto {
 
     private Member member;
 
-    private List<MemberPost> memberPosts;
+    private List<JoinMember> joinMembers;
 
     private String location;
 
