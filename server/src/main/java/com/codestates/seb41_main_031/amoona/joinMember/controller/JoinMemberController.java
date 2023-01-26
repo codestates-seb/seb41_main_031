@@ -24,8 +24,8 @@ public class JoinMemberController {
                                          @RequestBody JoinMemberPostDto joinMemberPostDto,
                                          @AuthenticationPrincipal String email) {
 
-        JoinMember joinMember = joinMemberMapper.joinMemberPostDtoToJoin(joinMemberPostDto);
-        JoinMember savedJoinMember = joinMemberService.createJoinMember(joinMember, email, postId);
+        JoinMember joinMember = joinMemberMapper.joinMemberPostDtoToJoinMember(joinMemberPostDto);
+        JoinMember savedJoinMember = joinMemberService.createJoinMember(joinMember, postId, email);
         JoinMemberResponseDto response = joinMemberMapper.joinMemberToJoinMemberResponseDto(savedJoinMember);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

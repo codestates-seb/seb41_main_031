@@ -19,7 +19,7 @@ public class JoinMemberService {
     private MemberRepository memberRepository;
     private PostRepository postRepository;
 
-    public JoinMember createJoinMember(JoinMember joinMember, String email, Long postId) {
+    public JoinMember createJoinMember(JoinMember joinMember, Long postId, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         Post post = postRepository.findById(postId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
         joinMember.setMember(member);
