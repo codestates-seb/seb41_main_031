@@ -32,6 +32,10 @@ public class Post extends BaseTimeEntity {
 
     private String time;
 
+    private String lat;
+
+    private String lng;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
     private List<JoinMember> joinMembers;
 

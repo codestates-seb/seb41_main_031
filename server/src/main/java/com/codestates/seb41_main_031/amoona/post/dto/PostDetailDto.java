@@ -27,4 +27,8 @@ public class PostDetailDto {
 
     private String time;
 
+    private String lat;
+
+    private String lng;
+
 }

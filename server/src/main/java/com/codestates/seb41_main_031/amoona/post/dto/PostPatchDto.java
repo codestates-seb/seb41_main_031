@@ -24,4 +24,8 @@ public class PostPatchDto {
 
     private String time;
 
+    private String lat;
+
+    private String lng;
+
 }
