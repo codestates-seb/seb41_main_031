@@ -273,7 +273,7 @@ const ModalBackdrop = styled.div`
   height: 90%;
   padding: 0px 200px;
   i {
-    position: absolute;
+    position: relative;
     top: 30px;
     right: 7%;
     background-color: black;
