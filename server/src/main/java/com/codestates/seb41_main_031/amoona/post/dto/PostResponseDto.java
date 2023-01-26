@@ -23,6 +23,10 @@ public class PostResponseDto {
 
     private String time;
 
+    private String lat;
+
+    private String lng;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;
