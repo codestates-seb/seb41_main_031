@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+
 
 const SignupContainer = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const SignupContainer = styled.div`
   width: 100vw;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   flex-direction: column;
   width: 50vw;
@@ -56,58 +57,125 @@ const SignupFont = styled.span`
  const ErrorMessage = styled.div`
     display: flex;
     margin-left: 15px;
+
+    .emailalert{
+      color : red;
+    }
+  
+    .passwordalert{
+      color : red;
+    }
  `
 
 function Signup() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [nickName, setNickName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  
+  const [signup, setSignup] = useState({
+    email: '',
+    newpassword: '',
+    nickname: ''
+  }); 
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // do something with email, password, and nickname 
-    console.log('email', email);
-    console.log('password', password);
-    console.log('nickname', nickName);
-     // Check the entered username and password against a list of valid credentials
-     if (nickName === 'admin' && password === 'password' && email === 'admin@gmail.com') {
-      // Redirect the user to the logged-in version of the app
-      window.location.replace('/login');
-    } else {
-      // Display an error message to the user
-     setErrorMessage('닉네임은 admin, 이메일은 admin@gmail.com, 비밀번호는 password이어야 합니다.');
+  const [isValid, setIsValid] = useState({
+    isEmail : false,
+    isPassword : false,
+    isClicked : false,
+    isPreviospassword : false
+  })
+
+  const onChangeSignup = (e) => {
+    const { name, value } = e.target;
+    setSignup({ ...signup, [name]: value });
+  };
+
+
+  useEffect(()=>{
+    const emailRegex =
+    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    
+    if(!emailRegex.test(signup.email)){
+      setIsValid({...isValid, isEmail: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isEmail : true})
     }
-  }
+  },[signup.email])
 
+  useEffect(()=>{
+    const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    
+    if(!passwordRegex.test(signup.newpassword)){
+      setIsValid({...isValid, isPassword: false})
+      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
+    } else{
+      setIsValid({...isValid, isPassword : true})
+    }
+  },[signup.newpassword])
+
+
+  const Emailalert = ()=> {
+    return (
+      signup.email ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isEmail === true?
+            null:'이메일 형식에 맞지 않습니다.'
+    )
+  }
+  
+  const Passwordalert = ()=>{
+    return (signup.newpassword ===''
+                ? null
+          : isValid.isClicked === false?
+           null : isValid.isPassword === true?
+           null:'비밀번호 형식에 맞지 않습니다.')
+  }
+function Clicked(){
+  
+    setIsValid({...isValid, isClicked: true})
+    
+}
   return (
     <SignupContainer>
-    <Form onSubmit={handleSubmit}>
+    <Form>
     <SignupHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </SignupHeader>  
         <SignupFont>&nbsp;&nbsp;&nbsp;닉네임</SignupFont>
         <Input
-          type="nickname"
-          value={nickName}
-          onChange={e => setNickName(e.target.value)}
+          type= "nickname"
+          name = "nickname" 
+          value={signup.nickname}
+          onChange={onChangeSignup}
         />
         <SignupFont>&nbsp;&nbsp;&nbsp;이메일</SignupFont>
         <Input
           type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          name="email"
+          value={signup.login}
+          onChange={onChangeSignup}
         />
         <SignupFont>&nbsp;&nbsp;&nbsp;비밀번호</SignupFont>
         <Input
           type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          name="newpassword"
+          value={signup.newpassword}
+          onChange={onChangeSignup}
         />
       <br /> 
-      <ErrorMessage>{errorMessage && <div style={{ color: 'red' }}>  
-      {errorMessage}</div>}</ErrorMessage>
-      <Button type="submit">회원가입하기</Button>
+      <ErrorMessage>
+        <span className = 'emailalert'>
+        {Emailalert()}
+        </span>
+        <span className = 'passwordalert'>&nbsp;&nbsp;
+        {Passwordalert()}
+        </span>
+      </ErrorMessage>
+      <Button
+      onClick = {()=>{
+        Clicked()
+      }}
+      >회원가입하기</Button>
       <HrefRight>이미 계정이 있으세요?&nbsp;&nbsp;<a href = "login">로그인하기</a></HrefRight>
     </Form>
     </SignupContainer>

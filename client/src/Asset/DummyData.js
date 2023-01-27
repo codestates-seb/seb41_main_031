@@ -6,7 +6,7 @@ async function fetchData() {
   return result.data;
 }
 
-export default DummyData();
+export default fetchData();
 
 //   useEffect(() => {
 //     console.log("Works!before");
