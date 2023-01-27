@@ -15,16 +15,34 @@ public interface PostMapper {
 
     default PostResponseDto postToPostResponseDto(Post post) {
 
-        return new PostResponseDto(post.getPostId(), post.getMember().getMemberId(), post.getLocation(),
-                post.getEvent(), post.getPlayerNum(), post.getDate(), post.getTime(), post.getLat(),
-                post.getLng(), post.getCreatedAt(), post.getModifiedAt());
+        return new PostResponseDto(
+                post.getPostId(),
+                post.getMember().getMemberId(),
+                post.getLocation(),
+                post.getEvent(),
+                post.getPlayerNum(),
+                post.getDate(),
+                post.getTime(),
+                post.getLat(),
+                post.getLng(),
+                post.getCreatedAt(),
+                post.getModifiedAt());
     }
 
     default PostDetailDto postToPostDetailDto(Post post){
 
-        return new PostDetailDto(post.getPostId(), post.getMember().getNickname(), post.getMember().getImage(),
-                post.getLocation(), post.getEvent(), post.getPlayerNum(), post.getDate(), post.getTime(),
-                post.getLat(), post.getLng(), post.getJoinMembers());
+        return new PostDetailDto(
+                post.getPostId(),
+                post.getMember().getNickname(),
+                post.getMember().getImage(),
+                post.getLocation(),
+                post.getEvent(),
+                post.getPlayerNum(),
+                post.getDate(),
+                post.getTime(),
+                post.getLat(),
+                post.getLng(),
+                post.getJoinMembers());
     }
 
     List<PostListDto> postsToPostListDtos(List<Post> posts);

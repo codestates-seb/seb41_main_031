@@ -13,9 +13,9 @@ public class JoinMemberResponseDto {
 
     private Long joinMemberId;
 
-    private String image;
-
     private String nickname;
+
+    private String image;
 
     private LocalDateTime createdAt;
 

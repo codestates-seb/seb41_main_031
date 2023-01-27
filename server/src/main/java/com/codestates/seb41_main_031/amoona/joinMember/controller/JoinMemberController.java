@@ -14,13 +14,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"모임인원"})
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/joinMembers")
 public class JoinMemberController {
 
-    JoinMemberService joinMemberService;
-    JoinMemberMapper joinMemberMapper;
+    private final JoinMemberService joinMemberService;
+    private final JoinMemberMapper joinMemberMapper;
 
     @ApiOperation(value = "모임참여", notes = "모임참여 API")
     @PostMapping("/{postId}")
