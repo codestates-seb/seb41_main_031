@@ -12,8 +12,8 @@ const initialState = {
   maplevel: 1,
   address: {
     maplocation: "위치를 선택해 주세요",
-    lat: 0,
-    lng: 0,
+    lat: 33.450701,
+    lng: 126.570667,
   },
   state: 1,
 };

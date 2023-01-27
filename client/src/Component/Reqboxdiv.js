@@ -91,11 +91,11 @@ function Reqboxdiv({
           </divuser>
           <divdate>
             DATE | {Date} <br />
-            TIME | {Time} - {Time_after}
+            TIME | {Time}
           </divdate>
-          <divparty>PARTY | {Party}</divparty>
+          <divparty>PARTY 1 | {Party}</divparty>
         </impormationdiv>
-        <h1>{item} 할 사람 구해요~~ 🏀</h1>
+        <h1>{item} 할 사람 구해요~~ </h1>
         <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
         <button onClick={openModal}>JOIN</button>
         <locationdiv>-{Location}-</locationdiv>

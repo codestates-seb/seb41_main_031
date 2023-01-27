@@ -46,6 +46,8 @@ const Map = ({ maplevel }) => {
           lat: lat,
           lng: lng,
         });
+        console.log(lat);
+        console.log(lng);
       }
     };
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);

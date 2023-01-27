@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 
 function NavigationBar() {
   const dispatch = useDispatch();
+  const data = useSelector((state) => state);
   const [expanded, setExpanded] = useState([]);
 
   const handleClick = (nodeId) => {
@@ -16,6 +17,15 @@ function NavigationBar() {
     });
   };
 
+  function displayString(data) {
+    if (data === 1) return "내 주변";
+    if (data === 3) return "50M";
+    if (data === 4) return "100M";
+    if (data === 5) return "250M";
+    if (data === 6) return "500M";
+    if (data === 7) return "1KM";
+  }
+
   const ZoomClick = (nodeId) => {
     dispatch({ type: "SET_NUMBER", maplevel: nodeId });
   };
@@ -26,7 +36,7 @@ function NavigationBar() {
       <Setlocsection onClick={() => handleClick("내 주변(500m)")}>
         <div>
           <span>
-            내 주변
+            {displayString(data.maplevel)}
             {expanded.includes("내 주변(500m)") ? (
               <RotatedIcon
                 className="fa-sharp fa-solid fa-caret-down fa-2x"
@@ -117,7 +127,7 @@ const NavBar = styled.nav`
     font-size: 20px;
     line-height: 30px;
     &:hover {
-      background-color: #3e8e41;
+      background-color: rgba(44, 57, 75, 0.4);
     }
   }
 `;
