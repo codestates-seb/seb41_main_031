@@ -19,6 +19,8 @@ public class PostListDto {
   
     private String event;
 
+    private int joinCount;
+
     private int playerNum;
 
     private String date;

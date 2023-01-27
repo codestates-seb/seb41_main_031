@@ -38,6 +38,7 @@ public class Member extends BaseTimeEntity {
 
     private int age;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
     private List<JoinMember> joinMembers;
 

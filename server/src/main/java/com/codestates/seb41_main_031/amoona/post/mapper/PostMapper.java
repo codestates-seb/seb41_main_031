@@ -34,10 +34,9 @@ public interface PostMapper {
 
         return new PostDetailDto(
                 post.getPostId(),
-                post.getMember().getNickname(),
-                post.getMember().getImage(),
                 post.getLocation(),
                 post.getEvent(),
+                post.getJoinMembers().size(),
                 post.getPlayerNum(),
                 post.getDate(),
                 post.getTime(),
@@ -56,6 +55,7 @@ public interface PostMapper {
                         .image(post.getMember().getImage())
                         .location(post.getLocation())
                         .event(post.getEvent())
+                        .joinCount(post.getJoinMembers().size())
                         .playerNum(post.getPlayerNum())
                         .date(post.getDate())
                         .time(post.getTime())
