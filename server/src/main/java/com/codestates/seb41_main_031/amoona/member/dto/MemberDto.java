@@ -3,6 +3,7 @@ package com.codestates.seb41_main_031.amoona.member.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 public class MemberDto {
     // 회원 가입 dto
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     public static class Post {
         @ApiModelProperty(example = "abc@abc.com")
@@ -32,6 +34,7 @@ public class MemberDto {
 
     // 회원 프로필 정보 수정 dto
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     public static class Patch {
         private Long memberId;
