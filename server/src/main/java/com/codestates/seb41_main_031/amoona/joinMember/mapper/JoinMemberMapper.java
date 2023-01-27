@@ -8,11 +8,11 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface JoinMemberMapper {
 
-    JoinMember joinMemberPostDtoToJoin(JoinMemberPostDto joinMemberPostDto);
+    JoinMember joinMemberPostDtoToJoinMember(JoinMemberPostDto joinMemberPostDto);
 
-    default JoinMemberResponseDto joinMemberToJoinMemberResponseDto(JoinMember savedJoinMember) {
+    default JoinMemberResponseDto joinMemberToJoinMemberResponseDto(JoinMember joinMember) {
 
-        return new JoinMemberResponseDto(savedJoinMember.getJoinMemberId(), savedJoinMember.getMember().getImage(),
-                savedJoinMember.getMember().getNickname(), savedJoinMember.getCreatedAt(), savedJoinMember.getModifiedAt());
+        return new JoinMemberResponseDto(joinMember.getJoinMemberId(), joinMember.getMember().getNickname(),
+                joinMember.getMember().getImage(), joinMember.getCreatedAt(), joinMember.getModifiedAt());
     }
 }

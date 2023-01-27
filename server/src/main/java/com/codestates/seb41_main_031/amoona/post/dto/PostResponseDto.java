@@ -13,6 +13,8 @@ public class PostResponseDto {
 
     private Long postId;
 
+    private Long memberId;
+
     private String location;
 
     private String event;

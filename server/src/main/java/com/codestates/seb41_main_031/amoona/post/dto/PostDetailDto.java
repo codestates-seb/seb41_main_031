@@ -1,7 +1,6 @@
 package com.codestates.seb41_main_031.amoona.post.dto;
 
 import com.codestates.seb41_main_031.amoona.joinMember.entity.JoinMember;
-import com.codestates.seb41_main_031.amoona.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,9 +12,9 @@ public class PostDetailDto {
 
     private Long postId;
 
-    private Member member;
+    private String nickname;
 
-    private List<JoinMember> joinMembers;
+    private String image;
 
     private String location;
 
@@ -30,5 +29,7 @@ public class PostDetailDto {
     private String lat;
 
     private String lng;
+
+    private List<JoinMember> joinMembers;
 
 }
