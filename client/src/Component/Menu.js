@@ -140,7 +140,7 @@ function Menu() {
       <MenuContainer className={menuOpen ? "activeMenu" : "hideMenu"}>
         <div className="menucontainer">
           MENU
-          <button>마이페이지</button>
+          <button> <a href = "/mypage">마이페이지</a></button>
           <button>내가 쓴 글</button>
           <button>
             <BiCurrentLocation />내 위치
