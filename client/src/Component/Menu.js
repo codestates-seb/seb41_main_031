@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {BiCurrentLocation, BiChat, BiMenu, BiBell} from "react-icons/bi"
+import {BiCurrentLocation, BiChat, BiBody, BiBell} from "react-icons/bi"
 // import Alarm from'./Alarm';
 
 
@@ -165,7 +165,7 @@ function Menu() {
                     setMenuOpen(menuOpen => !menuOpen);
                     setAlarmOpen(false);
                     }}>
-            <BiMenu />
+            <BiBody />
             </button>
         </MenuButton>
         <AlarmContainer className={alarmOpen ? "activeAlarm" : "hideAlarm"}>
