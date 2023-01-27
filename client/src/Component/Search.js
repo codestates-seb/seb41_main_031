@@ -24,7 +24,7 @@ function Search() {
       <Serachdiv>
         <div4>
           운동하고 싶은 사람 <strong>AMOONA</strong>
-          모여라 ~📢
+          모여라
         </div4>
         <div1>WHAT’S YOUR FAVORITE SPORT?</div1>
         <div>
@@ -32,7 +32,7 @@ function Search() {
           <input type="text" name="search" placeholder="어떤 운동 하세요?" />
         </div>
 
-        <div2>🔥Make YOUR TEAM!!🔥</div2>
+        <div2>🔥팀을 만들어 보세요!!🔥</div2>
         <button onClick={openpostupModal}>Let’s do It!!!</button>
         <div3>TRY EVERY THING WITH YOUR TEAM</div3>
         <divimg1>
