@@ -237,7 +237,6 @@ const Postinputdiv = styled.div`
   flex-direction: column;
   padding-top: 30px;
   padding-bottom: 10px;
-
   div {
     width: 400px;
     height: 60px;
