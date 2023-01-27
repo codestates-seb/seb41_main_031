@@ -1,6 +1,10 @@
 import React, { useState,useEffect } from "react";
 import styled from "styled-components";
-
+import { useDispatch } from 'react-redux';
+import { authActions } from '../Redux/auth';
+import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginContainer = styled.div`
   display: flex;
@@ -149,7 +153,53 @@ const Passwordalert = ()=>{
          null : isValid.isPassword === true?
          null:'비밀번호 형식에 맞지 않습니다.')
 }
+
+const dispatch = useDispatch();
+const navigate = useNavigate();
+
+
+const [tokenCookie, setTokenCookie] = useCookies(['Authorization']);
+const [refreshCookie, setRefreshCookie] = useCookies(['Refresh']);
+const [memberIdCookie, setMemberIdCookie] = useCookies(['memberId']);
+
+const loginSubmitHandler = (event) => {
   
+  if (isValid.isEmail && isValid.isPassword) {
+    const reqBody = {
+      username: login.email,
+      password: login.password
+    };
+    const sendLoginReq = async () => {
+      try {
+        const response = await axios.post(
+          'http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/login',
+          reqBody
+        );
+        const jwtToken = response.headers.get('Authorization');
+        const refreshToken = response.headers.get('Refresh');
+        const memberId = response.data.memberId;
+        setTokenCookie('Authorization', jwtToken, {
+          maxAge: 60 * 30000,
+        }); // 60초 * 30000분
+        setRefreshCookie('Refresh', refreshToken, {
+          maxAge: 60 * 30000,
+        }); // 60초 * 30000분
+        setMemberIdCookie('memberId', memberId, { maxAge: 60 * 30000 });
+        if (tokenCookie && memberIdCookie && refreshCookie) {
+          dispatch(authActions.login());
+        }
+        setTimeout(() => {
+          navigate('/');
+          window.location.reload();
+        }, 250);
+      } catch (error) {
+        console.log(error);
+        alert('인증에 실패했습니다.');
+      }
+    };
+    sendLoginReq();
+  }
+};
 
   return (
 
@@ -186,17 +236,17 @@ const Passwordalert = ()=>{
       </span>
       
     </ErrorMessage>
-
+  
     <Button
     onClick = {()=> {
       
       Clicked();
-      Print();
+      loginSubmitHandler()
     }}
     >
       로그인
       </Button>
-
+     
     <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
 
     </Form>

@@ -426,7 +426,12 @@ const [data, setData] = useState([]);
 const getUser = async () => {
   try {
     const response = await axios.get(
-      process.env.REACT_APP_DB_HOST + `/api/member/${memberId}`
+      'http://54.180.138.46:8080/members/' + `/members/${memberId}`,{
+
+        headers : {
+          'Authorization' : `Bearer ${accessToken}`
+        }
+      }
     );
     setData(response.data);
   } catch (error) {
@@ -508,7 +513,7 @@ const NicknameEdit = () =>
             Email : form.email
   
           })
-          .then(() => {
+          .then(() => { 
             window.location.reload();
             alert('이메일 변경이 완료되었습니다.');
             navigate('/mypage/editprofile');
@@ -535,7 +540,7 @@ const NicknameEdit = () =>
   
       if(!(form.region === data.Region))
       {
-        setTimeout(function (){
+        setTimeout(function (){  
           axios
           .patch(`http://localhost:5500/data/${1}`,{
             
