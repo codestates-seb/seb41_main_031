@@ -28,9 +28,7 @@ function Header() {
       <Headerdiv>
         <img src={logo} alt="logo_img" />
         <span>AMOONA</span>
-        {/* <i class="fa-regular fa-bell fa-2x"></i>
-        <i class="fa-solid fa-bars fa-2x"></i> */}
-        <i class="fa-regular fa-bell fa-2x"><Menu /></i>
+        <i><Menu /></i>
       </Headerdiv>
     </>
   );
