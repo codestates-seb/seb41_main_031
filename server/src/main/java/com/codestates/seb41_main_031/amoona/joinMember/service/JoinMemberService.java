@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class JoinMemberService {
 
-    private JoinMemberRepository joinMemberRepository;
-    private MemberRepository memberRepository;
-    private PostRepository postRepository;
+    private final JoinMemberRepository joinMemberRepository;
+    private final MemberRepository memberRepository;
+    private final PostRepository postRepository;
 
     public JoinMember createJoinMember(JoinMember joinMember, Long postId, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));

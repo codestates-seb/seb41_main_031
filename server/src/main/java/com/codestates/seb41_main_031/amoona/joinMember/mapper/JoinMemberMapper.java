@@ -12,7 +12,11 @@ public interface JoinMemberMapper {
 
     default JoinMemberResponseDto joinMemberToJoinMemberResponseDto(JoinMember joinMember) {
 
-        return new JoinMemberResponseDto(joinMember.getJoinMemberId(), joinMember.getMember().getNickname(),
-                joinMember.getMember().getImage(), joinMember.getCreatedAt(), joinMember.getModifiedAt());
+        return new JoinMemberResponseDto(
+                joinMember.getJoinMemberId(),
+                joinMember.getMember().getNickname(),
+                joinMember.getMember().getImage(),
+                joinMember.getCreatedAt(),
+                joinMember.getModifiedAt());
     }
 }
