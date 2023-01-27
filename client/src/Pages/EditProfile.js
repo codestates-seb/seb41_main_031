@@ -3,6 +3,7 @@ import React, { useState, useEffect,useRef } from 'react';
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios, { formToJSON } from "axios";
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 const Main = styled.div`
 @media all and (max-width: 1100px){
@@ -416,26 +417,41 @@ function EditProfile() {
 
 const navigate = useNavigate();
 
+const cookies = new Cookies();
+  const accessToken = cookies.get('Authorization');
+  const memberId = cookies.get('memberId');
+
 const [data, setData] = useState([]);
 
-  useEffect(() => {
-    console.log("Works!before");
-    setTimeout(function () {
-      console.log("Works!");
-      axios
-        .get("http://localhost:5500/data/1")
-        .then(function (response) {
-          // response
-          setData(response.data);
-          //데이터 전송 성공시
-        })
-        .catch(function (error) {
-          // 오류발생시 실행
-        })
-        .then(function (response) {
-          // 항상 실행
-        }); //컴포넌트가 리랜더링 될때마다 실행
-    }, 3000);},[])
+const getUser = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_DB_HOST + `/api/member/${memberId}`
+    );
+    setData(response.data);
+  } catch (error) {
+    if (error.response) {
+      // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // 요청이 전송되었지만, 응답이 수신되지 않음
+      console.log(error.request);
+    } else {
+      // 오류가 발생한 요청을 설정하는 데 문제가 생김
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  }
+};
+
+
+
+useEffect(() => {
+  getUser();
+}, []);
+
 
 const NicknameEdit = () => 
 
