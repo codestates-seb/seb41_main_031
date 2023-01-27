@@ -69,5 +69,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "proxy": "http://54.180.138.46:8080"
+=======
+  "proxy" : "'http://ec2-15-164-211-228.ap-northeast-2.compute.amazonaws.com:8080/api/member/"
+>>>>>>> 46b5885 (17:47)
 }
