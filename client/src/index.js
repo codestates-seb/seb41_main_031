@@ -48,11 +48,11 @@ function reducer(state = initialState, action) {
 let store = createStore(reducer);
 
 render(
-  <CookiesProvider>
+  
   <Provider store={store}>
     <App />
   </Provider>
-  </CookiesProvider>,
+  ,
   document.getElementById("root")
 );
 
