@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../Redux/auth';
+import { useCookies } from 'react-cookie';
+
 
 
 const SignupContainer = styled.div`
@@ -58,13 +65,13 @@ const SignupFont = styled.span`
     display: flex;
     margin-left: 15px;
 
-    .emailalert{
-      color : red;
-    }
-  
-    .passwordalert{
-      color : red;
-    }
+.emailalert{
+  color : red;
+}
+
+.passwordalert{
+  color : red;
+}
  `
 
 function Signup() {
@@ -135,6 +142,82 @@ function Clicked(){
     setIsValid({...isValid, isClicked: true})
     
 }
+
+
+const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const reqLoginBody = {
+    username: signup.email,
+    password: signup.newpassword,
+  };
+  const [tokenCookie, setTokenCookie] = useCookies(['Authorization']);
+  const [refreshCookie, setRefreshCookie] = useCookies(['Refresh']);
+  const [memberIdCookie, setMemberIdCookie] = useCookies(['memberId']);
+
+  const sendLoginReq = async () => {
+    try {
+      const response = await axios.post(
+        '/login',
+        reqLoginBody
+      );
+      const jwtToken = response.headers.get('Authorization');
+      const refreshToken = response.headers.get('Refresh');
+      const memberId = response.data.memberId;
+      setTokenCookie('Authorization', jwtToken, {
+        maxAge: 60 * 30000,
+      }); // 60초 * 30000분
+      setRefreshCookie('Refresh', refreshToken, {
+        maxAge: 60 * 30000,
+      }); // 60초 * 30000분
+      setMemberIdCookie('memberId', memberId, { maxAge: 60 * 30000 });
+      if (tokenCookie && memberIdCookie && refreshCookie) {
+        dispatch(authActions.login());
+      }
+      setTimeout(() => {
+        navigate('/');
+        window.location.reload();
+      }, 250);
+    } catch (error) {
+      console.log(error);
+      alert('인증에 실패했습니다.');
+    }
+  };
+
+
+  const Signuphandler = (event) => {
+    
+    if (isValid.isEmail && isValid.isPassword&&signup.nickname !=='') {
+      const reqSignupBody = {
+        email: signup.email,
+        password: signup.newpassword,
+        nickname: signup.nickname
+        
+      };
+
+      const sendSignUpReq = async () => {
+        try { 
+          const response = await axios.post(
+            '/members',
+            reqSignupBody
+          );
+          if (response.status === 201) {
+            alert('환영합니다.');
+            sendLoginReq();
+          }
+        } catch (error) {
+          console.log(error);
+          alert('잘못된 요청입니다.');
+          console.log(reqSignupBody)
+        }
+      };
+      sendSignUpReq();
+    }
+  };
+  
+ 
+
+
   return (
     <SignupContainer>
     <Form>
@@ -174,6 +257,7 @@ function Clicked(){
       <Button
       onClick = {()=>{
         Clicked()
+        Signuphandler()
       }}
       >회원가입하기</Button>
       <HrefRight>이미 계정이 있으세요?&nbsp;&nbsp;<a href = "login">로그인하기</a></HrefRight>

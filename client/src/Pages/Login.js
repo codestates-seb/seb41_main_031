@@ -166,8 +166,8 @@ const loginSubmitHandler = (event) => {
   
   if (isValid.isEmail && isValid.isPassword) {
     const reqBody = {
-      username: login.email,
-      password: login.password
+      email: login.email,
+      password: login.newpassword
     };
     const sendLoginReq = async () => {
       try {
@@ -178,6 +178,7 @@ const loginSubmitHandler = (event) => {
         const jwtToken = response.headers.get('Authorization');
         const refreshToken = response.headers.get('Refresh');
         const memberId = response.data.memberId;
+        
         setTokenCookie('Authorization', jwtToken, {
           maxAge: 60 * 30000,
         }); // 60초 * 30000분
@@ -195,6 +196,8 @@ const loginSubmitHandler = (event) => {
       } catch (error) {
         console.log(error);
         alert('인증에 실패했습니다.');
+        console.log(reqBody)
+        
       }
     };
     sendLoginReq();

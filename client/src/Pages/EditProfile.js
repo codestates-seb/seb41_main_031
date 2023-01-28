@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import React, { useState, useEffect,useRef } from 'react';
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios, { formToJSON } from "axios";
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 const Main = styled.div`
 @media all and (max-width: 1100px){
 	
-  width : 70%;
-  height : 70%;
+  width : 80%;
+  height : 80%;
 }
 
 `
 const LeftBox = styled.div`` 
+
 const Image = styled.img`
     width: 17rem;
     height: 17rem;; 
@@ -25,6 +26,8 @@ const Image = styled.img`
     margin-bottom : 60px;
     
 `
+
+
 const RightBox = styled.div`
 float : right;
 margin-top : 90px;
@@ -277,9 +280,14 @@ font-size : 0.7rem;
 const NewPasswordBox = styled.div`
 margin-top : 20px;
 font-size :  0.7rem;
-.passwordalert{
-    color : red;
-  }
+
+.passwordwrap{
+  display: block
+  display:flex;
+  text-align : center;
+  color : red;
+    font-size : 1rem;
+}
 `
 
 const InformBox = styled.div`
@@ -311,9 +319,16 @@ justify-content : center;
 
 .emailalert{
   color : red;
-  
-  
+  font-size : 1rem;
+  display:flex;
+  justify-content : center;
+  margin-bottom : 10px;
 }
+
+.emailwrap{
+  display: block
+}
+
 
 `
 const RegionBox= styled.div`
@@ -405,69 +420,213 @@ function EditProfile() {
 
 const navigate = useNavigate();
 
+const cookies = new Cookies();
+  const accessToken = cookies.get('Authorization');
+  const memberId = cookies.get('memberId');
+
 const [data, setData] = useState([]);
 
-  useEffect(() => {
-    console.log("Works!before");
-    setTimeout(function () {
-      console.log("Works!");
-      axios
-        .get("http://localhost:5500/data/1")
-        .then(function (response) {
-          // response
-          setData(response.data);
-          //데이터 전송 성공시
-        })
-        .catch(function (error) {
-          // 오류발생시 실행
-        })
-        .then(function (response) {
-          // 항상 실행
-        }); //컴포넌트가 리랜더링 될때마다 실행
-    }, 3000);},[])
+const getUser = async () => {
+  try {
+    const response = await axios.get(
+      `/members/${memberId}`,{
 
-const NicknameEdit = () => 
-
-{
-  
-  if(form.nickname!==''&&form.email===''&&form.region===''        //모두 입력했을 때
-  &&form.previouspassword===''&&form.newpassword===''){  
-    if (window.confirm('닉네임을 변경하시겠습니까?')) {
-  
-      if((form.nickname === data.Nickname)){
-        alert('예전 닉네임과 같습니다. 다시 입력해주세요')
+        headers : {
+          'Authorization' : `Bearer ${accessToken}`
+        }
       }
+    );
+    setData(response.data);
+  } catch (error) {
+    if (error.response) {
+      // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // 요청이 전송되었지만, 응답이 수신되지 않음
+      console.log(error.request);
+    } else {
+      // 오류가 발생한 요청을 설정하는 데 문제가 생김
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  }
+};
 
-    if(!(form.nickname === data.Nickname))
-    {
-      setTimeout(function (){
-        axios
-        .patch(`http://localhost:5500/data/${1}`,{
+
+
+useEffect(() => {
+  getUser();
+}, []);
+
+
+
+
+
+  const NicknameEdit = async () => {
+    if (
+      form.nickname!==''&&form.email===''&&form.region===''        //모두 입력했을 때
+  &&form.previouspassword===''&&form.newpassword===''
+    ) {
+      if (window.confirm('닉네임을 변경하시겠습니까?')){
+      try {
+        await axios
+          .patch(
+            `/members/${memberId}`,
+            {
+              nickname: form.nickname,
+            },
+            { headers: { Authorization: accessToken } }
+          )
+          .then(() => {
+            alert('닉네임 변경이 완료되었습니다');
+            navigate('/mypage');
+          });
+      } catch (error) {
+        if (error.response) {
+          // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          return alert('Error');
           
-          Nickname : form.nickname
-
-        })
-        .then(() => {
-          window.location.reload();
-          alert('닉네임 변경이 완료되었습니다.');
-          navigate('/mypage/editprofile');
-        })
-        .catch((err) => alert(err.response.data.message));
-      }, 3000)
-      } 
+        } else if (error.request) {
+          // 요청이 전송되었지만, 응답이 수신되지 않음
+          console.log(error.request);
+          return alert('Error');
+          
+        } else {
+          // 오류가 발생한 요청을 설정하는 데 문제가 생김
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
       }
-
-  }  
+    }
   }
+  };
 
-  const EmailEdit = ()=>{
-    if(form.nickname===''&&form.email!==''&&form.region===''        //모두 입력했을 때
-  &&form.previouspassword===''&&form.newpassword===''){
+
+  const EmailEdit = async () => {
+    if (
+      (form.nickname===''&&form.email!==''&&form.region===''      
+    &&form.previouspassword===''&&form.newpassword==='')&&isValid.isEmail
+    ) {
+      if (window.confirm('이메일을 변경하시겠습니까?')){
+      try {
+        await axios
+          .patch(
+            `/members/${memberId}`,
+            {
+              email: form.email,
+            },
+            { headers: { Authorization: accessToken } }
+          )
+          .then(() => {
+            alert('이메일 변경이 완료되었습니다');
+            navigate('/mypage');
+          });
+      } catch (error) {
+        if (error.response) {
+          // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          return alert('Error');
+        } else if (error.request) {
+          // 요청이 전송되었지만, 응답이 수신되지 않음
+          console.log(error.request);
+          return alert('Error');
+        } else {
+          // 오류가 발생한 요청을 설정하는 데 문제가 생김
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      }
+    }
+  }
+  };
+
+
+
+  const RegionEdit = async () => {
+    if (
+      form.nickname===''&&form.email===''&&form.region!==''        //모두 입력했을 때
+    &&form.previouspassword===''&&form.newpassword===''
+    ) {
+      if (window.confirm('지역을 변경하시겠습니까?')){
+      try {
+        await axios
+          .patch(
+            `/members/${memberId}`,
+            {
+              Region: form.region,
+            },
+            { headers: { Authorization: accessToken } }
+          )
+          .then(() => {
+            alert('지역 변경이 완료되었습니다');
+            navigate('/mypage');
+          });
+      } catch (error) {
+        if (error.response) {
+          // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          return alert('Error');
+        } else if (error.request) {
+          // 요청이 전송되었지만, 응답이 수신되지 않음
+          console.log(error.request);
+          return alert('Error');
+        } else {
+          // 오류가 발생한 요청을 설정하는 데 문제가 생김
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      }
+    }
+  }
+  };
+
+
+    const PasswordEdit = () => 
+
+  {
     
-  }
-  }
+    if(form.nickname===''&&form.email===''&&form.region===''        //모두 입력했을 때
+    &&form.previouspassword!==''&&form.newpassword!==''){  
+      if (window.confirm('비밀번호를 변경하시겠습니까?')) {
+    
+        if((form.newpassword === data.password)&&isValid.isPassword){
+          alert('예전 비밀번호와 같습니다. 다시 입력해주세요')
+        }
 
-
+        if((form.previouspassword !== data.password)&&isValid.isPassword){
+          alert('예전 비밀번호와 입력한 비밀번호가 다릅니다. 다시 입력해주세요')
+        }
+  
+      if(!(form.newpassword === data.password)&&(form.previouspassword === data.password)&&isValid.isPassword)
+      {
+        setTimeout(function (){
+          axios
+          .patch(`http://localhost:5500/data/${1}`,{
+            
+            Password : form.password
+  
+          })
+          .then(() => {
+            window.location.reload();
+            alert('비밀번호 변경이 완료되었습니다.');
+            navigate('/mypage/editprofile');
+          })
+          .catch((err) => alert(err.response.data.message));
+        }, 3000)
+        } 
+        }
+  
+    }  
+    }
   const Emailalert = ()=> {
     return (
       form.email ===''
@@ -517,14 +676,13 @@ const NicknameEdit = () =>
         ref={fileInput}/>
 return(
     <Main>
-    <Skeleton width={"100%"} />
-    <Skeleton width={"100px"} />
      <MiddleBox>   
      <LeftBox>
         <Image
-        src = {image}
+        src={image} 
         onClick={()=>{fileInput.current.click()}}
         > 
+       
         </Image>
      </LeftBox>
      <RightBox>
@@ -543,19 +701,18 @@ return(
       </NicknameBox>
         <EmailBox>
           <span className = 'Email'>이메일: </span>
+          <div className = 'emailwrap'>
           <Email
           name = "email"
           value= {form.email}
           onChange = {
             onChangeprofile
             }
-            
           ></Email>
-          <span>
           <span className = 'emailalert'>
           {Emailalert()} 
             </span>
-          </span>
+            </div>
        </EmailBox>
        <RegionBox>
        <span className = 'Region'>지역: </span>
@@ -580,6 +737,7 @@ return(
         </PreviousPasswordBox>
         <NewPasswordBox>
           <span className ='New'>새로운 비밀번호</span>
+          <div className = 'passwordwrap'>
           <NewPassword
           name = "newpassword"
           value= {form.newpassword}
@@ -591,6 +749,7 @@ return(
 <span className = 'passwordalert'>
           {Passwordalert()}
             </span>
+            </div>
         </NewPasswordBox>
         
      </RightBox>
@@ -599,7 +758,9 @@ return(
         <EditButton 
         onClick = {()=> 
         { NicknameEdit()
-        
+          EmailEdit()
+          RegionEdit()
+          PasswordEdit()
           Print()
           Clicked()
           
