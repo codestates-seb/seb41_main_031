@@ -6,12 +6,13 @@ import Search from "../Component/Search";
 import Nav from "../Component/Nav";
 import DummyData from "../Asset/DummyData"; //이름 바꾸기
 import Reqboxdiv from "../Component/Reqboxdiv";
+import PostDetail from "../Component/PostDetail";
 
 function MainPage() {
   const [username, setUsername] = useState("");
   const mapRef = useRef(null);
   const [postdeisOpen, setpostdedeisOpen] = useState(false);
-  const [data1, setdata1] = useState([]);
+
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [isReqVisible, setIsReqVisible] = useState(false);
 
@@ -41,7 +42,7 @@ function MainPage() {
     }
   }, [scrollPosition]);
   /**/
-
+  const [data1, setdata1] = useState([]);
   useEffect(() => {
     console.log(DummyData);
     const promise = DummyData;
@@ -65,6 +66,11 @@ function MainPage() {
 
   return (
     <>
+      {postdeisOpen && (
+        <ModalBackdrop>
+          <PostDetail />
+        </ModalBackdrop>
+      )}
       <Search />
       <Maindiv>
         <Mapdiv className={`${isMapVisible ? "fade-in" : "fade-out"}`}>

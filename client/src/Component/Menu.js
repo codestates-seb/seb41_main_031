@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { BiCurrentLocation, BiChat, BiMenu, BiBell } from "react-icons/bi";
 // import Alarm from'./Alarm';
 
@@ -20,11 +21,29 @@ const MenuContainer = styled.div`
   .menucontainer {
     /* position: absolute; */
     /* right: 1000px; */
+    text-decoration: none !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     /* border: 1px blue solid; */
     font-size: 20px;
+
+    buttondiv {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none !important;
+      color: black;
+      margin: 12px;
+      margin-right: -5px;
+      width: 250px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 0.5px black solid;
+      border-radius: 10px 10px;
+      box-shadow: 0px 1px 2px gray inset;
+      font-size: 18px;
+    }
     button {
       display: flex;
       align-items: center;
@@ -40,6 +59,7 @@ const MenuContainer = styled.div`
       font-size: 18px;
     }
   }
+
   transition: 1s;
   &.activeMenu {
     margin-top: -10px;
@@ -140,7 +160,9 @@ function Menu() {
       <MenuContainer className={menuOpen ? "activeMenu" : "hideMenu"}>
         <div className="menucontainer">
           MENU
-          <button> <a href = "/mypage">마이페이지</a></button>
+          <Link to="/mypage">
+            <buttondiv>마이페이지</buttondiv>
+          </Link>
           <button>내가 쓴 글</button>
           <button>
             <BiCurrentLocation />내 위치
