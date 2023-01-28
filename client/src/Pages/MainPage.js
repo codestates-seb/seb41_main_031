@@ -70,14 +70,6 @@ function MainPage() {
     } else if (searchValue === "기타") {
       setdata1(data1.filter((item) => item.event === "기타"));
     } else {
-      const promise = DummyData;
-      const getData = () => {
-        promise.then((dummyData) => {
-          setdata1(dummyData);
-          console.log(data1);
-        });
-      };
-      getData();
     }
   };
 
