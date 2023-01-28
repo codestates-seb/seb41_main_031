@@ -77,12 +77,14 @@ function Postup({ openModal }) {
   function onClickDay(value) {
     setDate(value);
   }
+  const auth = window.localStorage.getItem("Authorization");
 
   function postup() {
     openModal();
     axios
       .post(
         `/posts`,
+
         {
           date: dateString,
           time: timeString,
@@ -95,22 +97,19 @@ function Postup({ openModal }) {
         },
         {
           headers: {
-            Authorization: `${JSON.parse(
-              window.localStorage.getItem("Authorization").jwtToken
-            )}`,
+            Authorization: JSON.parse(auth).jwtToken,
           },
         }
       )
       .then(function (response) {
         // response
-        console.log(response.data); //데이터 전송 성공시
+        console.log("송신 성공"); //데이터 전송 성공시
       })
       .catch(function (error) {
         // 오류발생시 실행
         console.log(error);
         alert("로그인을 해주세요");
       });
-    window.location.replace("/");
   }
 
   return (
