@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -19,7 +18,6 @@ const SignupContainer = styled.div`
   width: 100vw;
 `;
 
-const Form = styled.div`
 const Form = styled.div`
   display: flex;
   flex-direction: column;
@@ -118,59 +116,7 @@ function Signup() {
       setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
     } else{
       setIsValid({...isValid, isPassword : true})
-  
-  const [signup, setSignup] = useState({
-    email: '',
-    newpassword: '',
-    nickname: ''
-  }); 
-
-  const [isValid, setIsValid] = useState({
-    isEmail : false,
-    isPassword : false,
-    isClicked : false,
-    isPreviospassword : false
-  })
-
-  const onChangeSignup = (e) => {
-    const { name, value } = e.target;
-    setSignup({ ...signup, [name]: value });
-  };
-
-
-  useEffect(()=>{
-    const emailRegex =
-    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    
-    if(!emailRegex.test(signup.email)){
-      setIsValid({...isValid, isEmail: false})
-      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
-    } else{
-      setIsValid({...isValid, isEmail : true})
     }
-  },[signup.email])
-
-  useEffect(()=>{
-    const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    
-    if(!passwordRegex.test(signup.newpassword)){
-      setIsValid({...isValid, isPassword: false})
-      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
-    } else{
-      setIsValid({...isValid, isPassword : true})
-    }
-  },[signup.newpassword])
-
-
-  const Emailalert = ()=> {
-    return (
-      signup.email ===''
-                ? null
-          : isValid.isClicked === false?
-           null : isValid.isEmail === true?
-            null:'이메일 형식에 맞지 않습니다.'
-    )
   },[signup.newpassword])
 
 
@@ -275,16 +221,11 @@ const navigate = useNavigate();
   return (
     <SignupContainer>
     <Form>
-    <Form>
     <SignupHeader> 
     <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
     </SignupHeader>  
         <SignupFont>&nbsp;&nbsp;&nbsp;닉네임</SignupFont>
         <Input
-          type= "nickname"
-          name = "nickname" 
-          value={signup.nickname}
-          onChange={onChangeSignup}
           type= "nickname"
           name = "nickname" 
           value={signup.nickname}
@@ -296,16 +237,10 @@ const navigate = useNavigate();
           name="email"
           value={signup.login}
           onChange={onChangeSignup}
-          name="email"
-          value={signup.login}
-          onChange={onChangeSignup}
         />
         <SignupFont>&nbsp;&nbsp;&nbsp;비밀번호</SignupFont>
         <Input
           type="password"
-          name="newpassword"
-          value={signup.newpassword}
-          onChange={onChangeSignup}
           name="newpassword"
           value={signup.newpassword}
           onChange={onChangeSignup}
