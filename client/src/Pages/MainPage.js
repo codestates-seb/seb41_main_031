@@ -12,7 +12,6 @@ function MainPage() {
   const [username, setUsername] = useState("");
   const mapRef = useRef(null);
   const [postdeisOpen, setpostdedeisOpen] = useState(false);
-
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [isReqVisible, setIsReqVisible] = useState(false);
 
@@ -68,7 +67,7 @@ function MainPage() {
     <>
       {postdeisOpen && (
         <ModalBackdrop>
-          <PostDetail />
+          <PostDetail openModal={openpostdeModal} />
         </ModalBackdrop>
       )}
       <Search />
@@ -89,6 +88,7 @@ function MainPage() {
                 item={id.event}
                 Location={id.location}
                 openModal={openpostdeModal}
+                value={id.postId}
               />
             );
           })}
@@ -152,7 +152,6 @@ const ModalBackdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
   height: 100%;
 `;

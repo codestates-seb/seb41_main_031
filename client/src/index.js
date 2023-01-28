@@ -15,6 +15,7 @@ const initialState = {
     lat: 33.450701,
     lng: 126.570667,
   },
+  postid: 1,
   state: 1,
 };
 
@@ -33,12 +34,12 @@ function reducer(state = initialState, action) {
       return { ...state, address: { ...state.address, lng: action.lng } };
     case "SET_ADDRESS":
       return { ...state, address: action.address };
+    case "SET_POST":
+      return { ...state, postid: action.postid };
     default:
       return state;
   }
 }
-
-
 
 let store = createStore(reducer);
 

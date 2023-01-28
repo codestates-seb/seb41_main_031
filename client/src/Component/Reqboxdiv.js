@@ -1,5 +1,49 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
+function Reqboxdiv({
+  img,
+  name,
+  Date,
+  Time,
+  Time_after,
+  Party,
+  item,
+  Location,
+  openModal,
+  value,
+}) {
+  const dispatch = useDispatch();
+  function openpostdeModal() {
+    dispatch({ type: "SET_POST", postid: value });
+    console.log(value);
+  }
+
+  return (
+    <>
+      <Reqbox>
+        <impormationdiv>
+          <divuser>
+            <img src={img} alt="user"></img>
+            <div>{name}</div>
+          </divuser>
+          <divdate>
+            DATE | {Date} <br />
+            TIME | {Time}
+          </divdate>
+          <divparty>PARTY 1 | {Party}</divparty>
+        </impormationdiv>
+        <h1>{item} 할 사람 구해요~~ </h1>
+        <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
+        <button onClick={() => openModal() && openpostdeModal()}>JOIN</button>
+        <locationdiv>-{Location}-</locationdiv>
+      </Reqbox>
+    </>
+  );
+}
+
+export default Reqboxdiv;
 
 const Reqbox = styled.div`
   color: black;
@@ -69,39 +113,3 @@ const Reqbox = styled.div`
     margin-top: 30px;
   }
 `;
-
-function Reqboxdiv({
-  img,
-  name,
-  Date,
-  Time,
-  Time_after,
-  Party,
-  item,
-  Location,
-  openModal,
-}) {
-  return (
-    <>
-      <Reqbox>
-        <impormationdiv>
-          <divuser>
-            <img src={img} alt="user"></img>
-            <div>{name}</div>
-          </divuser>
-          <divdate>
-            DATE | {Date} <br />
-            TIME | {Time}
-          </divdate>
-          <divparty>PARTY 1 | {Party}</divparty>
-        </impormationdiv>
-        <h1>{item} 할 사람 구해요~~ </h1>
-        <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
-        <button onClick={openModal}>JOIN</button>
-        <locationdiv>-{Location}-</locationdiv>
-      </Reqbox>
-    </>
-  );
-}
-
-export default Reqboxdiv;
