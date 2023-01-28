@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Postup from "../Pages/Postup";
 import styled from "styled-components";
 
-function Search() {
+function Search({ handleSearch }) {
   const [postisOpen, setpostIsOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   function openpostupModal() {
     setpostIsOpen(!postisOpen);
@@ -29,7 +30,15 @@ function Search() {
         <div1>WHAT’S YOUR FAVORITE SPORT?</div1>
         <div>
           <i class="fa-solid fa-magnifying-glass  fa-2x"></i>
-          <input type="text" name="search" placeholder="어떤 운동 하세요?" />
+          <input
+            type="text"
+            name="search"
+            placeholder="어떤 운동 하세요?"
+            onChange={(e) => setSearchValue(e.target.value)}
+            onKeyPress={(event) =>
+              event.key === "Enter" ? handleSearch(searchValue) : null
+            }
+          />
         </div>
 
         <div2>🔥팀을 만들어 보세요!!🔥</div2>

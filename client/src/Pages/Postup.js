@@ -91,8 +91,9 @@ function Postup({ openModal }) {
         },
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlcyI6WyJVU0VSIl0sInVzZXJuYW1lIjoiZ2lhbm5pc0BnbWFpbC5jb20iLCJzdWIiOiJnaWFubmlzQGdtYWlsLmNvbSIsImlhdCI6MTY3NDc0OTMxNCwiZXhwIjoxNjc0ODM1NzE0fQ.C9aQ_Uq3PkMzeEotUv1sMdIG1aLpXgT6k71qH5bubgkfUpUGI6hQKkgLvo4O6arn",
+            Authorization: `Bearer ${JSON.parse(
+              window.localStorage.getItem("Authorization")
+            )}`,
           },
         }
       )

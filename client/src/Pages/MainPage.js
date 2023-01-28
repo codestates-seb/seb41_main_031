@@ -11,6 +11,7 @@ import PostDetail from "../Component/PostDetail";
 function MainPage() {
   const [username, setUsername] = useState("");
   const mapRef = useRef(null);
+
   const [postdeisOpen, setpostdedeisOpen] = useState(false);
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [isReqVisible, setIsReqVisible] = useState(false);
@@ -42,6 +43,7 @@ function MainPage() {
   }, [scrollPosition]);
   /**/
   const [data1, setdata1] = useState([]);
+
   useEffect(() => {
     console.log(DummyData);
     const promise = DummyData;
@@ -52,7 +54,32 @@ function MainPage() {
       });
     };
     getData();
-  }, [DummyData]);
+  }, []);
+
+  const handleSearch = (searchValue) => {
+    if (searchValue === "축구") {
+      setdata1(data1.filter((item) => item.event === "축구"));
+    } else if (searchValue === "농구") {
+      setdata1(data1.filter((item) => item.event === "농구"));
+    } else if (searchValue === "탁구") {
+      setdata1(data1.filter((item) => item.event === "탁구"));
+    } else if (searchValue === "배구") {
+      setdata1(data1.filter((item) => item.event === "배구"));
+    } else if (searchValue === "헬스") {
+      setdata1(data1.filter((item) => item.event === "헬스"));
+    } else if (searchValue === "기타") {
+      setdata1(data1.filter((item) => item.event === "기타"));
+    } else {
+      const promise = DummyData;
+      const getData = () => {
+        promise.then((dummyData) => {
+          setdata1(dummyData);
+          console.log(data1);
+        });
+      };
+      getData();
+    }
+  };
 
   const change = (e) => {
     let { value } = { ...e.target };
@@ -70,7 +97,7 @@ function MainPage() {
           <PostDetail openModal={openpostdeModal} />
         </ModalBackdrop>
       )}
-      <Search />
+      <Search handleSearch={handleSearch} />
       <Maindiv>
         <Mapdiv className={`${isMapVisible ? "fade-in" : "fade-out"}`}>
           <Map />
