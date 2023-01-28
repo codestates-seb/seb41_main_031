@@ -2,7 +2,7 @@ package com.codestates.seb41_main_031.amoona.post.entity;
 
 import com.codestates.seb41_main_031.amoona.audit.BaseTimeEntity;
 import com.codestates.seb41_main_031.amoona.member.entity.Member;
-import com.codestates.seb41_main_031.amoona.memberPost.entity.MemberPost;
+import com.codestates.seb41_main_031.amoona.joinMember.entity.JoinMember;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +37,7 @@ public class Post extends BaseTimeEntity {
     private String lng;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
-    private List<MemberPost> memberPosts;
+    private List<JoinMember> joinMembers;
 
     @JoinColumn(name = "memberId")
     @ManyToOne

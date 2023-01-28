@@ -31,6 +31,7 @@ public class SecurityConfiguration {
 
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+
     public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
@@ -63,6 +64,8 @@ public class SecurityConfiguration {
                         .antMatchers(HttpMethod.POST, "/posts").hasRole("USER") // 게시글 등록
                         .antMatchers(HttpMethod.PATCH, "/posts/**").hasRole("USER") // 게시글 수정
                         .antMatchers(HttpMethod.DELETE, "/posts/**").hasAnyRole("USER", "ADMIN") // 게시글 삭제
+                        .antMatchers(HttpMethod.POST, "/joinMembers/**").hasRole("USER")
+                        .antMatchers(HttpMethod.DELETE, "/joinMembers/**").hasRole("USER")
                         .anyRequest().permitAll()
                 );
         return http.build();
