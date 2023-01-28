@@ -5,6 +5,7 @@ import com.codestates.seb41_main_031.amoona.post.entity.Post;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface PostMapper {
@@ -29,14 +30,13 @@ public interface PostMapper {
                 post.getModifiedAt());
     }
 
-    default PostDetailDto postToPostDetailDto(Post post){
+    default PostDetailDto postToPostDetailDto(Post post) {
 
         return new PostDetailDto(
                 post.getPostId(),
-                post.getMember().getNickname(),
-                post.getMember().getImage(),
                 post.getLocation(),
                 post.getEvent(),
+                post.getJoinMembers().size(),
                 post.getPlayerNum(),
                 post.getDate(),
                 post.getTime(),
@@ -45,5 +45,23 @@ public interface PostMapper {
                 post.getJoinMembers());
     }
 
-    List<PostListDto> postsToPostListDtos(List<Post> posts);
+    default List<PostListDto> postsToPostListDtos(List<Post> posts) {
+        return posts
+                .stream()
+                .map(post -> PostListDto
+                        .builder()
+                        .postId(post.getPostId())
+                        .nickname(post.getMember().getNickname())
+                        .image(post.getMember().getImage())
+                        .location(post.getLocation())
+                        .event(post.getEvent())
+                        .joinCount(post.getJoinMembers().size())
+                        .playerNum(post.getPlayerNum())
+                        .date(post.getDate())
+                        .time(post.getTime())
+                        .lat(post.getLat())
+                        .lng(post.getLng())
+                        .build())
+                .collect(Collectors.toList());
+    }
 }
