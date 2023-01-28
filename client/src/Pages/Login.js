@@ -212,32 +212,39 @@ function Login() {
         />
         <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
 
-        <Input
-          name="newpassword"
-          type="password"
-          value={login.newpassword}
-          placeholder="Please type your password"
-          onChange={onChangeLogin}
-        />
-        <br />
-        <ErrorMessage>
-          <span className="emailalert">{Emailalert()}</span> &nbsp;&nbsp;
-          <span className="passwordalert">{Passwordalert()}</span>
-        </ErrorMessage>
+    <Input
+      name="newpassword"
+      type="password"
+      value={login.newpassword}
+      placeholder = 'Please type your password'
+      onChange={onChangeLogin}
+    />
+    <br />
+    <ErrorMessage>
+      
+      <span className = 'emailalert'>
+      {Emailalert()}
+      </span> &nbsp;&nbsp;
+      <span className = 'passwordalert'>
+      {Passwordalert()}
+      </span>
+      
+    </ErrorMessage>
+  
+    <Button
+    onKeyPress = {onKeyPress}
+    onClick = {()=> {
+      Click();
+      Clicked();
+    }}
+    >
+      로그인
+      </Button>
+     
+    <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
 
-        <Button
-          onClick={() => {
-            Clicked();
-            loginSubmitHandler();
-          }}
-        >
-          로그인
-        </Button>
-
-        <HrefRight>
-          처음이신가요?&nbsp;<a href="signup"> 시작하기 </a>
-        </HrefRight>
-      </Form>
+    </Form>
+    
     </LoginContainer>
   );
 }
