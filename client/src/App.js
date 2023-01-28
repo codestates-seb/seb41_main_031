@@ -24,17 +24,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const APPdiv = styled.div`
-  margin-top: 60px;
-`;
-
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
         <Header />
-
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/Login/" element={<Login />}></Route>
@@ -48,7 +43,6 @@ function App() {
           <Route path="/post-detail" element={<PostDetail />}></Route>
           <Route path="/Timedata" element={<Timedata />}></Route>
         </Routes>
-
         <Footer />
       </BrowserRouter>
     </>

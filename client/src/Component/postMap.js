@@ -4,16 +4,16 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { connect } from "react-redux";
 
-const Map = ({ maplevel }) => {
+const Map = ({ maplevel, polat, polng }) => {
   const [address, setAddress] = useState([]);
   const dispatch = useDispatch();
   const [map, setMap] = useState(null);
   const mapRef = useRef(null);
   const mapContainer = useRef(null);
   const { kakao } = window;
-  const position = new kakao.maps.LatLng(33.450701, 126.570667);
-  const [lat, setlat] = useState(33.450701);
-  const [lng, setlng] = useState(126.570667);
+  const position = new kakao.maps.LatLng(polat, polng);
+  const [lat, setlat] = useState(polat);
+  const [lng, setlng] = useState(polng);
   const mapOptions = {
     center: position, // 지도의 중심좌표
     level: maplevel, // 지도의 확대 레벨
@@ -46,10 +46,12 @@ const Map = ({ maplevel }) => {
           lat: lat,
           lng: lng,
         });
-        dispatch({ type: "SET_ADDRESS", address: address });
+        console.log(lat);
+        console.log(lng);
       }
     };
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+    dispatch({ type: "SET_ADDRESS", address: address });
   }, [lng]);
 
   useEffect(() => {
@@ -86,7 +88,7 @@ const Map = ({ maplevel }) => {
     const positions = [
       {
         map: map,
-        position: new kakao.maps.LatLng(33.450701, 126.570667),
+        position: new kakao.maps.LatLng(lat, lng),
         title: address.address,
       },
       {

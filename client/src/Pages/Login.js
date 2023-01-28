@@ -167,6 +167,10 @@ function Login() {
           setTokenCookie("Authorization", jwtToken, {
             maxAge: 60 * 30000,
           }); // 60초 * 30000분
+          window.localStorage.setItem(
+            "Authorization",
+            JSON.stringify({ jwtToken })
+          );
           setRefreshCookie("Refresh", refreshToken, {
             maxAge: 60 * 30000,
           }); // 60초 * 30000분

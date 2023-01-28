@@ -5,14 +5,11 @@ import logo from "../Asset/2.png";
 import Menu from "./Menu";
 import LoginButton from "./LoginButton";
 import SignupButton from "./SignupButton";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-
-
-
 const Headerdiv = styled.div`
-  position: relative;
+  position: fixed;
   width: 100%;
   height: 60px;
   display: flex;
@@ -34,57 +31,32 @@ const Headerdiv = styled.div`
       margin-right: auto;
     }
   }
-  i {
-    z-index: 4;
-    position: relative;
-    margin-left: 20px;
-  }
-
-  .LoginChange{
-    margin-right : 20px;
+  .LoginChange {
+    margin-right: 20px;
   }
 `;
 
-
-
-
 function Header() {
-
   const location = useLocation();
-  const [pathname, setPathname] = useState('/');
-  
-  useEffect(()=>{
-    setPathname(location.pathname)
-  },[location.pathname])
+  const [pathname, setPathname] = useState("/");
 
-const LoginChange = ()=>{
-  
-  if(pathname === '/'){
-    return <LoginButton/>
-    
-  }
+  useEffect(() => {
+    setPathname(location.pathname);
+  }, [location.pathname]);
 
-  else {
+  const LoginChange = () => {
+    if (pathname === "/") {
+      return <LoginButton />;
+    } else {
+    }
+  };
 
-  }
-}
-
-const SignupChange = ()=>{
-  
-  if(pathname === '/'){
-    return <SignupButton/>
-    
-  }
-
-  else {
-
-  }
-}
-
-
-
-
-
+  const SignupChange = () => {
+    if (pathname === "/") {
+      return <SignupButton />;
+    } else {
+    }
+  };
 
   return (
     <>
@@ -96,15 +68,8 @@ const SignupChange = ()=>{
           <span>AMOONA</span>
         </div2>
 
-        <i>
-          <span className = 'LoginChange'>
-          {LoginChange()}
-          </span>
-          <span className = 'SignupChange'>
-          {SignupChange()}
-          </span>
-          
-        </i>
+        <span className="LoginChange">{LoginChange()}</span>
+        <span className="SignupChange">{SignupChange()}</span>
       </Headerdiv>
     </>
   );

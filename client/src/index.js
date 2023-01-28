@@ -1,15 +1,13 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { CookiesProvider } from 'react-cookie';
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
-import store2 from './Redux/store2';
+import store2 from "./Redux/store2";
 import { legacy_createStore as createStore } from "redux";
 
 import App from "./App";
-
-
 
 const SET_LOCATION = "SET_LOCATION";
 const SET_LAT = "SET_LAT";
@@ -51,12 +49,10 @@ function reducer(state = initialState, action) {
 let store = createStore(reducer);
 
 render(
-  <CookiesProvider store = {store2}>
-  <Provider store={store}>
-    <App />
-  </Provider>
-  </CookiesProvider>
-  ,
+  <CookiesProvider store={store2}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </CookiesProvider>,
   document.getElementById("root")
 );
-

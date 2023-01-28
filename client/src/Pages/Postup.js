@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Map from "../Component/Map";
+import PostMap from "../Component/postMap";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Calendar from "react-calendar";
@@ -28,6 +29,9 @@ function Postup({ openModal }) {
   function openpostModal() {
     setpostIsOpen(!postisOpen);
     console.log(data.address.address);
+
+    console.log(typeof data.address.lat);
+
     setlocation(data.address.address);
   }
   function opensprotsModal() {
@@ -83,7 +87,7 @@ function Postup({ openModal }) {
           date: dateString,
           time: timeString,
           event: sprot,
-          lat: data.address.lat,
+          lat: parseInt(data.address.lat),
           lng: data.address.lng,
           location: location,
           playerNum: member,
@@ -91,8 +95,8 @@ function Postup({ openModal }) {
         },
         {
           headers: {
-            Authorization: `Bearer ${JSON.parse(
-              window.localStorage.getItem("Authorization")
+            Authorization: `${JSON.parse(
+              window.localStorage.getItem("Authorization").jwtToken
             )}`,
           },
         }
@@ -106,10 +110,14 @@ function Postup({ openModal }) {
         console.log(error);
         alert("로그인을 해주세요");
       });
+    window.location.replace("/");
   }
 
   return (
     <>
+      {console.log(
+        JSON.parse(window.localStorage.getItem("Authorization")).jwtToken
+      )}
       {postisOpen && (
         <ModalBackdrop>
           <Map></Map>
