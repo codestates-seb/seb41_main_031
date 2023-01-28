@@ -19,16 +19,24 @@ public class JoinMemberService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
-    public JoinMember createJoinMember(JoinMember joinMember, Long postId, String email) {
+    public JoinMember createJoinMember(Long postId, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         Post post = postRepository.findById(postId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.POST_NOT_FOUND));
-        joinMember.setMember(member);
-        joinMember.setPost(post);
+
+        JoinMember joinMember = JoinMember.builder().member(member).post(post).build();
+
+        for (int i = 0; i < post.getJoinMembers().size(); i++){
+
+            if (post.getJoinMembers().get(i).getMember().getMemberId().equals(member.getMemberId())) {
+                throw new BusinessLogicException(ExceptionCode.JOIN_MEMBER_EXISTS);
+            }
+        }
+
         return joinMemberRepository.save(joinMember);
     }
 
     public void deleteJoinMember(Long postId, String email) {
-        JoinMember findJoinMember = joinMemberRepository.findById(postId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.JOINMEMBER_NOT_FOUND));
+        JoinMember findJoinMember = joinMemberRepository.findById(postId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.JOIN_MEMBER_NOT_FOUND));
         if (!findJoinMember.getMember().getEmail().equals(email)) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOWED);
         }
