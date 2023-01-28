@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../Asset/2.png";
 import Menu from "./Menu";
+import LoginButton from "./LoginButton";
+import SignupButton from "./SignupButton";
+import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+
+
 
 
 const Headerdiv = styled.div`
@@ -33,9 +39,53 @@ const Headerdiv = styled.div`
     position: relative;
     margin-left: 20px;
   }
+
+  .LoginChange{
+    margin-right : 20px;
+  }
 `;
 
+
+
+
 function Header() {
+
+  const location = useLocation();
+  const [pathname, setPathname] = useState('/');
+  
+  useEffect(()=>{
+    setPathname(location.pathname)
+  },[location.pathname])
+
+const LoginChange = ()=>{
+  
+  if(pathname === '/'){
+    return <LoginButton/>
+    
+  }
+
+  else {
+
+  }
+}
+
+const SignupChange = ()=>{
+  
+  if(pathname === '/'){
+    return <SignupButton/>
+    
+  }
+
+  else {
+
+  }
+}
+
+
+
+
+
+
   return (
     <>
       <Headerdiv>
@@ -47,7 +97,12 @@ function Header() {
         </div2>
 
         <i>
-          <Menu/>
+          <span className = 'LoginChange'>
+          {LoginChange()}
+          </span>
+          <span className = 'SignupChange'>
+          {SignupChange()}
+          </span>
           
         </i>
       </Headerdiv>

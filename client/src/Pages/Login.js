@@ -162,7 +162,7 @@ const [tokenCookie, setTokenCookie] = useCookies(['Authorization']);
 const [refreshCookie, setRefreshCookie] = useCookies(['Refresh']);
 const [memberIdCookie, setMemberIdCookie] = useCookies(['memberId']);
 
-const loginSubmitHandler = (event) => {
+const loginSubmitHandler = () => {
   
   if (isValid.isEmail && isValid.isPassword) {
     const reqBody = {
@@ -172,9 +172,10 @@ const loginSubmitHandler = (event) => {
     const sendLoginReq = async () => {
       try {
         const response = await axios.post(
-          'http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/login',
+          "/login",
           reqBody
         );
+
         const jwtToken = response.headers.get('Authorization');
         const refreshToken = response.headers.get('Refresh');
         const memberId = response.data.memberId;
@@ -188,8 +189,10 @@ const loginSubmitHandler = (event) => {
         setMemberIdCookie('memberId', memberId, { maxAge: 60 * 30000 });
         if (tokenCookie && memberIdCookie && refreshCookie) {
           dispatch(authActions.login());
+          
         }
         setTimeout(() => {
+          
           navigate('/');
           window.location.reload();
         }, 250);

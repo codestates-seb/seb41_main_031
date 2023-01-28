@@ -299,12 +299,15 @@ function Mypage() {
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
+          console.log(memberId)
         } else if (error.request) {
           // 요청이 전송되었지만, 응답이 수신되지 않음
           console.log(error.request);
+          console.log(memberId)
         } else {
           // 오류가 발생한 요청을 설정하는 데 문제가 생김
           console.log('Error', error.message);
+          console.log(memberId)
         }
         console.log(error.config);
       }

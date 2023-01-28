@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const Login = styled.button `
+
 box-shadow:inset 0px 1px 0px 0px #f29c93;
 	background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
 	background-color:#fe1a00;
@@ -13,6 +14,7 @@ box-shadow:inset 0px 1px 0px 0px #f29c93;
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 24px;
+	height : 45px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #b23e35;
 `
@@ -21,12 +23,9 @@ box-shadow:inset 0px 1px 0px 0px #f29c93;
 function LoginButton(){
 
 
-
-    
-    
-    <Login>Login</Login>
-    
-    
+		return <Link to = '/login'>
+ 			    <Login>Log in</Login>
+     	      </Link>
 
 }
 

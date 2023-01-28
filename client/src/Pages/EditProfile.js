@@ -558,7 +558,7 @@ useEffect(() => {
       try {
         await axios
           .patch(
-            `/members/${memberId}`,
+            `/members/7`,
             {
               Region: form.region,
             },
