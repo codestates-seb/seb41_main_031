@@ -15,6 +15,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.2.2",
     "eslint": "^8.31.0",
+    "http-proxy-middleware": "^2.0.6",
     "json-server": "^0.17.1",
     "prettier": "^2.8.2",
     "react": "^18.2.0",
@@ -69,9 +70,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
-  "proxy": "http://54.180.138.46:8080"
-=======
-  "proxy" : "'http://ec2-15-164-211-228.ap-northeast-2.compute.amazonaws.com:8080/api/member/"
->>>>>>> 46b5885 (17:47)
+  "proxy": "http://54.180.138.46:8080"  
 }

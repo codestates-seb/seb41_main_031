@@ -12,30 +12,23 @@ const LoginContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: auto;  
-  height: auto;  
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   width: 50vw;
-  width: 50vw;
 `;
 
 const Input = styled.input`
   margin: 1vw;
   padding: 1.8vw;
-  margin: 1vw;
-  padding: 1.8vw;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 10px;
   border-radius: 10px;
 `;
 
 const Button = styled.button`
-  margin: 1vw;
-  padding: 2vw;
   margin: 1vw;
   padding: 2vw;
   font-size: 16px;
@@ -44,12 +37,8 @@ const Button = styled.button`
 
   border-radius: 10px;
   background-color: #FF4C29;
-
-  border-radius: 10px;
-  background-color: #FF4C29;
   &:hover {
     cursor: pointer;
-    background-color: #000000;
     background-color: #000000;
   }
 `;
@@ -57,8 +46,6 @@ const Button = styled.button`
 const LoginHeader = styled.h2`
   display: flex;
   justify-content: center;
-  margin-bottom: 10%;
-`
   margin-bottom: 10%;
 `
 
@@ -179,8 +166,8 @@ const loginSubmitHandler = (event) => {
   
   if (isValid.isEmail && isValid.isPassword) {
     const reqBody = {
-      username: login.email,
-      password: login.password
+      email: login.email,
+      password: login.newpassword
     };
     const sendLoginReq = async () => {
       try {
@@ -191,6 +178,7 @@ const loginSubmitHandler = (event) => {
         const jwtToken = response.headers.get('Authorization');
         const refreshToken = response.headers.get('Refresh');
         const memberId = response.data.memberId;
+        
         setTokenCookie('Authorization', jwtToken, {
           maxAge: 60 * 30000,
         }); // 60초 * 30000분
@@ -208,6 +196,8 @@ const loginSubmitHandler = (event) => {
       } catch (error) {
         console.log(error);
         alert('인증에 실패했습니다.');
+        console.log(reqBody)
+        
       }
     };
     sendLoginReq();

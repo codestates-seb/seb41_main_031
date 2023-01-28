@@ -4,8 +4,9 @@ import styled from "styled-components";
 import logo from "../Asset/2.png";
 import Menu from "./Menu";
 
+
 const Headerdiv = styled.div`
-  position: fixed;
+  position: relative;
   width: 100%;
   height: 60px;
   display: flex;
@@ -46,7 +47,8 @@ function Header() {
         </div2>
 
         <i>
-          <Menu />
+          <Menu/>
+          
         </i>
       </Headerdiv>
     </>

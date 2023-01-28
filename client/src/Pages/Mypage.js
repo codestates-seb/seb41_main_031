@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import axios, { formToJSON } from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData, useNavigate,Navigate } from 'react-router-dom';
-import Delete from '../Component/Delete';
-  
+import { Cookies } from 'react-cookie';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
 import { BsFillPersonFill } from "react-icons/bs";
 import { AiTwotoneMail } from "react-icons/ai";
 import { ImLocation } from "react-icons/im";
 import { TfiAlarmClock } from "react-icons/tfi";
-
+import { useDispatch } from 'react-redux';
+import { authActions } from '../Redux/auth';
 
 
 const Main = styled.div`
@@ -273,27 +273,81 @@ display: flex;
 
 function Mypage() {
   
+
+  const cookies = new Cookies();
+  const accessToken = cookies.get('Authorization');
+  const memberId = cookies.get('memberId');
+
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    console.log("Works!before");
-    setTimeout(function () {
-      console.log("Works!");
-      axios
-        .get("http://localhost:5500/data/1")
-        .then(function (response) {
-          // response
-          setData(response.data);
-          //데이터 전송 성공시
-        })
-        .catch(function (error) {
-          // 오류발생시 실행
-        })
-        .then(function (response) {
-          // 항상 실행
-        }); //컴포넌트가 리랜더링 될때마다 실행
-    }, 3000);},[])
+  
     
+    const getUser = async () => {
+      try {
+        const response = await axios.get(
+          `/members/${memberId}`,{
+    
+            headers : {
+              'Authorization' : `Bearer ${accessToken}`
+            }
+          }
+        );
+        setData(response.data);
+      } catch (error) {
+        if (error.response) {
+          // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // 요청이 전송되었지만, 응답이 수신되지 않음
+          console.log(error.request);
+        } else {
+          // 오류가 발생한 요청을 설정하는 데 문제가 생김
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      }
+    };
+    
+    
+    
+    useEffect(() => {
+      getUser();
+    }, []);
+
+
+
+
+
+
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+
+
+    const Deleteuser = (e) => {
+      
+      if (window.confirm('탈퇴하시겠습니까?')) {
+        axios
+          .delete(`/members/${memberId}`, {
+            headers: { Authorization: accessToken },
+          })
+          .then(() => {
+            dispatch(authActions.logout());
+            cookies.remove('Authorization');
+            cookies.remove('memberId');
+            cookies.remove('Refresh');
+            window.location.reload();
+            alert('이용해 주셔서 감사합니다');
+            navigate('/');
+          })
+          .catch((err) => alert(err.response.data.message));
+      } else {
+        return;
+      }
+    };
   
   
   return (
@@ -333,7 +387,7 @@ function Mypage() {
       <Link to ="/mypage/editprofile">
       <EditButton>프로필 수정</EditButton>
       </Link>
-      <WithdrawButton onClick = {Delete}>
+      <WithdrawButton onClick = {Deleteuser}>
         탈퇴하기
       </WithdrawButton>
     </BottomBox>
