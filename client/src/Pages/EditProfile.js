@@ -660,7 +660,7 @@ useEffect(() => {
   }
   
 
-  const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+  const [image, setImage] = useState("https://static.toss.im/cashtag/image/2b1d7d75ba42d44329eb")
   const [file, setFile] = useState([]);
   const fileInput = useRef(null)
 
