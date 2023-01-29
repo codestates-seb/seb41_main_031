@@ -12,7 +12,9 @@ import DummyData from "../Asset/DummyData"; //이름 바꾸기
 
 function PostDetail({ openModal }) {
   const [Joindata, setJoindata] = useState([]);
+  const [Joinmemberdata, setJoinmemberdata] = useState([]);
   const data = useSelector((state) => state);
+  const auth = window.localStorage.getItem("Authorization");
   useEffect(() => {
     const promise = DummyData;
     const getData = () => {
@@ -23,8 +25,11 @@ function PostDetail({ openModal }) {
     getData();
   }, []);
 
+  useEffect(() => {}, []);
+
+  console.log("dddd" + data.postid);
+
   const filteredData = Joindata.filter((item) => item.postId === data.postid);
-  console.log(filteredData);
 
   return (
     <>
@@ -37,15 +42,12 @@ function PostDetail({ openModal }) {
               <Viewinputdiv>
                 <span1>종목</span1>
                 <contentboxdiv>{item.event}</contentboxdiv>
-                <span1>날짜와 시간</span1>
-                <contentboxdiv>
+                <span1>
                   <FaRegCalendarAlt className="calendar" />
-                  {item.date}
-                </contentboxdiv>
-                <contentboxdiv>
-                  <FcAlarmClock className="clock" />
-                  {item.time}
-                </contentboxdiv>
+                  날짜와 시간
+                </span1>
+                <contentboxdiv>{item.date}</contentboxdiv>
+                <contentboxdiv>{item.time}</contentboxdiv>
                 <span1>운동장소</span1>
                 <contenttextdiv>
                   <HiLocationMarker className="location" />

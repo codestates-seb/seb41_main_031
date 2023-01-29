@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Reqboxdiv({
   img,
@@ -15,9 +15,12 @@ function Reqboxdiv({
   value,
 }) {
   const dispatch = useDispatch();
+  const data = useSelector((state) => state);
+
   function openpostdeModal() {
     dispatch({ type: "SET_POST", postid: value });
-    console.log(value);
+    console.log(data.postid);
+    openModal();
   }
 
   return (
@@ -26,6 +29,7 @@ function Reqboxdiv({
         <impormationdiv>
           <divuser>
             <img src={img} alt="user"></img>
+
             <div>{name}</div>
           </divuser>
           <divdate>
@@ -36,7 +40,7 @@ function Reqboxdiv({
         </impormationdiv>
         <h1>{item} 할 사람 구해요~~ </h1>
         <contentdiv>👇PLS PRESS JOIN👇</contentdiv>
-        <button onClick={() => openModal() && openpostdeModal()}>JOIN</button>
+        <button onClick={() => openpostdeModal()}>JOIN</button>
         <locationdiv>-{Location}-</locationdiv>
       </Reqbox>
     </>

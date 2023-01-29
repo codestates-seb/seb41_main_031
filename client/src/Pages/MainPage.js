@@ -100,7 +100,7 @@ function MainPage() {
             return (
               <Reqboxdiv
                 name={id.name}
-                img={id.img}
+                img={id.image}
                 Date={id.date}
                 Time={id.time}
                 Party={id.playerNum}

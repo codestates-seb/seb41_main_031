@@ -10,17 +10,17 @@ import { legacy_createStore as createStore } from "redux";
 import App from "./App";
 
 const SET_LOCATION = "SET_LOCATION";
-const SET_LAT = "SET_LAT";
-const SET_LNG = "SET_LNG";
 
 const initialState = {
   maplevel: 1,
+  postid: 1,
   address: {
     maplocation: "위치를 선택해 주세요",
-    lat: 33.450701,
-    lng: 126.570667,
   },
-  postid: 1,
+
+  lat: 33.450701,
+  lng: 126.570667,
+
   state: 1,
 };
 
@@ -33,10 +33,10 @@ function reducer(state = initialState, action) {
         ...state,
         address: { ...state.address, maplocation: action.maplocation },
       };
-    case SET_LAT:
-      return { ...state, address: { ...state.address, lat: action.lat } };
-    case SET_LNG:
-      return { ...state, address: { ...state.address, lng: action.lng } };
+    case "SET_LAT":
+      return { ...state, lat: action.lat };
+    case "SET_LNG":
+      return { ...state, lng: action.lng };
     case "SET_ADDRESS":
       return { ...state, address: action.address };
     case "SET_POST":
