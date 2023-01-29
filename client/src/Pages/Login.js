@@ -48,7 +48,7 @@ const Button = styled.button`
 const LoginHeader = styled.h2`
   display: flex;
   justify-content: center;
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 `;
 
 const HrefRight = styled.a`
@@ -199,13 +199,7 @@ function Login() {
   return (
     <LoginContainer>
       <Form>
-        <LoginHeader>
-          <h2>
-            아무나에 오신 걸 환영합니다.
-            <br />
-            사람들과의 연결을 경험해보세요!
-          </h2>
-        </LoginHeader>
+        <LoginHeader><h2>로그인</h2></LoginHeader>
         <LoginFont>&nbsp;&nbsp;&nbsp;이메일</LoginFont>
         <Input
           name="email"

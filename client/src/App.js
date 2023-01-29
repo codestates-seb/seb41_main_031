@@ -32,8 +32,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/Login/" element={<Login />}></Route>
-          <Route path="/Signup/" element={<Signup />}></Route>
+          <Route path="/login/" element={<Login />}></Route>
+          <Route path="/signup/" element={<Signup />}></Route>
           <Route path="/mypage/" element={<Mypage />}></Route>
           <Route path="/mypage/editprofile" element={<EditProfile />}></Route>
           <Route path="/post-detail/" element={<PostDetail />}></Route>

@@ -50,7 +50,7 @@ const Button = styled.button`
 const SignupHeader = styled.h2`
   display: flex;
   justify-content: center;
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 `
 const HrefRight = styled.a`
     display: flex;
@@ -223,8 +223,8 @@ const navigate = useNavigate();
   return (
     <SignupContainer>
     <Form>
-    <SignupHeader> 
-    <h2>아무나에 오신 걸 환영합니다.<br />사람들과의 연결을 경험해보세요!</h2>
+    <SignupHeader>
+    <h2>회원가입</h2>
     </SignupHeader>  
         <SignupFont>&nbsp;&nbsp;&nbsp;닉네임</SignupFont>
         <Input

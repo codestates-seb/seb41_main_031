@@ -24,8 +24,7 @@ function Search({ handleSearch }) {
       )} */}
       <Serachdiv>
         <div4>
-          운동하고 싶은 사람 <strong>AMOONA</strong>
-          모여라
+          운동하고 싶은 사람 <strong>AMOONA</strong> 모여라
         </div4>
         <div1>WHAT’S YOUR FAVORITE SPORT?</div1>
         <div>
