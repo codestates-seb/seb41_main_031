@@ -349,6 +349,8 @@ const Input = styled.input`
 
 function EditProfile() {
 
+
+
   const [form, setForm] = useState({
     nickname : '',
     email : '',
@@ -374,8 +376,12 @@ function EditProfile() {
   
 
   const Print = ()=>{
+    
     console.log(form.region)
     console.log(form.newpassword)
+    console.log(JSON.parse(auth).jwtToken)
+    console.log(window.localStorage.getItem("Authorization"))
+    
   }
 
 
@@ -424,15 +430,17 @@ const cookies = new Cookies();
   const accessToken = cookies.get('Authorization');
   const memberId = cookies.get('memberId');
 
+
 const [data, setData] = useState([]);
+const auth = window.localStorage.getItem("Authorization");
 
 const getUser = async () => {
   try {
     const response = await axios.get(
-      `/members/${memberId}`,{
+      '/members/7',{
 
         headers : {
-          'Authorization' : `Bearer ${accessToken}`
+          Authorization: JSON.parse(auth).jwtToken
         }
       }
     );
@@ -473,11 +481,11 @@ useEffect(() => {
       try {
         await axios
           .patch(
-            `/members/${memberId}`,
+            '/members/7',
             {
               nickname: form.nickname,
             },
-            { headers: { Authorization: accessToken } }
+            {  Authorization: JSON.parse(auth).jwtToken }
           )
           .then(() => {
             alert('닉네임 변경이 완료되었습니다');

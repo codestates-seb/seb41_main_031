@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import { CookiesProvider } from "react-cookie";
+
 import { Provider } from "react-redux";
 import { render } from "react-dom";
-import store2 from "./Redux/store2";
+
 import { legacy_createStore as createStore } from "redux";
 
 import App from "./App";
@@ -49,10 +48,10 @@ function reducer(state = initialState, action) {
 let store = createStore(reducer);
 
 render(
-  <CookiesProvider store={store2}>
+  
     <Provider store={store}>
       <App />
     </Provider>
-  </CookiesProvider>,
+ ,
   document.getElementById("root")
 );

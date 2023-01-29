@@ -167,6 +167,7 @@ function Login() {
           setTokenCookie("Authorization", jwtToken, {
             maxAge: 60 * 30000,
           }); // 60초 * 30000분
+          localStorage.clear()
           window.localStorage.setItem(
             "Authorization",
             JSON.stringify({ jwtToken })
@@ -181,6 +182,7 @@ function Login() {
           setTimeout(() => {
             navigate("/");
             window.location.reload();
+            
           }, 250);
         } catch (error) {
           console.log(error);

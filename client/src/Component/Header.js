@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const Headerdiv = styled.div`
-  position: fixed;
+  position: relatve;
   width: 100%;
   height: 60px;
   display: flex;
@@ -32,9 +32,14 @@ const Headerdiv = styled.div`
     }
   }
   .LoginChange {
-    margin-right: 20px;
+   margin-left : 1250px;
+  }
+  .Menu{
+   
   }
 `;
+
+const auth = window.localStorage.getItem("Authorization");
 
 function Header() {
   const location = useLocation();
@@ -44,17 +49,26 @@ function Header() {
     setPathname(location.pathname);
   }, [location.pathname]);
 
+
   const LoginChange = () => {
     if (pathname === "/") {
       return <LoginButton />;
-    } else {
-    }
+    } 
+
+   
+    else {}
   };
 
+ 
   const SignupChange = () => {
     if (pathname === "/") {
+      
+      
       return <SignupButton />;
-    } else {
+
+    } 
+    
+    else {
     }
   };
 
@@ -67,9 +81,11 @@ function Header() {
           </Link>
           <span>AMOONA</span>
         </div2>
-
+         
         <span className="LoginChange">{LoginChange()}</span>
         <span className="SignupChange">{SignupChange()}</span>
+        
+        
       </Headerdiv>
     </>
   );

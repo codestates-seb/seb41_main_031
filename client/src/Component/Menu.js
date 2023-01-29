@@ -155,6 +155,14 @@ function Menu() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [alarmOpen, setAlarmOpen] = useState(false);
 
+
+function Logout(){
+  
+window.localStorage.removeItem('Authorization');
+console.log('삭제 완료')
+}
+  
+
   return (
     <>
       <MenuContainer className={menuOpen ? "activeMenu" : "hideMenu"}>
@@ -171,7 +179,9 @@ function Menu() {
             <BiChat />
             오픈 톡
           </button>
-          <button>LOGOUT</button>
+          <button
+          onClick = {Logout()}
+          >LOGOUT</button>
         </div>
       </MenuContainer>
 
