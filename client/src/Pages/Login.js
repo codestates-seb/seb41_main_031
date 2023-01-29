@@ -232,10 +232,10 @@ function Login() {
     </ErrorMessage>
   
     <Button
-    onKeyPress = {onKeyPress}
     onClick = {()=> {
-      Click();
+      
       Clicked();
+      loginSubmitHandler()
     }}
     >
       로그인
