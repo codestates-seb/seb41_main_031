@@ -12,14 +12,20 @@ const Main = styled.div`
   height : 80%;
 }
 
+."sc-ddKZzx kSrqZd"{
+  width ; 
+}
 `
-const LeftBox = styled.div`` 
+const LeftBox = styled.div`
+
+
+` 
 
 const Image = styled.img`
-    width: 17rem;
-    height: 17rem;; 
+    width: 12rem;
+    height: 12rem;; 
     border-radius: 70%;
-    border : solid 3px;
+    border : solid 2px;
     overflow: hidden;
     background-color : white;
     margin-right : 80px;
@@ -39,8 +45,8 @@ const Nickname =  styled.input.attrs({
    placeholder: "변경할 닉네임"
  })`
  box-sizing: border-box;
- width: 450px;
- height: 55px;
+ width: 280px;
+ height: 40px;
 
 background: rgba(255, 255, 255, 0.08);
 border: 1px solid rgba(0, 0, 0, 0.4);
@@ -69,8 +75,8 @@ const Email = styled.input.attrs({
  })`
  
  box-sizing: border-box;
- width: 450px;
- height: 55px;
+ width: 280px;
+ height: 40px;
 
 background: rgba(255, 255, 255, 0.08);
 border: 1px solid rgba(0, 0, 0, 0.4);
@@ -89,7 +95,7 @@ border-radius: 10px;
  display: flex;
    justify-content: center;
    align-items: center;
-   margin-bottom : 15px;
+   margin-bottom : 5px;
 
  `;
 const Region = styled.input.attrs({
@@ -99,8 +105,8 @@ const Region = styled.input.attrs({
  })`
 
  box-sizing: border-box;
- width: 450px;
- height: 55px;
+ width: 280px;
+ height: 40px;
 
 background: rgba(255, 255, 255, 0.08);
 border: 1px solid rgba(0, 0, 0, 0.4);
@@ -119,7 +125,7 @@ border-radius: 10px;
  display: flex;
    justify-content: center;
    align-items: center;
-   margin-bottom : 15px;
+
 
  `;
 
@@ -129,8 +135,8 @@ const PreviousPassword = styled.input.attrs({
   placeholder: "이전 비밀번호를 입력해주세요"
 })`
 box-sizing: border-box;
- width: 585px;
- height: 55px;
+ width: 400px;
+ height: 45px;
 
 background: rgba(255, 255, 255, 0.08);
 border: 1px solid rgba(0, 0, 0, 0.4);
@@ -162,8 +168,8 @@ const NewPassword = styled.input.attrs({
 })`
 
 box-sizing: border-box;
-width: 585px;
- height: 55px;
+width: 400px;
+height: 45px;
 
 background: rgba(255, 255, 255, 0.08);
 border: 1px solid rgba(0, 0, 0, 0.4);
@@ -202,10 +208,10 @@ margin-bottom : 50px;
 
 `  
 const EditButton = styled.button`
-width: 600px;
+width: 400px;
 height: 45.55px;
 
-background-image: linear-gradient(to bottom, #2c394b, #2f515d, #3f6867, #5e7e6c, #879173);
+background-image: linear-gradient(to bottom, #2c394b, #17343e, #0f2d2d, #13251c, #171c0d);
 border: 1px solid rgba(0, 0, 0, 0.4);
 border-radius: 15px;
 
@@ -226,12 +232,12 @@ display: flex;
   margin:auto;
 
   margin-bottom : 30px;
-  
 
   &:hover {
     transition: all 1.1s;
     background-color: rgb(0, 0, 0, 0.6);
     color: rgb(255, 255, 255, 100);
+}
 }
 
 
@@ -240,7 +246,7 @@ const BackButton = styled.button`
 display:flex;
 align-items:center;
 margin:auto;
-width: 600px;
+width: 400px;
 height: 45.55px;
 
 
@@ -303,7 +309,7 @@ justify-content : center;
 .Nickname{
   width: 80px;
   font-size : 1.1rem;
-  margin-top : 13.5px;
+  margin-top : 8px;
   
 }
 `
@@ -313,7 +319,7 @@ justify-content : center;
 .Email{
   width: 80px;
   font-size : 1.1rem;
-  margin-top : 13.5px;
+  margin-top : 8px;
   
 }
 
@@ -337,7 +343,7 @@ justify-content : center;
 .Region{
   width: 80px;
   font-size : 1.1rem;
-  margin-top : 13.5px;
+  margin-top : 8px;
   
 }
 
