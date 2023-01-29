@@ -245,7 +245,7 @@ function Login() {
       로그인
       </Button>
      
-    <HrefRight>처음이신가요?&nbsp;<a href = "signup"> 시작하기 </a></HrefRight>
+    <HrefRight>처음이신가요?&nbsp;<a href = "/signup"> 시작하기 </a></HrefRight>
 
     </Form>
     
