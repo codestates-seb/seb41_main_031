@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const Headerdiv = styled.div`
-  position: relatve;
+  position: fixed;
   width: 100%;
   height: 60px;
   display: flex;

@@ -20,9 +20,11 @@ const Main = styled.div`
   width : 100%;
   height : 100%;
 }
+
 `;
 const LeftBox = styled.div`
 float:left;
+margin-top : 50px;
 `;
 const Image = styled.img`
     width: 12rem;
@@ -35,7 +37,7 @@ const Image = styled.img`
     `;
 const RightBox = styled.div`
 
-margin-top : 50px;
+margin-top : 90px;
 `
 
 const EmailButton = styled.button`
@@ -272,7 +274,7 @@ display: flex;
 
 
 function Mypage() {
-  
+  const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
   const [data, setData] = useState([]);
 
   const auth = window.localStorage.getItem("Authorization");
@@ -354,7 +356,7 @@ function Mypage() {
     <MiddleBox>
     <LeftBox>
       <Image 
-      src={data.img}
+      src={image}
       type = 'file'
       >
       </Image>
@@ -362,23 +364,23 @@ function Mypage() {
     <RightBox>
         <EmailButton >
              <AiTwotoneMail className = 'emailicon'/>
-             <span className = 'emaildata'>{data.Email}</span>
+             <span className = 'emaildata'>leg1770@gmail.com</span>
         </EmailButton>
         <NicknameButton>
         <BsFillPersonFill className = 'nicknameicon'/>
-        <span className = 'nicknamedata'>{data.Nickname}</span>
+        <span className = 'nicknamedata'>dogdog</span>
           </NicknameButton>
         <RegionButton>
         <ImLocation className = 'regionicon'/>
-        <span className = 'regiondata'>{data.Region}</span>
+        <span className = 'regiondata'>서울</span>
         </RegionButton>
         <SexButton>
         <FontAwesomeIcon icon={faVenusMars} className = 'sexicon'/>
-        <span className = 'sexdata'>{data.Sex}</span>
+        <span className = 'sexdata'>남자</span>
         </SexButton>
         <AgeButton>
         <TfiAlarmClock className = 'ageicon'/>
-        <span className = 'agedata'>{data.Age}</span>
+        <span className = 'agedata'>25세</span>
           </AgeButton>
     </RightBox>
     </MiddleBox>

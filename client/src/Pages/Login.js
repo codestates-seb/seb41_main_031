@@ -12,12 +12,14 @@ const LoginContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: auto;
+  
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   width: 50vw;
+  margin-top : 100px;
 `;
 
 const Input = styled.input`
@@ -209,7 +211,7 @@ function Login() {
           name="email"
           type="text"
           value={login.email}
-          placeholder="Please type your E-mail"
+          placeholder="이메일을 입력해주세요"
           onChange={onChangeLogin}
         />
         <LoginFont>&nbsp;&nbsp;&nbsp;비밀번호</LoginFont>
@@ -218,7 +220,7 @@ function Login() {
       name="newpassword"
       type="password"
       value={login.newpassword}
-      placeholder = 'Please type your password'
+      placeholder = '비밀번호를 입력해주세요'
       onChange={onChangeLogin}
     />
     <br />
