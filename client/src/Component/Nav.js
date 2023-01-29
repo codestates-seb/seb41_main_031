@@ -32,7 +32,7 @@ function NavigationBar() {
 
   return (
     <Setlocdiv>
-      <div>NOW METTING....</div>
+      <div>NOW MEETING....</div>
       <Setlocsection onClick={() => handleClick("내 주변(500m)")}>
         <div>
           <span>
