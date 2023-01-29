@@ -9,12 +9,13 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const Headerdiv = styled.div`
-  position: relatve;
+  position: fixed;
   width: 100%;
   height: 60px;
   display: flex;
   background-color: rgba(255, 255, 255, 0.9);
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   padding: 0 40px;
   div2 {
@@ -31,11 +32,18 @@ const Headerdiv = styled.div`
       margin-right: auto;
     }
   }
-  .LoginChange {
-   margin-left : 1250px;
+  logindiv {
+    display: flex;
+    flex-direction: row;
+    i {
+      margin: 3px 3px 0px 40px;
+      color: black;
+    }
   }
-  .Menu{
-   
+  .LoginChange {
+    margin-left: 1250px;
+  }
+  .Menu {
   }
 `;
 
@@ -49,28 +57,10 @@ function Header() {
     setPathname(location.pathname);
   }, [location.pathname]);
 
-
-  const LoginChange = () => {
-    if (pathname === "/") {
-      return <LoginButton />;
-    } 
-
-   
-    else {}
-  };
-
- 
-  const SignupChange = () => {
-    if (pathname === "/") {
-      
-      
-      return <SignupButton />;
-
-    } 
-    
-    else {
-    }
-  };
+  function Logout() {
+    window.localStorage.removeItem("Authorization");
+    window.location.replace("/");
+  }
 
   return (
     <>
@@ -81,11 +71,27 @@ function Header() {
           </Link>
           <span>AMOONA</span>
         </div2>
-         
-        <span className="LoginChange">{LoginChange()}</span>
-        <span className="SignupChange">{SignupChange()}</span>
-        
-        
+
+        <logindiv>
+          {auth && JSON.parse(auth).jwtToken ? (
+            <>
+              <Link to="/mypage/">
+                <i class="fa-solid fa-user"></i>
+              </Link>
+              <i
+                className="fa-solid fa-right-from-bracket"
+                onClick={Logout}
+              ></i>
+            </>
+          ) : (
+            <>
+              <Link to="/Login/">
+                <i className="fa-solid fa-right-to-bracket"></i>
+              </Link>
+              Login
+            </>
+          )}
+        </logindiv>
       </Headerdiv>
     </>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import logo from "../Asset/yadon.png";
 import { useDispatch, useSelector } from "react-redux";
 
 function Reqboxdiv({
-  img,
   name,
   Date,
   Time,
@@ -28,7 +28,7 @@ function Reqboxdiv({
       <Reqbox>
         <impormationdiv>
           <divuser>
-            <img src={img} alt="user"></img>
+            <img src={logo} alt="user"></img>
 
             <div>{name}</div>
           </divuser>
