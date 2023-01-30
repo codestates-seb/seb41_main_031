@@ -70,6 +70,7 @@ function MainPage() {
     } else if (searchValue === "기타") {
       setdata1(data1.filter((item) => item.event === "기타"));
     } else {
+      window.location.replace("/");
     }
   };
 
