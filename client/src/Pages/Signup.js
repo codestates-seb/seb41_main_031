@@ -200,7 +200,7 @@ const navigate = useNavigate();
       const sendSignUpReq = async () => {
         try { 
           const response = await axios.post(
-            '/members',
+            process.env.REACT_APP_DB_HOST+'/members',
             reqSignupBody
           );
           if (response.status === 201) {

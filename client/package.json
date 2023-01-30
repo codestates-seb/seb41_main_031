@@ -69,6 +69,5 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "proxy": "http://54.180.138.46:8080"
+  "license": "ISC"
 }
