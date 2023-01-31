@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "animate.css/animate.min.css";
-import Map from "../Component/Map";
 import styled from "styled-components";
 import Search from "../Component/Search";
 import Nav from "../Component/Nav";
@@ -85,6 +84,7 @@ function MainPage() {
 
   return (
     <>
+
       {postdeisOpen && (
         <ModalBackdrop>
           <PostDetail openModal={openpostdeModal} />
@@ -93,7 +93,7 @@ function MainPage() {
       <Search handleSearch={handleSearch} />
       <Maindiv>
         <Mapdiv className={`${isMapVisible ? "fade-in" : "fade-out"}`}>
-          <Map />
+          
         </Mapdiv>
         <Nav />
         <Reqdiv isReqVisible={isReqVisible}>
