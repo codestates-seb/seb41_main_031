@@ -54,7 +54,7 @@ function MainPage() {
       });
     };
     getData();
-  });
+  }, []);
 
   const handleSearch = (searchValue) => {
     if (searchValue === "축구") {
