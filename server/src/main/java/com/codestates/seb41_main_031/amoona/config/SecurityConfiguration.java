@@ -22,8 +22,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -81,10 +79,14 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        // 모든 출처(Origin) 에 대해 스크립트 기반의 http 통신을 허용 -> 운영 서버 환경에서 요구사항에 맞게 변경 가능
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
-        // 파라미터로 지정한 http 메서드에 대한 http 통신을 허용
+
+        configuration.addAllowedOriginPattern("*"); // 특정 패턴의 origin으로 부터 오는 것만 허용된다.
+        configuration.addAllowedMethod("*"); // 특정 메소드만 허용한다.
+        configuration.addAllowedHeader("*"); // 특정 헤더만 허용한다.
+        configuration.addExposedHeader("authorization");
+        // 추가 헤더, 커스텀 헤더를 지정한다. jwtToken을 이용해 사용자 인증을 하기 위해 authorization 이라는 커스텀 헤더가 필요하다.
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // CorsConfigurationSource 인터페이스의 구현 클래스인 UrlBasedCorsConfigurationSource 클래스의 객체 생성
