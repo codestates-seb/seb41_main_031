@@ -42,7 +42,7 @@ const Nickname =  styled.input.attrs({
    type: "text",
    
    required: true,
-   placeholder: "변경할 닉네임"
+   placeholder: "변경할 성별"
  })`
  box-sizing: border-box;
  width: 280px;
@@ -71,7 +71,7 @@ border-radius: 10px;
 const Email = styled.input.attrs({
    type: "text",
    required: true,
-   placeholder: "변경할 이메일"
+   placeholder: "변경할 나이"
  })`
  
  box-sizing: border-box;
@@ -358,8 +358,8 @@ function EditProfile() {
 
 
   const [form, setForm] = useState({
-    nickname : '',
-    email : '',
+    sex : '',
+    age : '',
     region : '',
     previouspassword : '',
     newpassword : ''
@@ -396,29 +396,8 @@ function EditProfile() {
     setForm({ ...form, [name]: value });
   };
 
-  useEffect(()=>{
-    const emailRegex =
-    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    
-    if(!emailRegex.test(form.email)){
-      setIsValid({...isValid, isEmail: false})
-      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
-    } else{
-      setIsValid({...isValid, isEmail : true})
-    }
-  },[form.email])
+  
 
-  useEffect(()=>{
-    const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    
-    if(!passwordRegex.test(form.newpassword)){
-      setIsValid({...isValid, isPassword: false})
-      setIsValid({...isValid, isClicked: false}) // 정규식에 안맞으면 클릭상태 초기화
-    } else{
-      setIsValid({...isValid, isPassword : true})
-    }
-  },[form.newpassword])
 
   
 
@@ -432,69 +411,33 @@ function EditProfile() {
 
 const navigate = useNavigate();
 
-const cookies = new Cookies();
-  const accessToken = cookies.get('Authorization');
-  const memberId = cookies.get('memberId');
-
 
 const [data, setData] = useState([]);
+
 const auth = window.localStorage.getItem("Authorization");
-
-const getUser = async () => {
-  try {
-    const response = await axios.get(
-      '/members/7',{
-
-        headers : {
-          Authorization: JSON.parse(auth).jwtToken
-        }
-      }
-    );
-    setData(response.data);
-  } catch (error) {
-    if (error.response) {
-      // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      // 요청이 전송되었지만, 응답이 수신되지 않음
-      console.log(error.request);
-    } else {
-      // 오류가 발생한 요청을 설정하는 데 문제가 생김
-      console.log('Error', error.message);
-    }
-    console.log(error.config);
-  }
-};
+const MemberID = window.localStorage.getItem("MemberID")
 
 
-
-useEffect(() => {
-  getUser();
-}, []);
-
-
-
-
-
-  const NicknameEdit = async () => {
+  const SexEdit = async () => {
     if (
-      form.nickname!==''&&form.email===''&&form.region===''        //모두 입력했을 때
+      form.sex!==''&&form.age===''&&form.region===''        //모두 입력했을 때
   &&form.previouspassword===''&&form.newpassword===''
     ) {
-      if (window.confirm('닉네임을 변경하시겠습니까?')){
+      if (window.confirm('성별을 변경하시겠습니까?')){
       try {
         await axios
           .patch(
-            '/members/7',
+            `/members/${JSON.parse(MemberID).MemberID}`,
             {
-              nickname: form.nickname,
+              gender: form.sex
             },
-            {  Authorization: JSON.parse(auth).jwtToken }
+            {  
+              headers : {Authorization: JSON.parse(auth).jwtToken} 
+
+              }
           )
           .then(() => {
-            alert('닉네임 변경이 완료되었습니다');
+            alert('성별 변경이 완료되었습니다');
             navigate('/mypage');
           });
       } catch (error) {
@@ -521,23 +464,23 @@ useEffect(() => {
   };
 
 
-  const EmailEdit = async () => {
+  const AgeEdit = async () => {
     if (
-      (form.nickname===''&&form.email!==''&&form.region===''      
-    &&form.previouspassword===''&&form.newpassword==='')&&isValid.isEmail
+      (form.sex===''&&form.age!==''&&form.region===''      
+    &&form.previouspassword===''&&form.newpassword==='')
     ) {
-      if (window.confirm('이메일을 변경하시겠습니까?')){
+      if (window.confirm('나이를 변경하시겠습니까?')){
       try {
         await axios
           .patch(
-            `/members/${memberId}`,
+            `/members/${JSON.parse(MemberID).MemberID}`,
             {
-              email: form.email,
+              age: form.age
             },
-            { headers: { Authorization: accessToken } }
+            {  headers : {Authorization: JSON.parse(auth).jwtToken} }
           )
           .then(() => {
-            alert('이메일 변경이 완료되었습니다');
+            alert('나이 변경이 완료되었습니다');
             navigate('/mypage');
           });
       } catch (error) {
@@ -565,18 +508,20 @@ useEffect(() => {
 
   const RegionEdit = async () => {
     if (
-      form.nickname===''&&form.email===''&&form.region!==''        //모두 입력했을 때
+      form.sex===''&&form.age===''&&form.region!==''        //모두 입력했을 때
     &&form.previouspassword===''&&form.newpassword===''
     ) {
       if (window.confirm('지역을 변경하시겠습니까?')){
       try {
         await axios
           .patch(
-            `/members/7`,
+            `/members/${JSON.parse(MemberID).MemberID}`,
             {
-              Region: form.region,
+              region: form.region,
             },
-            { headers: { Authorization: accessToken } }
+            {  headers : {
+              Authorization: JSON.parse(auth).jwtToken} 
+            }
           )
           .then(() => {
             alert('지역 변경이 완료되었습니다');
@@ -641,15 +586,7 @@ useEffect(() => {
   
     }  
     }
-  const Emailalert = ()=> {
-    return (
-      form.email ===''
-                ? null
-          : isValid.isClicked === false?
-           null : isValid.isEmail === true?
-            null:'이메일 형식에 맞지 않습니다.'
-    )
-  }
+ 
 
   const Passwordalert = ()=>{
     return (form.newpassword ===''
@@ -702,10 +639,10 @@ return(
      <RightBox>
       <InformBox>
       <NicknameBox>
-        <span className = 'Nickname'>닉네임: </span> 
+        <span className = 'Nickname'>성별: </span> 
         <Nickname
-        name = "nickname"
-        value= {form.nickname}
+        name = "sex"
+        value= {form.sex}
         onChange = {
           onChangeprofile
           }
@@ -714,17 +651,17 @@ return(
         </Nickname>
       </NicknameBox>
         <EmailBox>
-          <span className = 'Email'>이메일: </span>
+          <span className = 'Email'>나이: </span>
           <div className = 'emailwrap'>
           <Email
-          name = "email"
-          value= {form.email}
+          name = "age"
+          value= {form.age}
           onChange = {
             onChangeprofile
             }
           ></Email>
           <span className = 'emailalert'>
-          {Emailalert()} 
+          
             </span>
             </div>
        </EmailBox>
@@ -771,12 +708,12 @@ return(
      <BottomBox>
         <EditButton 
         onClick = {()=> 
-        { NicknameEdit()
-          EmailEdit()
+        { SexEdit()
+          AgeEdit()
           RegionEdit()
           PasswordEdit()
           Print()
-          Clicked()
+         
           
                   }}>
         프로필 변경하기</EditButton>

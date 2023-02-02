@@ -275,9 +275,15 @@ display: flex;
 
 function Mypage() {
   const [image, setImage] = useState("https://static.toss.im/cashtag/image/2b1d7d75ba42d44329eb")
-  const [data, setData] = useState([]);
+  const [sex, setSex] = useState('');
+  const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [age, setAge] = useState('');
+  const [region, setRegion] = useState('');
 
   const auth = window.localStorage.getItem("Authorization");
+  const MemberID = window.localStorage.getItem("MemberID")
+
   
   
     const getUser = async () => {
@@ -285,14 +291,20 @@ function Mypage() {
       
       try {
         const response = await axios.get(
-          '/members/7',{
+          `/members/${JSON.parse(MemberID).MemberID}`,{
     
             headers : {
               Authorization: JSON.parse(auth).jwtToken
             }
           }
         );
-        setData(response.data);
+        setSex(response.data.data.gender);
+        setEmail(response.data.data.email);
+        setNickname(response.data.data.nickname);
+        console.log(response.data.data.nickname)
+        setAge(response.data.data.age);
+        setRegion(response.data.data.region);
+        console.log(response.data.data.region)
       } catch (error) {
         if (error.response) {
           // 요청이 전송되었고, 서버에서 20x 외의 코드로 응답 됨
@@ -323,23 +335,22 @@ function Mypage() {
 
 
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+   
 
 
 
     const Deleteuser = (e) => {
 
-        const auth = window.localStorage.getItem("Authorization");
-      
+
       if (window.confirm('탈퇴하시겠습니까?')) {
         axios
-          .delete('/members/7', {
-            Authorization: JSON.parse(auth).jwtToken
+          .delete(`/members/${JSON.parse(MemberID).MemberID}`,{
+            headers : {Authorization: JSON.parse(auth).jwtToken}
           })
           .then(() => {
-            window.location.reload();
             alert('이용해 주셔서 감사합니다');
             navigate('/');
+            window.location.reload();
           })
           .catch((err) => alert(err.response.data.message));
       } else {
@@ -364,23 +375,23 @@ function Mypage() {
     <RightBox>
         <EmailButton >
              <AiTwotoneMail className = 'emailicon'/>
-             <span className = 'emaildata'>leg1770@gmail.com</span>
+             <span className = 'emaildata'>{email}</span>
         </EmailButton>
         <NicknameButton>
         <BsFillPersonFill className = 'nicknameicon'/>
-        <span className = 'nicknamedata'>dogdog</span>
+        <span className = 'nicknamedata'>{nickname}</span>
           </NicknameButton>
         <RegionButton>
         <ImLocation className = 'regionicon'/>
-        <span className = 'regiondata'>서울</span>
+        <span className = 'regiondata'>{region}</span>
         </RegionButton>
         <SexButton>
         <FontAwesomeIcon icon={faVenusMars} className = 'sexicon'/>
-        <span className = 'sexdata'>남자</span>
+        <span className = 'sexdata'>{sex}</span>
         </SexButton>
         <AgeButton>
         <TfiAlarmClock className = 'ageicon'/>
-        <span className = 'agedata'>25세</span>
+        <span className = 'agedata'>{age}</span>
           </AgeButton>
     </RightBox>
     </MiddleBox>

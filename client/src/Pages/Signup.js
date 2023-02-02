@@ -146,45 +146,7 @@ function Clicked(){
 
 
 const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const reqLoginBody = {
-    username: signup.email,
-    password: signup.newpassword,
-  };
-  const [tokenCookie, setTokenCookie] = useCookies(['Authorization']);
-  const [refreshCookie, setRefreshCookie] = useCookies(['Refresh']);
-  const [memberIdCookie, setMemberIdCookie] = useCookies(['memberId']);
-
-  const sendLoginReq = async () => {
-    try {
-      const response = await axios.post(
-        'http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/login',
-        reqLoginBody
-      );
-      const jwtToken = response.headers.get('Authorization');
-      const refreshToken = response.headers.get('Refresh');
-      const memberId = response.data.memberId;
-      setTokenCookie('Authorization', jwtToken, {
-        maxAge: 60 * 30000,
-      }); // 60초 * 30000분
-      setRefreshCookie('Refresh', refreshToken, {
-        maxAge: 60 * 30000,
-      }); // 60초 * 30000분
-      setMemberIdCookie('memberId', memberId, { maxAge: 60 * 30000 });
-      if (tokenCookie && memberIdCookie && refreshCookie) {
-        dispatch(authActions.login());
-      }
-      setTimeout(() => {
-        navigate('/');
-        window.location.reload();
-      }, 250);
-    } catch (error) {
-      console.log(error);
-      
-      alert('인증에 실패했습니다.');
-    }
-  };
+  
 
 
   const Signuphandler = (event) => {
@@ -205,7 +167,9 @@ const navigate = useNavigate();
           );
           if (response.status === 201) {
             alert('환영합니다.');
-            sendLoginReq();
+            navigate("/login");
+            window.location.reload();
+           
           }
         } catch (error) {
           console.log(error);

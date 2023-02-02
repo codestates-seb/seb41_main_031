@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { authActions } from "../Redux/auth";
-import { useCookies } from "react-cookie";
+
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -146,13 +144,10 @@ function Login() {
       : "비밀번호 형식에 맞지 않습니다.";
   };
 
-  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
 
-  const [tokenCookie, setTokenCookie] = useCookies(["Authorization"]);
-  const [refreshCookie, setRefreshCookie] = useCookies(["Refresh"]);
-  const [memberIdCookie, setMemberIdCookie] = useCookies(["memberId"]);
-
+  
   const loginSubmitHandler = (event) => {
     if (isValid.isEmail && isValid.isPassword) {
       const reqBody = {
@@ -161,26 +156,24 @@ function Login() {
       };
       const sendLoginReq = async () => {
         try {
-          const response = await axios.post("http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/login", reqBody);
+          const response = await axios.post("/login", reqBody);
           const jwtToken = response.headers.get("Authorization");
-          const refreshToken = response.headers.get("Refresh");
-          const memberId = response.data.memberId;
+          const MemberID = response.headers.get("MemberID")
 
-          setTokenCookie("Authorization", jwtToken, {
-            maxAge: 60 * 30000,
-          }); // 60초 * 30000분
-          localStorage.clear()
+          
+          window.localStorage.clear();
           window.localStorage.setItem(
             "Authorization",
             JSON.stringify({ jwtToken })
           );
-          setRefreshCookie("Refresh", refreshToken, {
-            maxAge: 60 * 30000,
-          }); // 60초 * 30000분
-          setMemberIdCookie("memberId", memberId, { maxAge: 60 * 30000 });
-          if (tokenCookie && memberIdCookie && refreshCookie) {
-            dispatch(authActions.login());
-          }
+
+          window.localStorage.setItem(
+            "MemberID",
+            JSON.stringify({ MemberID })
+          )
+          
+        
+          
           setTimeout(() => {
             navigate("/");
             window.location.reload();
@@ -189,7 +182,7 @@ function Login() {
         } catch (error) {
           console.log(error);
           alert("인증에 실패했습니다.");
-          console.log(reqBody);
+          
         }
       };
       sendLoginReq();
