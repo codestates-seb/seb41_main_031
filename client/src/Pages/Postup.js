@@ -85,7 +85,7 @@ function Postup({ openModal }) {
     openModal();
     axios
       .post(
-        `/posts`,
+        `http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/posts`,
         {
           date: dateString,
           time: timeString,
