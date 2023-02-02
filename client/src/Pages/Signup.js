@@ -159,7 +159,7 @@ const navigate = useNavigate();
   const sendLoginReq = async () => {
     try {
       const response = await axios.post(
-        '/login',
+        'http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/login',
         reqLoginBody
       );
       const jwtToken = response.headers.get('Authorization');

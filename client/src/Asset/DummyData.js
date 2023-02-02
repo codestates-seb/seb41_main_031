@@ -3,9 +3,6 @@ import axios from "axios";
 async function DummyData() {
   const result = await axios.get(`/posts?page=1&size=15`);
   console.log(result.data.data);
-  console.log(typeof result.data.data);
-  console.log(result.data);
-  console.log(typeof result.data);
   return result.data.data;
 }
 
