@@ -97,7 +97,7 @@ function MainPage() {
         </Mapdiv>
         <Nav />
         <Reqdiv isReqVisible={isReqVisible}>
-          {data1.map((id) => {
+          {data1 && data1.map((id) => {
             return (
               <Reqboxdiv
                 name={id.name}

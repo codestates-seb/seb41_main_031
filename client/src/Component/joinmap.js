@@ -111,7 +111,7 @@ const Map = ({ maplevel }) => {
       infoWindow.open(map, marker);
     });
 
-    podata.map((item) => {
+    podata && podata.map((item) => {
       const marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(
