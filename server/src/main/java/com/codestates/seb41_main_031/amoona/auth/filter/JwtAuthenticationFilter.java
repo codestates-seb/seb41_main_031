@@ -73,7 +73,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setHeader("Refresh", refreshToken);
 
         // header 에 memberId 값 추가
-        response.setHeader("MemberID", memberId);
+        response.setHeader("MemberId", memberId);
 
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
     }
