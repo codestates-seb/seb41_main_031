@@ -156,23 +156,27 @@ function Login() {
       };
       const sendLoginReq = async () => {
         try {
-          const response = await axios.post("http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/login", reqBody);
-          const jwtToken = response.headers.get("Authorization");
+
+          const response = await axios.post("http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/login", reqBody);
           const MemberID = response.headers.get("MemberID")
+          const jwtToken = response.headers.get("Authorization");
+          console.log(response)
 
           
           window.localStorage.clear();
+
+          window.localStorage.setItem(
+            "MemberID",
+            JSON.stringify({ MemberID })
+          );
+            
+          
+
           window.localStorage.setItem(
             "Authorization",
             JSON.stringify({ jwtToken })
           );
 
-          window.localStorage.setItem(
-            "MemberID",
-            JSON.stringify({ MemberID })
-          )
-          
-        
           
           setTimeout(() => {
             navigate("/");

@@ -69,6 +69,7 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy" : "http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080"
   
 }
