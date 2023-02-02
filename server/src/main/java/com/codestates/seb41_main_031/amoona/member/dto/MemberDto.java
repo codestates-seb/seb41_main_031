@@ -31,13 +31,6 @@ public class MemberDto {
         @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
         private String nickname;
 
-        private String region;
-
-        private String image;
-
-        private String gender;
-
-        private int age;
     }
 
     // 회원 프로필 정보 수정 dto
