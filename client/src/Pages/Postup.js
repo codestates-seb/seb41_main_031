@@ -85,13 +85,13 @@ function Postup({ openModal }) {
     openModal();
     axios
       .post(
-        `/posts`,
+        `http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/posts`,
         {
           date: dateString,
           time: timeString,
           event: sprot,
-          lat: polat,
-          lng: polng,
+          lat: `${polat}`,
+          lng: `${polng}`,
           location: location,
           playerNum: member,
           image:
@@ -112,10 +112,13 @@ function Postup({ openModal }) {
         console.log(error);
         alert("로그인을 해주세요");
       });
+    window.location.replace("/");
   }
 
   return (
     <>
+      {console.log("" + polat)}
+      {console.log("" + polng)}
       {postisOpen && (
         <ModalBackdrop>
           <Map></Map>

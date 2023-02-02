@@ -70,6 +70,7 @@ function MainPage() {
     } else if (searchValue === "기타") {
       setdata1(data1.filter((item) => item.event === "기타"));
     } else {
+      window.location.replace("/");
     }
   };
 
@@ -96,7 +97,7 @@ function MainPage() {
         </Mapdiv>
         <Nav />
         <Reqdiv isReqVisible={isReqVisible}>
-          {data1.map((id) => {
+          {data1 && data1.map((id) => {
             return (
               <Reqboxdiv
                 name={id.name}
