@@ -156,7 +156,7 @@ function Login() {
       };
       const sendLoginReq = async () => {
         try {
-          const response = await axios.post("/login", reqBody);
+          const response = await axios.post("http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/login", reqBody);
           const jwtToken = response.headers.get("Authorization");
           const MemberID = response.headers.get("MemberID")
 

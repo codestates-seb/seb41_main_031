@@ -291,7 +291,7 @@ function Mypage() {
       
       try {
         const response = await axios.get(
-          `/members/${JSON.parse(MemberID).MemberID}`,{
+          `http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/members/${JSON.parse(MemberID).MemberID}`,{
     
             headers : {
               Authorization: JSON.parse(auth).jwtToken
@@ -344,7 +344,7 @@ function Mypage() {
 
       if (window.confirm('탈퇴하시겠습니까?')) {
         axios
-          .delete(`/members/${JSON.parse(MemberID).MemberID}`,{
+          .delete(`http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/members/${JSON.parse(MemberID).MemberID}`,{
             headers : {Authorization: JSON.parse(auth).jwtToken}
           })
           .then(() => {

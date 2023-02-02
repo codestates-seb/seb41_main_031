@@ -427,7 +427,7 @@ const MemberID = window.localStorage.getItem("MemberID")
       try {
         await axios
           .patch(
-            `/members/${JSON.parse(MemberID).MemberID}`,
+            `http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/${JSON.parse(MemberID).MemberID}`,
             {
               gender: form.sex
             },
@@ -473,7 +473,7 @@ const MemberID = window.localStorage.getItem("MemberID")
       try {
         await axios
           .patch(
-            `/members/${JSON.parse(MemberID).MemberID}`,
+            `http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/members/${JSON.parse(MemberID).MemberID}`,
             {
               age: form.age
             },
@@ -515,7 +515,7 @@ const MemberID = window.localStorage.getItem("MemberID")
       try {
         await axios
           .patch(
-            `/members/${JSON.parse(MemberID).MemberID}`,
+            `http://ec2-54-180-138-46.ap-northeast-2.compute.amazonaws.com:8080/members/members/${JSON.parse(MemberID).MemberID}`,
             {
               region: form.region,
             },
