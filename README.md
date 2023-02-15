@@ -17,17 +17,17 @@
 
  #### AMOONA 는 혼자 운동하고 싶지만 주변에 사람이 없을 때 사람들의 서비스입니다.
 
-<p>
-https://im3.ezgif.com/tmp/ezgif-3-b02f43a738.gif
-</p>
+![image](https://user-images.githubusercontent.com/110460401/219074610-822ef364-d9ac-49f9-8d53-ab89f718f55c.png)
+
 
 
 <br>
 
 ## 👨‍👩‍👧‍👦 Team Members 
-|장경욱 (FE 팀원)   |김상완 (FE 팀원)   |이정권 (FE 팀원)   |박평환 (FE 팀원)                  |강현구 (BE 팀원)               |김의진 (BE 팀원)               |이승현 (BE 팀원)          
-|<img src='https://user-images.githubusercontent.com/104314701/195014647-071dcecb-ee2c-4664-8b13-1b0d3e9edd7a.png' width='150'>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/104314701/194877479-b32226f2-50c9-4741-855a-a0ef5db9388d.png' width='150'/>|<img src='https://user-images.githubusercontent.com/104314701/194877509-fd0c2ee0-397a-4808-8c32-23a8144bfd94.png' width='150'/>|                  
-|[@samsamgo](https://github.com/samsamgo)        |[@samsamgo](https://github.com/samsamgo)        |[@samsamgo](https://github.com/samsamgo)        |[@samsamgo](https://github.com/samsamgo)        |[@houndhollis](https://github.com/houndhollis)           |[@shotny](https://github.com/shotny)           |[@Damm06](https://github.com/Damm06)       |
+| ![장경욱](https://user-images.githubusercontent.com/110460401/219077451-c3fbe122-e021-4d45-81f8-10b5a0960c15.png) | ![이정권](https://avatars.githubusercontent.com/u/111329273?v=4) | ![강현구](https://avatars.githubusercontent.com/u/110895459?v=4) | ![이승현](https://avatars.githubusercontent.com/u/107023090?v=4) | ![김의진](https://avatars.githubusercontent.com/u/76214729?v=4) |
+|:-------------------------------------------------------------:|:-------------------------------------------------------------:|:-------------------------------------------------------------:|:-------------------------------------------------------------:|:------------------------------------------------------------:|
+|              [장경욱](https://github.com/samsamgo)               |            [이정권](https://github.com/kangseong-sim)            |             [강현구](https://github.com/woojcoding)              |               [이승현](https://github.com/hyob12)                |              [김의진](https://github.com/harin95)               |              [장경욱](https://github.com/samsamgo)               |
+|                              FE                               |                              FE                               |                              BE                               |                              FE                               |                              BE                              | 
 
 
 <br>
