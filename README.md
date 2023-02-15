@@ -18,7 +18,7 @@
  #### AMOONA 는 혼자 운동하고 싶지만 주변에 사람이 없을 때 사람들의 서비스입니다.
 
 <p>
-![image](https://user-images.githubusercontent.com/110460401/219072254-b4b31ff3-901f-48a4-831b-ec03292ebf5d.png)
+https://im3.ezgif.com/tmp/ezgif-3-b02f43a738.gif
 </p>
 
 
