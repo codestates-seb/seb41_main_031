@@ -18,15 +18,14 @@
  #### AMOONA 는 혼자 운동하고 싶지만 주변에 사람이 없을 때 사람들의 서비스입니다.
 
 <p>
-![image](https://user-images.githubusercontent.com/110460401/219054033-859626ce-68e4-44f5-81b9-8751db214034.png)
+https://user-images.githubusercontent.com/110460401/219054033-859626ce-68e4-44f5-81b9-8751db214034.png
 </p>
 
 
 <br>
 
 ## 👨‍👩‍👧‍👦 Team Members 
-|장경욱 (FE 팀원)   |김상완 (FE 팀원)   |이정권 (FE 팀원)   |박평환 (FE 팀원)                  |강현구 (BE 팀원)               |김의진 (BE 팀원)               |이승현 (BE 팀원)               |
-|----------------|-------------------------------|-----------------------------|-----------------------------|
+|장경욱 (FE 팀원)   |김상완 (FE 팀원)   |이정권 (FE 팀원)   |박평환 (FE 팀원)                  |강현구 (BE 팀원)               |김의진 (BE 팀원)               |이승현 (BE 팀원)          
 |<img src='https://user-images.githubusercontent.com/104314701/195014647-071dcecb-ee2c-4664-8b13-1b0d3e9edd7a.png' width='150'>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/103996469/192595845-36d99b8c-ec46-41ff-98f7-aef452181093.png' width='150'/>|<img src='https://user-images.githubusercontent.com/104314701/194877479-b32226f2-50c9-4741-855a-a0ef5db9388d.png' width='150'/>|<img src='https://user-images.githubusercontent.com/104314701/194877509-fd0c2ee0-397a-4808-8c32-23a8144bfd94.png' width='150'/>|                  
 |[@samsamgo](https://github.com/samsamgo)        |[@samsamgo](https://github.com/samsamgo)        |[@samsamgo](https://github.com/samsamgo)        |[@samsamgo](https://github.com/samsamgo)        |[@houndhollis](https://github.com/houndhollis)           |[@shotny](https://github.com/shotny)           |[@Damm06](https://github.com/Damm06)       |
 
