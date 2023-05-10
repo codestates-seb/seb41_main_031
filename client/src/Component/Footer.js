@@ -1,180 +1,172 @@
-import React from "react";
-import styled from "styled-components";
-import logo from "../Asset/2.png";
+import React from 'react';
+import styled from 'styled-components';
+import '../Asset/styles.css'
+import $ from 'jquery';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-function Footer() {
-  return (
-    <>
-      <Footerdiv>
-        <Repositoryalldiv>
-          <Repositorydiv>
-            <span>AMOONA</span>
-            <ul>
-              <li>Repository</li>
-              <li>Demovideo</li>
-            </ul>
-          </Repositorydiv>
-          <Authorshipdiv>
-            <span>
-              <a href="https://github.com/samsamgo">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>장경욱</div>
-              <section>Front-End</section>
-            </span>
-            <span>
-              <a href="https://github.com/SEB-FE-41-kimsangwan">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>김상완</div>
-              <section>Front-End</section>
-            </span>
-            <span>
-              <a href="https://github.com/Parkpyunghwan">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>박평환</div>
-              <section>Front-End</section>
-            </span>
-            <span>
-              <a href="https://github.com/leg1771">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>이정권</div>
-              <section>Front-End</section>
-            </span>
-            <span>
-              <a href="https://github.com/maverickhg">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>강현구</div>
-              <section>Back-End</section>
-            </span>
-            <span>
-              <a href="https://github.com/euijin0122">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>김의진</div>
-              <section>Back-End</section>
-            </span>
-            <span>
-              <a href="https://github.com/YJCMS">
-                <i class="fa-brands fa-github fa-3x"></i>
-              </a>
-              <div>이승현</div>
-              <section>Back-End</section>
-            </span>
-          </Authorshipdiv>
-        </Repositoryalldiv>
-        <Impormationdiv></Impormationdiv>
-      </Footerdiv>
-    </>
-  );
+
+
+class ContactForm extends React.Component {
+  componentDidMount() {
+    // SB Forms Contact Form
+    // To make this form functional, sign up at https://startbootstrap.com/solution/contact-forms to get an API token!
+
+    // Disable form submissions if there are invalid fields
+    $('#contactForm').on('submit', function (event) {
+      if (this.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      this.classList.add('was-validated');
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <ContactSection className="page-section" id="contact">
+          <div className="container">
+            <div className="text-center">
+              <ContactHeading className="section-heading text-uppercase">Contact Me</ContactHeading>
+              <ContactSubheading className="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</ContactSubheading>
+            </div>
+            <form id="contactForm" noValidate>
+              <div className="row align-items-stretch mb-5">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    {/* Name input */}
+                    <input className="form-control" id="name" type="text" placeholder="Your Name *" required />
+                    <div className="invalid-feedback">A name is required.</div>
+                  </div>
+                  <div className="form-group">
+                    {/* Email address input */}
+                    <input className="form-control" id="email" type="email" placeholder="Your Email *" required />
+                    <div className="invalid-feedback">An email is required.</div>
+                    <div className="invalid-feedback">Email is not valid.</div>
+                  </div>
+                  <div className="form-group mb-md-0">
+                    {/* Phone number input */}
+                    <input className="form-control" id="phone" type="tel" placeholder="Your Phone *" required />
+                    <div className="invalid-feedback">A phone number is required.</div>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                <div class="form-group form-group-textarea mb-md-0">
+                  {/* message input */}
+                  <textarea className="form-control" id="message" placeholder="Your Message *" required />
+                  <div className="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center text-white mb-3">
+                  <div class="fw-bolder">Form submission successful!</div>
+                  To activate this form, sign up at
+                  <br />
+                  <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                </div>
+              </div>
+              <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Error sending message!</div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button>
+              </div>
+            </form>
+          </div>
+        </ContactSection>
+      </>
+    );
+    
+  }
 }
 
-export default Footer;
+export default ContactForm;
 
-const Footerdiv = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  padding: 0 47px;
-  div1 {
-    text-align: center;
+
+const ContactSection = styled.section`
+  padding: 100px 0;
+  background-color: #212529;
+  background-image: url("../assets/img/map-image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .text-center {
+    text-align: center !important;
+  }
+  .section-heading {
+    color: #fff;
+  }
+  .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+
+  form#contactForm .form-group {
+    margin-bottom: 1.5rem;
+
+    input,
+    textarea {
+      padding: 1.25rem;
+    }
+
+    input.form-control {
+      height: auto;
+    }
+
+    &-textarea {
+      height: 100%;
+
+      textarea {
+        height: 100%;
+        min-height: 10rem;
+      }
+    }
+
+    p.help-block {
+      margin: 0;
+    }
+
+    .form-control:focus {
+      border-color: #ffc800;
+      box-shadow: none;
+    }
+  }
+
+  form#contactForm ::-webkit-input-placeholder {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    color: #ced4da;
+  }
+
+  form#contactForm :-moz-placeholder {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    color: #ced4da;
+  }
+
+  form#contactForm ::-moz-placeholder {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    color: #ced4da;
+  }
+
+  form#contactForm :-ms-input-placeholder {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    color: #ced4da;
   }
 `;
 
-const Impormationdiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOgbLIG45tCphAyPKfMDgK0GmGEO07tBizAg&usqp=CAU");
-  background-size: auto;
-  height: 220px;
-  img {
-    /* margin: 0px 0px 20px 30px; */
-    width: auto;
-    height: 80px;
-    margin: 30px 0px 20px 30px;
-  }
-
-  div {
-    line-height: 1.8;
-    margin: 30px 70px 60px 100px;
-  }
+const ContactHeading = styled.h2`
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
 `;
 
-const Repositoryalldiv = styled.div`
-  height: 200px;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_kPm6foOV5n0dS2p45aUjfiX35m9b_thWJA&usqp=CAU");
-  background-size: cover;
-  display: flex;
-  flex-direction: row;
-  padding-top: 40px;
-`;
-const Repositorydiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 40%;
-  color: black;
-
-  ul {
-    margin: 30px 0px 0px 60px;
-    font-size: 30px;
-    color: Pink;
-  }
-  span {
-    font-weight: bold;
-    font-size: 40px;
-    color: Pink;
-    margin: 40px 20px 20px 50px;
-  }
-`;
-
-const Authorshipdiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 60%;
-  color: black;
-  div1 {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    bottom: 7%;
-    left: 10%;
-    transform: translateY(1600px);
-    ul {
-      font-size: 30px;
-      color: Pink;
-    }
-    img {
-      /* margin: 0px 0px 20px 30px; */
-      width: 80px;
-      height: 80px;
-      margin: 30px 0px 20px 30px;
-    }
-  }
-
-  span {
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    font-weight: bold;
-
-    div {
-      margin: 10px 0px 10px 0px;
-      font-size: 15px;
-    }
-    section {
-      border-radius: 20px;
-      width: 100px;
-      border: 5px solid pink;
-      font-size: 15px;
-    }
-    a {
-      color: Pink;
-    }
-  }
+const ContactSubheading = styled.h3`
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 50px;
 `;
